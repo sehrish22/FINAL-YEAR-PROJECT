@@ -97,8 +97,9 @@
     width: 80%;
     background-color: white;
     padding-left: 20%;
-    padding-top: 3%; /* Matches the top padding */
+    padding-top: 3%; 
     padding-bottom: 5.25%;
+    height: 10.7em;
 }
 .out{
     position: sticky;
