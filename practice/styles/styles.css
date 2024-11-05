@@ -1,0 +1,33 @@
+#volunteer1{
+    background-color: aqua;
+    float: left;
+    width: 50%;
+    height: 30em;
+}
+#volunteer2{
+    float: left;
+    background-color: blanchedalmond;
+    width: 50%;
+    height: 30em;
+}
+#volimg{
+    height: 30em;
+    width: 100%;
+}
+#volpara{
+    text-shadow: 5cm;
+    align-items: center;
+    justify-content: center;
+    padding: 1em;
+    font-size: 2.5em; 
+    line-height: 1.2;
+    text-align: center;
+    font-weight: bold; 
+    font-family: 'Georgia', 'Times New Roman', serif; 
+    color: #333333; 
+    text-transform: uppercase; 
+    letter-spacing: 0.05em;
+}
+#vol{
+    border;
+}
