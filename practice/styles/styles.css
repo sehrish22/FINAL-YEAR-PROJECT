@@ -1,109 +1,240 @@
-*{
-    margin: 0px;
-    padding: 0px;
+/* Reset and base styling */
+* {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
-#volunteer1{
-    background-color: aqua;
-    float: left;
-    width: 50%;
-    height: 30em;
+
+body {
+    font-family: 'Arial', sans-serif;
+    color: #4d3b3b; /* Dark brown shade for text */
+    background-color: #f5f0eb; /* Light skin tone for background */
 }
-#volunteer2{
-    float: left;
-    background-color: blanchedalmond;
-    width: 50%;
-    height: 30em;
+
+#navbar {
+  margin: 0;
+  padding: 0;
 }
-#volimg{
+
+.navbar {
+  padding: 1rem 2rem; /* Add space around the navbar */
+  background-color: black; /* Set the background color to black */
+  text-align: center;  /* Center the navbar text */
+}
+
+.navbar-nav {
+  display: flex;
+  justify-content: center; /* Center navbar items */
+  gap: 2rem; /* Add space between navbar items */
+  width: 100%;
+}
+
+.navbar-nav .nav-item {
+  padding: 0.5rem 1rem; /* Add space inside each nav-item */
+}
+
+.navbar-brand {
+  font-size: 1.8rem; /* Increase font size of the logo */
+  color: #f7e6d4; /* Light skin color for logo */
+  padding-right: 2rem; /* Space between logo and nav items */
+}
+
+.navbar-brand:hover {
+  color: #f1a6a6; /* Highlight color when hovering */
+}
+
+.nav-link {
+  font-size: 1.2rem; /* Font size for navbar links */
+  padding: 0.75rem 1rem; /* Padding around the text */
+  color: #f7e6d4; /* Light skin color */
+}
+
+.navbar-nav .nav-link:hover {
+  color: #f1a6a6; /* Hover color */
+}
+
+.navbar-toggler {
+  margin-left: auto; /* Toggler button aligned to the right */
+}
+
+/* Navbar Dropdown styling */
+.nav-item.dropdown .dropdown-menu {
+  min-width: 200px; /* Set a minimum width for the dropdown menu */
+}
+
+.navbar-toggler-icon {
+  background-color: white; /* Change the color of the burger menu */
+}
+
+#video {
     height: 30em;
     width: 100%;
+    overflow: hidden;
+    margin: 0 auto;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.5), transparent);
 }
-#volpara{
-    text-shadow: 5cm;
-    align-items: center;
-    justify-content: center;
-    padding: 1em;
-    font-size: 1.5em; 
-    line-height: 1.2;
+
+#vid {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.85;
+}
+
+/* Welcome Paragraph Styling */
+#paragraph {
     text-align: center;
-    font-weight: bold; 
-    font-family: 'Georgia', 'Times New Roman', serif; 
-    color: #333333; 
-    text-transform: uppercase; 
-    letter-spacing: 0.05em;
-}
-.footer{
-    height: 100vh;
-    width: 100%;
-    background-color: white;
-    display: flex;
-    padding: 10px;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-
-
+    padding: 2em 1em;
+    background: #8c6b4a; /* Brown */
+    color: #f5f0eb; /* Light skin tone */
 }
 
-.f1, .f2, .f3{
-    width: 33%;
-    height: 90%;
-    padding: 10px;
-}
-
-.f2, .f3 {
-    display: flex;
-    flex-wrap: wrap;  
-}
-
-.f2 > a, .f3 > a{
-    width: 100%;
-    color:  black;
-}
-#call{
-    position: fixed;
-    bottom: 0%;
-}
-#para{
-    width: 100%;
+#para {
     font-weight: bold;
-    font-size: 1.8em; 
+    font-size: 1.8em;
     line-height: 1.4;
-    font-family: 'Georgia', 'Times New Roman', serif; 
-    color: #333333; 
-    text-align: center; 
+    font-family: 'Georgia', 'Times New Roman', serif;
+    color: #f5f0eb;
     padding: 1em;
     letter-spacing: 0.05em;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    max-width: 800px;
+    margin: 0 auto;
 }
-#log{
-    float: right;
-    width: 10%;
-    background-color: white;
-    padding-top: 3%;
-    padding-bottom: 5.25%;
+
+/* Image Grid Styling */
+.row {
+    display: flex;
+    justify-content: center;
+    padding: 2em 0;
+    gap: 20px;
 }
-#cart{
-    float: right;
-    width: 10%;
-    background-color: white;
-    padding-top: 3%;
-    padding-bottom: 5.25%;
+
+.inst {
+    height: 200px;
+    width: 200px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-#imag{
-    float: right;
-    width: 80%;
-    background-color: white;
-    padding-left: 20%;
-    padding-top: 3%; 
-    padding-bottom: 5.25%;
-    height: 10.7em;
+
+.inst:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
 }
-.out{
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    background-color: aliceblue;
+
+/* Volunteer Section Styling */
+#vol {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 3em 1em;
+    background: #e2c4b8; /* Light skin tone */
+}
+
+#volunteer1, #volunteer2 {
+    flex: 1;
+    height: 30em;
+}
+
+#volunteer1 {
+    background: #4d3b3b; /* Dark brown */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#volimg {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+#volunteer2 {
+    background: #a58b6f; /* Medium brown */
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2em;
+}
+
+#volpara {
+    font-size: 1.5em;
+    line-height: 1.5;
+    text-align: center;
+    font-weight: bold;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    color: #ffffff;
+    letter-spacing: 0.05em;
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+#volunteer2 button {
+    background: #4d3b3b; /* Dark brown */
+    border: none;
+    padding: 0.8em 1.5em;
+    color: #ffffff;
+    font-weight: bold;
+    margin-top: 1em;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+#volunteer2 button:hover {
+    background-color: #8c6b4a; /* Brown */
+}
+
+/* Footer Styling */
+.footer {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 2em;
+    background: #4d3b3b; /* Dark brown */
+    color: #f5f0eb;
+    text-align: center;
+}
+
+.footer div {
+    width: 33%;
+    padding: 1em;
+}
+
+.footer h3 {
+    font-size: 1.5em;
+    margin-bottom: 1em;
+    color: #e2c4b8;
+}
+
+.footer a {
+    color: #f5f0eb;
+    text-decoration: none;
+    display: block;
+    margin: 0.5em 0;
+    transition: color 0.3s ease;
+}
+
+.footer a:hover {
+    color: #a58b6f; /* Medium brown */
+}
+
+/* Floating Call Button */
+#call {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #e63946;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    border-radius: 50px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#call:hover {
+    background-color: #b02734; 
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
 }
