@@ -1,0 +1,46 @@
+extends ./layouts/master
+block content 
+    #video
+    video#vid(autoplay='' loop='' muted='' playsinline='')
+      source(src='./imgs/5968893-hd_1080_1920_30fps.mp4' type='video/mp4')
+    #paragraph
+        p#para
+            | &quot;Welcome to FurEverHome&mdash;a place where pets and people come together in harmony. Whether you&apos;re
+            | looking to adopt, find reliable care tips, or explore a wide range of pet products, we&apos;re here to
+            | support every step of your journey. At FurEverHome, we believe that every animal deserves a loving
+            | family and a safe place to thrive. Join us in making a difference and discover how easy it can be to
+            | give a pet their forever home.&quot;
+    .row
+        .col-xl-2
+            a(href='')
+                img.inst(src='/imgs/pet1.jpeg' alt='')
+        .col-xl-2
+            a(href='')
+                img.inst(src='/imgs/pet2.jpeg' alt='')
+        .col-xl-2
+            a(href='')
+                img.inst(src='/imgs/pet1.avif' alt='')
+        .col-xl-2
+            a(href='')
+                img.inst(src='/imgs/pet2.avif' alt='')
+        .col-xl-2
+            a(href='')
+                img.inst(src='/imgs/pet5.jpg' alt='')
+        .col-xl-2
+            a(href='')
+                img.inst(src='/imgs/pet6.jpeg' alt='')
+    #vol
+        #volunteer1
+            img#volimg(src='/imgs/volunteer1.jpeg' alt='')
+        #volunteer2
+            p#volpara
+                | &quot;Volunteers are the heart of FurEverHome, bringing love, support, and
+                | hope to animals in need. By joining us, you&rsquo;re helping create a
+                | brighter future for every pet, one kind act at a time. Make a
+                | difference&mdash;volunteer today!&quot; 
+                br
+                button.btn.btn-secondary.btn-lg(type='button') Volunteer
+        
+
+
+    
