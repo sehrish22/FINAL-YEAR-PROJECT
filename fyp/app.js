@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var mongoose = require('mongoose');
 
 var indexRouter = require('./routes/index');
 var productsRouter = require('./routes/products');
@@ -38,4 +39,9 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+mongoose.connect("mongodb://localhost/fypcrud", 
+  {useNewUrlParser:true,useUnifiedTopology:true})
+.then(()=> console.log("connection successfull"))
+.catch((error)=>console.log(error.message));
+module.exports=app;
 module.exports = app;
