@@ -51,10 +51,15 @@ div
                   a.dropdown-item(href='#') Vet Clinics
                 li
                   a.dropdown-item(href='#') Petsitters
-            li.nav-item
-              a.nav-link(href='/register')
-                svg.bi.bi-person-fill(xmlns='http://www.w3.org/2000/svg' width='16' height='16')
-                  path(d='M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6')
+            if !user
+              li.nav-item
+                a.nav-link(href='/register') sign up
+                  svg.bi.bi-person-fill(xmlns='http://www.w3.org/2000/svg' width='16' height='16')
+                    path(d='M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6')
+              li.nav-item
+                a.nav-link(href='/login') log in
+                  svg.bi.bi-person-fill(xmlns='http://www.w3.org/2000/svg' width='16' height='16')
+                    path(d='M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6')
             li.nav-item
               a.nav-link(href='/cart')
                 svg.bi.bi-cart3(xmlns='http://www.w3.org/2000/svg' width='16' height='16')
@@ -78,5 +83,7 @@ div
       a(href='') Clinics and Stores
     .f3
       h3 SignUp For Our NewsLetter
+      if user
+        a.nav-link(href='/logout') Logout
   div
     button#call.btn.btn-danger(type='button') Call Us!
