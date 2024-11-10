@@ -1,0 +1,10 @@
+extends ../layout
+
+block content
+    h1 LOG IN
+    form(action="/login",method="post")
+        .form-group
+            input#email(type="text",class="form-control" ,name="email",placeholder="email") 
+        .form-group     
+            input#password(type="text",class="form-control",name="password",placeholder="password")
+        input(type="submit",class="btn btn-info", value="SIGN IN")
