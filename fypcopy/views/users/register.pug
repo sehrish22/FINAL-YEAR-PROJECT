@@ -1,12 +1,21 @@
 extends ../layout
 
 block content
-    h1 LET`S CREATE YOR YOUR ACCOUNT
-    form(action="/register ",method="post")
-        .form-group
-            input#name(type="text",class="form-control" ,name="name",placeholder="name") 
-        .form-group
-            input#email(type="text",class="form-control" ,name="email",placeholder="email") 
-        .form-group     
-            input#password(type="text",class="form-control",name="password",placeholder="password")
-        input(type="submit",class="btn btn-info", value="SIGN UP")
+    .signup-container
+        h1 SIGN UP
+        form(action="/register", method="post", class="signup-form")
+            .signup-form-group
+                label(for="name") Name
+                input#name(type="text", class="signup-input", name="name", placeholder="Enter your name") 
+            .signup-form-group
+                label(for="email") Email
+                input#email(type="email", class="signup-input", name="email", placeholder="Enter your email") 
+            .signup-form-group     
+                label(for="password") Password
+                input#password(type="password", class="signup-input", name="password", placeholder="Create a password")
+            .signup-form-group
+                input(type="submit", class="signup-btn btn-block", value="SIGN UP")
+
+        .signup-links
+            p Already have an account?
+            a(href="/login", class="signup-link") Log In

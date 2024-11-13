@@ -25,6 +25,8 @@ div
                   a.dropdown-item(href='#') Dogs
                 li
                   a.dropdown-item(href='#') Others
+                li 
+                  a.dropdown-item(href="#") View all
             li.nav-item.dropdown
               a#navbarDropdown.nav-link.dropdown-toggle(href='/products' role='button' data-bs-toggle='dropdown' aria-expanded='false')
                 | Products
@@ -35,6 +37,8 @@ div
                   a.dropdown-item(href='#') Dog Food
                 li
                   a.dropdown-item(href='#') Other Food
+                li
+                  a.dropdown-item(href='/products') View All
             li.nav-item
               a.nav-link(href='#') PlayTime Appointment
             li.nav-item.dropdown
@@ -42,9 +46,9 @@ div
                 | More
               ul.dropdown-menu(aria-labelledby='navbarDropdown')
                 li
-                  a.dropdown-item(href='#') Volunteer
+                  a.dropdown-item(href='/volunteer') Volunteer
                 li
-                  a.dropdown-item(href='#') Job Employment
+                  a.dropdown-item(href='/job') Job Employment
                 li
                   a.dropdown-item(href='#') Shops
                 li
@@ -52,10 +56,10 @@ div
                 li
                   a.dropdown-item(href='#') Petsitters
             if !user
-              li.nav-item
-                a.nav-link(href='/register') sign up
-                  svg.bi.bi-person-fill(xmlns='http://www.w3.org/2000/svg' width='16' height='16')
-                    path(d='M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6')
+              //- li.nav-item
+              //-   a.nav-link(href='/register') sign up
+              //-     svg.bi.bi-person-fill(xmlns='http://www.w3.org/2000/svg' width='16' height='16')
+              //-       path(d='M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6')
               li.nav-item
                 a.nav-link(href='/login') log in
                   svg.bi.bi-person-fill(xmlns='http://www.w3.org/2000/svg' width='16' height='16')

@@ -10,6 +10,7 @@ var sessionAuth = require('./middlewares/sessionAuth');
 var indexRouter = require('./routes/index');
 var productsRouter = require('./routes/products');
 var usersRouter = require('./routes/users');
+var jobandvolunteerRouter = require('./routes/jobandvolunteer');
 
 var app = express();
 app.use(session({
@@ -32,6 +33,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/products', productsRouter);
 app.use('/', usersRouter);
+// app.use('/jobandvolunteer',jobandvolunteerRouter);
+app.use('/images', express.static('public/imgs'));
 
 
 // catch 404 and forward to error handler
