@@ -1,7 +1,7 @@
 extends ../layout
 
 block content
-    .row 
+    .row.transparent-container 
         .col-sm-6
             h1= title
         if user
@@ -12,13 +12,14 @@ block content
             .col-sm-4.mb-3
                 .card
                     .card-body
+                        if product.image
+                            img(src=product.image, alt=product.name, class="img-fluid mb-2")
                         h5.card-title= product.name
                         p.card-text Type: #{product.type}
                         p.card-text Price: $#{product.price}
                         p.card-text Description: #{product.description}
                         // Display the product image if it exists
-                        if product.image
-                            img(src=product.image, alt=product.name, class="img-fluid mb-2")
+                        
                         if user
                             .btn-group
                                 a(href="/products/delete/"+product._id, class="btn btn-danger") Delete
