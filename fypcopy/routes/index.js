@@ -5,6 +5,15 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.render("home");
 });
+router.get('/stores', function(req, res, next) {
+  res.render("stores");
+});
+router.get('/clinics', function(req, res, next) {
+  res.render("clinics");
+});
+router.get('/petsitters', function(req, res, next) {
+  res.render("petsitters");
+});
 router.get('/cart', function(req, res, next) {
   let cart= req.cookies.cart;
   if(!cart) cart =[];

@@ -67,16 +67,16 @@ background-color: white; /* Change the color of the burger menu */
 }
 
 #video {
-  height: 0em;
+  display: flex;
   width: 100%;
-  overflow: hidden;
+  height: 0;
   margin: 0 auto;
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.5), transparent);
 }
 
 #vid {
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 20%;
   object-fit: cover;
   opacity: 0.85;
 }
@@ -337,4 +337,104 @@ background-color: white; /* Change the color of the burger menu */
 }
 .signup-link:hover {
   text-decoration: underline;
+}
+/* Container for all store cards */
+/* Container for all store cards */
+.store-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px; /* Space between cards */
+  justify-content: space-between;
+}
+
+/* Style for individual store cards to fit three per row */
+.store-card {
+  flex: 1 1 30%; /* Allows for three cards per row with some spacing */
+  border: 1px solid #ccc;
+  padding: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  box-sizing: border-box; /* Ensures padding is included in width calculation */
+}
+
+/* Style for store name */
+.store-name {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+/* Style for store address, phone, opening, and closing details */
+.store-address,
+.store-phone,
+.store-opening,
+.store-closing {
+  font-size: 1em;
+  color: #555;
+  margin: 4px 0;
+}
+
+/* Responsive: Adjust to two cards per row on medium screens, stack on smaller screens */
+@media (max-width: 1024px) {
+  .store-card {
+    flex: 1 1 48%; /* Two cards per row */
+  }
+}
+
+@media (max-width: 768px) {
+  .store-card {
+    flex: 1 1 100%; /* Full-width on smaller screens */
+  }
+}
+/* Container for all clinic cards */
+.clinic-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px; /* Space between cards */
+  justify-content: space-between;
+}
+
+/* Style for individual clinic cards to fit three per row */
+.clinic-card {
+  flex: 1 1 30%; /* Allows for three cards per row with some spacing */
+  border: 1px solid #ccc;
+  padding: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  box-sizing: border-box; /* Ensures padding is included in width calculation */
+}
+
+/* Style for clinic name */
+.clinic-name {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+/* Style for clinic address, phone, opening, and closing details */
+.clinic-address,
+.clinic-phone,
+.clinic-opening,
+.clinic-closing {
+  font-size: 1em;
+  color: #555;
+  margin: 4px 0;
+}
+.logo-style{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+/* Responsive: Adjust to two cards per row on medium screens, stack on smaller screens */
+@media (max-width: 1024px) {
+  .clinic-card {
+    flex: 1 1 48%; /* Two cards per row */
+  }
+}
+
+@media (max-width: 768px) {
+  .clinic-card {
+    flex: 1 1 100%; /* Full-width on smaller screens */
+  }
 }
