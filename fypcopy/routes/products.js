@@ -10,7 +10,7 @@ router.get("/", async function (req, res, next) {
   let products = await Product.find();
   res.render("products/list", { title: "Products of pets", products });
 });
-
+//de
 // Render add product page
 router.get("/add", checkSessionAuth, async function (req, res, next) {
   res.render("products/add");
