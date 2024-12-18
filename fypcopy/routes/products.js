@@ -22,7 +22,6 @@ router.post("/add", checkSessionAuth, upload, validateProduct, async function (r
   if (req.file) {
     productData.image = '/uploads/' + req.file.filename; // Store image URL in the image field
   }
-
   let product = new Product(productData);
   await product.save();
   res.redirect("/products");
