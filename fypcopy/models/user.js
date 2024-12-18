@@ -4,9 +4,7 @@ const Joi = require('@hapi/Joi');
 var UserSchema = mongoose.Schema({
   name: String,
   email: String,
-  password: String,
-  resetPasswordToken: String,
-  resetPasswordExpires: Date
+  password: String
 });
 const User = mongoose.model("User", UserSchema);
 module.exports = User;
