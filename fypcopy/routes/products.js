@@ -10,7 +10,6 @@ router.get("/", async function (req, res, next) {
   let products = await Product.find();
   res.render("products/list", { title: "Products of pets", products });
 });
-
 // Render add product page
 router.get("/add", checkSessionAuth, async function (req, res, next) {
   res.render("products/add");
@@ -22,7 +21,6 @@ router.post("/add", checkSessionAuth, upload, validateProduct, async function (r
   if (req.file) {
     productData.image = '/uploads/' + req.file.filename; // Store image URL in the image field
   }
-
   let product = new Product(productData);
   await product.save();
   res.redirect("/products");
@@ -102,5 +100,8 @@ router.post("/cart/decrement/:id", async function (req, res, next) {
   res.cookie("cart", cart);
   res.redirect("/cart");
 });
-
+//checkout page
+router.get("/checkout",async function(req,res,next){
+  res.render("checkout");
+})
 module.exports = router;

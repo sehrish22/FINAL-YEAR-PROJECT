@@ -1,17 +1,21 @@
-extends ../layout 
-block content 
-    h1 Add New Product
-    form(action="/products/add ",method="post")
-        .form-group
-            label(for="name") Product name 
-            input#name(type="text",class="form-control" ,name="name") 
-        .form-group     
-            label(for="type") Product type 
-            input#type(type="text",class="form-control",name="type")
-        .form-group    
-            label(for="price") Product price 
-            input#price(type="text",class="form-control",name="price") 
-        .form-group
-             label(for="description") Product description 
-             input#description(type="text",class="form-control",name="description") 
-        input(type="submit",class="btn btn-info")
+extends ../layout
+
+block content
+  h1 Add New Product
+  form(action="/products/add", method="POST", enctype="multipart/form-data")
+    .form-group
+      label(for="name") Name
+      input(type="text", class="form-control", id="name", name="name", required)
+    .form-group
+      label(for="type") Type
+      input(type="text", class="form-control", id="type", name="type", required)
+    .form-group
+      label(for="price") Price
+      input(type="text", class="form-control", id="price", name="price", required)
+    .form-group
+      label(for="description") Description
+      textarea(class="form-control", id="description", name="description", required)
+    .form-group
+      label(for="image") Product Image
+      input(type="file", class="form-control", id="image", name="image")
+    button(type="submit", class="btn btn-success") Add Product

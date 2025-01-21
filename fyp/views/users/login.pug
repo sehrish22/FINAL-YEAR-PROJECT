@@ -1,10 +1,19 @@
 extends ../layout
 
 block content
-    h1 LOG IN
-    form(action="/login",method="post")
-        .form-group
-            input#email(type="text",class="form-control" ,name="email",placeholder="email") 
-        .form-group     
-            input#password(type="text",class="form-control",name="password",placeholder="password")
-        input(type="submit",class="btn btn-info", value="SIGN IN")
+    .login-container
+        h1 LOGIN
+        form(action="/login", method="post", class="login-form")
+            .login-form-group
+                label(for="email") Email
+                input#email(type="email", class="login-input", name="email", placeholder="Enter your email")
+            .login-form-group     
+                label(for="password") Password
+                input#password(type="password", class="login-input", name="password", placeholder="Enter your password")
+            .login-form-group
+                input(type="submit", class="login-btn btn-block", value="SIGN IN")
+            .login-links
+                p Don't have an account?
+                a(href="/register", class="login-link") Sign Up
+                p Forgot password?
+                a(href="/forgot", class="login-link") Reset Password

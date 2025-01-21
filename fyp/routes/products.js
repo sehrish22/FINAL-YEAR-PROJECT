@@ -55,4 +55,5 @@ router.get("/cart/remove/:id", async function (req, res, next) {
   res.cookie("cart",cart);
   res.redirect("/cart");
 });
+
 module.exports = router;
