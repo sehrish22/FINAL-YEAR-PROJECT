@@ -1,0 +1,12 @@
+extends ../layout
+
+block content
+    h1 Reset Password
+    form(action="/users/reset/" + token, method="post")
+        .form-group
+            label(for="password") New Password
+            input#password(type="password", name="password", class="form-control")
+        .form-group
+            label(for="confirmPassword") Confirm New Password
+            input#confirmPassword(type="password", name="confirmPassword", class="form-control")
+        input(type="submit", value="Reset Password", class="btn btn-primary")
