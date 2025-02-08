@@ -1,0 +1,14 @@
+extends ../layout
+
+block content
+      h2 Profiles
+      if users && users.length > 0
+        .row
+        each user in users
+            .col-sm-4.mb-3
+                .card
+                    .card-body
+                        p.card-text Name: #{user.name}
+                        p.card-text Email: #{user.email}
+      else
+        p No profiles to display.
