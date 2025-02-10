@@ -23,11 +23,11 @@ html
                     | Pets
                   ul.dropdown-menu(aria-labelledby='navbarDropdown')
                     li
-                      a.dropdown-item(href='#') Cats
+                      a.dropdown-item(href='/pets?type=cat') Cats
                     li
-                      a.dropdown-item(href='#') Dogs
+                      a.dropdown-item(href='/pets?type=dog') Dogs
                     li
-                      a.dropdown-item(href='#') Others
+                      a.dropdown-item(href='/pets?type=other') Others
                     li 
                       a.dropdown-item(href="pets") View all
                 li.nav-item.dropdown
@@ -35,11 +35,11 @@ html
                     | Products
                   ul.dropdown-menu(aria-labelledby='navbarDropdown')
                     li
-                      a.dropdown-item(href='#') Cat Food
+                      a.dropdown-item(href='/products?type=cat') Cat Food
                     li
-                      a.dropdown-item(href='#') Dog Food
+                      a.dropdown-item(href='/products?type=dog') Dog Food
                     li
-                      a.dropdown-item(href='#') Other Food
+                      a.dropdown-item(href='/products?type=horse,snake') Other Food
                     li
                       a.dropdown-item(href='/products') View All
                 //- li.nav-item

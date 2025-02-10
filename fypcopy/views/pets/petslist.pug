@@ -14,7 +14,8 @@ block content
                     .card-body
                         if pet.image
                             img(src=pet.image, alt=pet.name, class="img-fluid mb-2")
-                        h5.card-title= pet.name
+                        h5.card-title 
+                            a(href="/pets/"+pet._id) #{pet.name}
                         p.card-text Type: #{pet.type}
                         p.card-text Price: $#{pet.fee}
                         p.card-text Description: #{pet.description}

@@ -7,8 +7,29 @@ const upload = require("../middlewares/upload"); // Include multer middleware
 
 // GET pets list
 router.get("/", async function (req, res, next) {
-  let pets = await Pet.find();
+  let filter = {};
+  if (req.query.type) {
+      filter.type = req.query.type; // Filter by type if provided
+  }
+
+  let pets = await Pet.find(filter);
   res.render("pets/petslist", { title: "pets", pets });
+});
+//get details of a pet
+router.get("/:id", async (req, res) => {
+  const petId = req.params.id;
+
+  // Ensure the petId is a valid ObjectId before querying
+  if (!petId.match(/^[0-9a-fA-F]{24}$/)) {
+      return res.status(400).send("Invalid Pet ID");
+  }
+
+  const pet = await Pet.findById(petId);
+  if (!pet) {
+      return res.status(404).send("Pet not found");
+  }
+
+  res.render("pets/petsdetails", { title: pet.name, pet });
 });
 // Render add pet page
 router.get("/petsadd", checkSessionAuth, async function (req, res, next) {

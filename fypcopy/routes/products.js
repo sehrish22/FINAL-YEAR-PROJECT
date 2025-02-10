@@ -9,8 +9,21 @@ const upload = require("../middlewares/upload"); // Include multer middleware
 
 // GET products list
 router.get("/", async function (req, res, next) {
-  let products = await Product.find();
+  let filter = {};
+  if (req.query.type) {
+      filter.type = req.query.type; // Filter by type if provided
+  }
+
+  let products = await Product.find(filter);
   res.render("products/list", { title: "Products of pets", products });
+});
+//get details of a product
+router.get("/:id", async (req, res) => {
+      const product = await Product.findById(req.params.id);
+      if (!product) {
+          return res.status(404).send("Product not found");
+      }
+      res.render("products/details", { title: product.name, product });
 });
 // Render add product page
 router.get("/add", checkSessionAuth, async function (req, res, next) {
