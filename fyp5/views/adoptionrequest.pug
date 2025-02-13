@@ -1,7 +1,7 @@
 extends layout
 block content
   h1 Adoption Request
-  form(action="/adoptionrequest", method="post")
+  form(action="/admin/adoptionrequests", method="post")
     div.form-group
       label(for="email") Email
       input.form-control#email(type="text", name="email", required)

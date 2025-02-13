@@ -9,13 +9,12 @@ var sessionAuth = require("./middlewares/sessionAuth");
 
 var indexRouter = require("./routes/index");
 var productsRouter = require("./routes/products");
-// var ordersRouter = require("./routes/orders");
 var adminRoutes = require("./routes/admin");
 var ordersRoutes = require("./routes/orders");
+var adoptionrequestsRoutes = require("./routes/adoptionrequests");
 var profilesRoutes = require("./routes/profiles");
 var petsRouter = require("./routes/pets");
 var usersRouter = require("./routes/users");
-var jobandvolunteerRouter = require("./routes/jobandvolunteer");
 
 var app = express();
 app.use(
@@ -41,9 +40,9 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", indexRouter);
 app.use("/products", productsRouter);
 app.use("/pets", petsRouter);
-// app.use("/orders", ordersRouter);
 app.use("/admin", adminRoutes);
 app.use("/admin", ordersRoutes);
+app.use("/admin", adoptionrequestsRoutes);
 app.use("/admin", profilesRoutes);
 app.use("/products", ordersRoutes);
 app.use("/", usersRouter);

@@ -607,4 +607,274 @@ background-color: white; /* Change the color of the burger menu */
     text-align: center;
   }
 }
+/* Admin Dashboard Styles */
+.admin-dashboard {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+  background-color: #1c1c1c; /* Dark background */
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
 
+.admin-title {
+  text-align: center;
+  font-size: 28px;
+  color: #d2b48c; /* Brownish shade */
+  margin-bottom: 20px;
+}
+
+.admin-subtitle {
+  font-size: 20px;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.admin-text {
+  color: #b0b0b0;
+  font-size: 16px;
+}
+
+/* Admin Dashboard Grid */
+.admin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+/* Admin Dashboard Cards */
+.admin-card {
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  color: #fff;
+  transition: transform 0.2s ease-in-out;
+}
+
+.admin-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Background Colors */
+.bg-dark {
+  background-color: #222; /* Black Shade */
+}
+
+.bg-brown {
+  background-color: #8b5e3b; /* Warm Brown */
+}
+
+.bg-gray {
+  background-color: #3a3a3a; /* Mid Gray */
+}
+
+/* Admin Card Titles */
+.admin-card-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Admin Card Text */
+.admin-card-text {
+  font-size: 14px;
+  color: #e0e0e0;
+}
+
+/* Buttons */
+.btn-brown {
+  display: inline-block;
+  padding: 8px 15px;
+  margin-top: 10px;
+  font-size: 14px;
+  color: #fff;
+  background-color: #6b4226; /* Dark Brown */
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background 0.3s ease-in-out;
+}
+
+.btn-brown:hover {
+  background-color: #55351d; /* Slightly darker brown */
+}
+/* Orders Page Container */
+.admin-orders-container {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 20px;
+  background-color: #2d2d2d; /* Dark background */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Orders Title */
+.admin-orders-title {
+  text-align: center;
+  font-size: 28px;
+  color: #d2b48c; /* Light brown */
+  margin-bottom: 20px;
+}
+
+/* Grid Layout */
+.admin-orders-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+/* Order Card */
+.admin-order-card {
+  background-color: #1e1e1e; /* Slightly lighter dark shade */
+  color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.admin-order-card:hover {
+  transform: scale(1.02);
+}
+
+/* Order Card Body */
+.admin-order-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Order Text */
+.admin-order-text {
+  font-size: 16px;
+  color: #e0e0e0;
+}
+
+/* No Orders Message */
+.admin-no-orders {
+  text-align: center;
+  font-size: 18px;
+  color: #aaa;
+}
+/* Adoption Requests Container */
+.admin-adoption-container {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 20px;
+  background-color: #2d2d2d; /* Dark background */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Adoption Requests Title */
+.admin-adoption-title {
+  text-align: center;
+  font-size: 28px;
+  color: #d2b48c; /* Light brown */
+  margin-bottom: 20px;
+}
+
+/* Grid Layout */
+.admin-adoption-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+/* Adoption Card */
+.admin-adoption-card {
+  background-color: #1e1e1e; /* Slightly lighter dark shade */
+  color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.admin-adoption-card:hover {
+  transform: scale(1.02);
+}
+
+/* Adoption Card Body */
+.admin-adoption-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Adoption Text */
+.admin-adoption-text {
+  font-size: 16px;
+  color: #e0e0e0;
+}
+
+/* No Adoption Requests Message */
+.admin-no-adoption-requests {
+  text-align: center;
+  font-size: 18px;
+  color: #aaa;
+}
+/* Profiles Container */
+.admin-profiles-container {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 20px;
+  background-color: #2d2d2d; /* Dark background */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Profiles Title */
+.admin-profiles-title {
+  text-align: center;
+  font-size: 28px;
+  color: #d2b48c; /* Light brown */
+  margin-bottom: 20px;
+}
+
+/* Grid Layout */
+.admin-profiles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+/* Profile Card */
+.admin-profile-card {
+  background-color: #1e1e1e; /* Slightly lighter dark shade */
+  color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.admin-profile-card:hover {
+  transform: scale(1.02);
+}
+
+/* Profile Card Body */
+.admin-profile-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Profile Text */
+.admin-profile-text {
+  font-size: 16px;
+  color: #e0e0e0;
+}
+
+/* No Profiles Message */
+.admin-no-profiles {
+  text-align: center;
+  font-size: 18px;
+  color: #aaa;
+}
+.admin-card.bg-highlight {
+  background-color: #d2b48c; /* Light brown shade */
+  color: #000;
+  font-weight: bold;
+}

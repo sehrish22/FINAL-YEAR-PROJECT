@@ -1,0 +1,14 @@
+extends ../layout
+
+block content
+  .admin-profiles-container
+    h2.admin-profiles-title User Profiles
+    if users && users.length > 0
+      .admin-profiles-grid
+        each user in users
+          .admin-profile-card
+            .admin-profile-card-body
+              p.admin-profile-text Name: #{user.name}
+              p.admin-profile-text Email: #{user.email}
+    else
+      p.admin-no-profiles No profiles to display.
