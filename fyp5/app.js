@@ -22,7 +22,7 @@ app.use(
     secret: "dummy text",
     resave: false,
     saveUninitialized: false,
-    cookie: { maxAge: 60000 },
+    cookie: { expires: null },
   })
 );
 

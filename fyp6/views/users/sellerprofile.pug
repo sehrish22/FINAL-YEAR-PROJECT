@@ -1,0 +1,11 @@
+extends layout
+
+block content
+    .container
+        h1 Seller Profile
+        p Welcome, #{user.name}
+        ul
+            li Store Name: #{user.storeName}
+            li Email: #{user.email}
+            li Contact: #{user.contact}
+            li Address: #{user.address}

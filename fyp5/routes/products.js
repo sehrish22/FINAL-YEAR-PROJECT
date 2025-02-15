@@ -63,20 +63,16 @@ router.post(
 );
 
 //get details of a product
-router.get("/:id", async (req, res, next) => {
-  // Check if req.params.id is a valid ObjectId before querying
-  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
-    return next(); // Move to the next route (e.g., checkout)
-  }
-
+router.get("/:id", async (req, res) => {
   try {
-    let product = await Product.findById(req.params.id);
-    if (!product) {
-      return res.status(404).send("Product not found");
-    }
-    res.render("productDetails", { product });
-  } catch (error) {
-    next(error);
+      const product = await Product.findById(req.params.id);
+      if (!product) {
+          return res.status(404).send("Product not found");
+      }
+      res.render("products/details", { title: product.name, product });
+  } catch (err) {
+      console.error(err);
+      res.status(500).send("Server Error");
   }
 });
 // Delete a product

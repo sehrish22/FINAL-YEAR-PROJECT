@@ -16,6 +16,7 @@ router.post(
   validateOrder,
   async function (req, res, next) {
     let orderData = req.body;
+    
     let order = new Order(orderData);
     await order.save();
 

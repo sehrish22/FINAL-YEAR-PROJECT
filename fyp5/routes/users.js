@@ -2,22 +2,27 @@ var express = require("express");
 var router = express.Router();
 var { User } = require("../models/user");
 var bcrypt = require("bcryptjs");
-const _ = require ('lodash');
-const jwt = require ('jsonwebtoken');
-const crypto = require('crypto');
-const nodemailer = require('nodemailer');
+const _ = require("lodash");
+const jwt = require("jsonwebtoken");
+const crypto = require("crypto");
+const nodemailer = require("nodemailer");
+const upload = require("../middlewares/upload"); // Include multer middleware
+const validateUser = require("../middlewares/validateUser");
 
 // Register router
 router.get("/register", function (req, res, next) {
   res.render("users/register");
 });
 
-router.post("/register", async function (req, res, next) {
+router.post("/register", validateUser, async function (req, res, next) {
+  console.log("new one");
   let user = await User.findOne({ email: req.body.email });
   if (user) return res.status(400).send("User with this email already exists");
   user = new User(req.body);
   let salt = await bcrypt.genSalt(10);
   user.password = await bcrypt.hash(user.password, salt);
+  if (user.password.length < 8)
+    return res.status(400).send("Password must be at least 8 characters long");
   await user.save();
   res.redirect("/login");
 });
@@ -28,7 +33,6 @@ router.get("/login", function (req, res, next) {
 });
 
 router.post("/login", async function (req, res) {
-
   const user = await User.findOne({ email: req.body.email });
   if (!user) return res.redirect("/login");
 
@@ -37,49 +41,11 @@ router.post("/login", async function (req, res) {
 
   req.session.user = user;
   res.redirect("/");
-
 });
 //for logout
-router.get('/logout', function(req, res, next) {
+router.get("/logout", function (req, res, next) {
   req.session.user = null;
-  res.redirect('/login');
-});
-// for reset
-router.get('/forgot', function(req, res) {
-  res.render('users/forgot');
-});
-router.post('/reset/:token', async function(req, res) {
-  let user = await User.findOne({
-      resetPasswordToken: req.params.token,
-      resetPasswordExpires: { $gt: Date.now() }
-  });
-
-  if (!user) return res.status(400).send("Password reset token is invalid or has expired.");
-  
-  if (req.body.password !== req.body.confirmPassword) {
-      return res.status(400).send("Passwords do not match.");
-  }
-
-  // Update user password
-  let salt = await bcrypt.genSalt(10);
-  user.password = await bcrypt.hash(req.body.password, salt);
-  user.resetPasswordToken = undefined;
-  user.resetPasswordExpires = undefined;
-  await user.save();
-
-  res.send("Password has been reset successfully.");
+  res.redirect("/login");
 });
 
-// Forgot Password (OTP generation)
-router.get("/forgot", (req, res) => {
-  res.render("users/forgot");
-});
-
-//logout
-router.get("/logout",function (req,res){
-req.session.user=null;
-res.redirect("/login");  
-});
 module.exports = router;
-
-

@@ -3,7 +3,9 @@ extends ../layout
 block content
   .admin-dashboard.container
     h1.admin-title Admin Dashboard
-
+    .admin-profile
+          img.admin-profile-img(src=user.image, alt="User Image")
+          p.admin-name #{user.name}  
     .admin-content
       h2.admin-subtitle Welcome to the Admin Panel
       p.admin-text Manage users, pets, products, and adoption requests from here.

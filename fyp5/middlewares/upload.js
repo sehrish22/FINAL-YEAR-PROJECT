@@ -21,7 +21,7 @@ const storage = multer.diskStorage({
 // Create upload middleware
 const upload = multer({
   storage: storage,
-  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB limit
+  limits: { fileSize: 1024 * 1024 * 1024 }, // 1GB
   fileFilter: function (req, file, cb) {
     console.log("📂 File upload attempt:", file);
     const filetypes = /jpeg|jpg|png|gif|webp/;

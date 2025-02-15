@@ -18,7 +18,7 @@ router.post(
     let adoptionrequestData = req.body;
     let adoptionrequest = new AdoptionRequest(adoptionrequestData);
     await adoptionrequest.save();
-    res.redirect("admin/adoptionrequests");
+    res.redirect("/pets");
   }
 );
 // Export the router
