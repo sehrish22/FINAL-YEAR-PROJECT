@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  h1 Checkout
+  H2 Order id #
+  form(action="/products/checkout", method="post")
+    div.form-group
+      label(for="email") Email
+      input.form-control#email(type="text", name="email", required)
+    div.form-group
+      label(for="name") Name
+      input.form-control#name(type="text", name="name", required)
+    div.form-group
+      label(for="address") Address
+      textarea.form-control#address(name="address", required)
+    div.form-group
+      label(for="contact") Contact
+      input.form-control#contact(type="text", name="contact", required)
+    div.form-group
+      label(for="payment") Payment Method
+      select.form-control#payment(name="payment", required)
+        option(value="cash") Cash on Delivery
+    button.btn.btn-primary(type="submit") Complete Checkout

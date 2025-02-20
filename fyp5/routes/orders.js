@@ -6,8 +6,8 @@ const upload = require("../middlewares/upload"); // Include multer middleware
 
 // Admin Orders Route
 router.get("/orders", async function (req, res, next) {
-  let orders = await Order.find();
-  res.render("admin/orders", { orders });
+  const orders = await Order.find().populate("products"); // Fetch orders with product details
+    res.render("admin/orders", { orders });
 });
 // Store data in the database (including image upload)
 router.post(
@@ -16,8 +16,9 @@ router.post(
   validateOrder,
   async function (req, res, next) {
     let orderData = req.body;
-    
+    console.log("order",order);
     let order = new Order(orderData);
+    console.log("products",req.session.cart);
     await order.save();
 
     console.log(req.cookies);

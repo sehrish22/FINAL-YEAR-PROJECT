@@ -1,0 +1,32 @@
+extends layout
+
+block content
+  h1 My Shopping Cart
+  form(action="/products/checkout" method="post" class="cart-form")
+    div.cart-container
+      - var total = 0;
+      each item, index in cart
+        - var itemTotal = Number(item.price) * (item.quantity || 1);
+        - total += itemTotal;
+        div.cart-item
+          div.cart-item-details
+            img.cart-item-image(src=item.image || '/default-image.jpg', alt=item.name)
+            div.cart-item-info
+              h3.cart-item-name= item.name
+              p.cart-item-price Price: $#{item.price}
+          div.cart-item-quantity
+            label(for="quantity-" + index) Quantity
+            div.quantity-controls
+              form(action="/products/cart/decrement/" + item._id, method="post", class="quantity-form")
+                button.btn.btn-danger(type="submit") -
+              span.cart-quantity(id="quantity-" + index)= item.quantity || 1
+              form(action="/products/cart/increment/" + item._id, method="post", class="quantity-form")
+                button.btn.btn-success(type="submit") +
+          div.cart-item-subtotal
+            p Subtotal: $#{itemTotal}
+          div.cart-item-remove
+            a.btn.btn-danger(href="/products/cart/remove/" + item._id) Remove
+      div.cart-total
+        h3 Total: $#{total}
+      div.cart-actions
+        a.btn.btn-primary(href="/products/checkout") Proceed to Checkout

@@ -22,9 +22,11 @@ block content
                         p.card-text In Stock: #{product.instock}
                         // Display the product image if it exists
                         
-                        if user
+                        if user && product.owner.toString() === user._id.toString()
                             .btn-group
-                                a(href="/products/delete/"+product._id, class="btn btn-danger") Delete
-                                a(href="/products/edit/"+product._id, class="btn btn-warning") Edit
+                                a(href="/products/delete/"+product._id, class="btn btn-danger") 
+                                    i(class="fas fa-trash") Delete
+                                a(href="/products/edit/"+product._id, class="btn btn-warning") 
+                                    i(class="fas fa-edit") Edit
                         .btn-group        
                             a(href="/products/cart/"+product._id, class="btn btn-info") Add to Cart

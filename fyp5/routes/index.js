@@ -16,6 +16,7 @@ router.get("/petsitters", function (req, res, next) {
 });
 router.get("/cart", function (req, res, next) {
   let cart = req.cookies.cart;
+  console.log("cart",cart);
   if (!cart) cart = [];
   res.render("cart", { cart });
 });

@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
-var { Order } = require("../models/user");
+var { User } = require("../models/user");
 const upload = require("../middlewares/upload"); // Include multer middleware
 
 // Admin Orders Route
-router.get("/profils", async function (req, res, next) {
+router.get("/profiles", async function (req, res, next) {
   let users = await User.find();
   res.render("admin/profiles", { users });
 });
