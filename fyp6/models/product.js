@@ -8,6 +8,7 @@ var productSchema = mongoose.Schema({
   price: String,
   instock: String,
   image: String, // Add image field to store image URL or path
+  owner: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
 });
 
 const Product = mongoose.model("Product", productSchema);

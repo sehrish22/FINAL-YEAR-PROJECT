@@ -10,19 +10,14 @@ const mongoose = require("mongoose");
 // GET products list
 router.get("/", async function (req, res, next) {
   let filter = {};
-
-    // Apply type filter if provided
-    if (req.query.type) {
-        filter.type = req.query.type;
-    }
-
-    // If a user is logged in, filter products by the user's ID
-    if (req.user) {
-        filter.owner = req.user._id;
-    }
-
-    let products = await Product.find(filter);
-    res.render("products/list", { title: "Products of pets", products, user: req.user });
+  if (req.query.type) {
+    filter.type = req.query.type; // Filter by type if provided
+  }
+  if (req.user) {
+    filter.owner = req.user._id;
+}
+  let products = await Product.find(filter).populate('owner');
+  res.render("products/list", { title: "Products of pets", products });
 });
 // Render add product page
 router.get("/add", checkSessionAuth, async function (req, res, next) {
@@ -36,24 +31,17 @@ router.post(
   upload,
   validateProduct,
   async function (req, res, next) {
-    if (!req.user) return res.redirect("/login"); // Ensure user is logged in
-
     let productData = req.body;
-
+    console.log("lets see, req.body");
     if (req.file) {
-      productData.image = "/uploads/" + req.file.filename; // Store image URL
+      productData.image = "/uploads/" + req.file.filename; // Store image URL in the image field
     }
-
-    // Associate product with logged-in user
     productData.owner = req.user._id;
-
     let product = new Product(productData);
     await product.save();
-    
     res.redirect("/products");
   }
 );
-
 //checkout page
 router.get("/checkout", async function (req, res, next) {
   res.render("checkout");

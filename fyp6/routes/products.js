@@ -13,8 +13,10 @@ router.get("/", async function (req, res, next) {
   if (req.query.type) {
     filter.type = req.query.type; // Filter by type if provided
   }
-
-  let products = await Product.find(filter);
+  if (req.user) {
+    filter.owner = req.user._id;
+}
+  let products = await Product.find(filter).populate('owner');
   res.render("products/list", { title: "Products of pets", products });
 });
 // Render add product page
@@ -34,6 +36,7 @@ router.post(
     if (req.file) {
       productData.image = "/uploads/" + req.file.filename; // Store image URL in the image field
     }
+    productData.owner = req.user._id;
     let product = new Product(productData);
     await product.save();
     res.redirect("/products");
