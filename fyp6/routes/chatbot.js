@@ -8,29 +8,44 @@ router.get('/', (req, res) => {
 });
 router.post('/', async (req, res) => {
     try {
+        const pets = await Pet.find({});
+        console.log('All Pets in Database:', pets);
+
         const userMessage = req.body.message.toLowerCase();
-        console.log('User Message:', userMessage);
+        console.log('💬 User Message:', userMessage); 
 
-        // Dynamic search: Match user input against name, description, and type
-        const matchingPets = await Pet.find({
-            $or: [
-                { name: { $regex: userMessage, $options: 'i' } },
-                { description: { $regex: userMessage, $options: 'i' } },
-                { type: { $regex: userMessage, $options: 'i' } }
-            ]
-        });
+        // Extracting keywords (splitting user message)
+        const keywords = userMessage.split(' ').filter(word => word.length > 2);
+        console.log('🔑 Extracted Keywords:', keywords);
 
-        console.log('Matching Pets:', matchingPets);
+        // Build a query to search across name, description, and type fields
+        const query = {
+            $or: keywords.map(keyword => ({
+                $or: [
+                    { name: { $regex: keyword, $options: 'i' } },
+                    { description: { $regex: keyword, $options: 'i' } },
+                    { type: { $regex: keyword, $options: 'i' } }
+                ]
+            }))
+        };
+
+        console.log('🔍 Generated Query:', JSON.stringify(query, null, 2));
+
+        const matchingPets = await Pet.find(query);
+        console.log('🐾 Matching Pets:', matchingPets);
 
         if (matchingPets.length === 0) {
-            return res.json({ message: "😔 No pets match your description." });
+            return res.json({ message: "😔 Sorry, no pets match your description. Try again!" });
         }
 
-        res.json({ message: "🐾 Here are the pets we found:", pets: matchingPets });
+        res.json({ message: "🐾 Here are the pets matching your description:", pets: matchingPets });
+
     } catch (error) {
-        console.error('Chatbot Error:', error);
-        res.status(500).json({ error: "⚠️ Internal server error." });
+        console.error('🚨 Chatbot Error:', error);
+        res.status(500).json({ error: "Internal server error." });
     }
 });
+
+
 
 module.exports = router;
