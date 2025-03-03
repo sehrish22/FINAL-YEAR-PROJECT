@@ -9,9 +9,15 @@ block content
         each order in orders
           .admin-order-card
             .admin-order-card-body
+              h2 Order ID: #{order._id}
               p.admin-order-text Name: #{order.name}
               p.admin-order-text Email: #{order.email}
               p.admin-order-text Address: #{order.address}
               p.admin-order-text Contact: #{order.contact}
+              h3 Items Ordered:
+              each item in order.items
+                .item
+                  img(src=item.image, alt=item.name, width="100")
+                  p #{item.name} - $#{item.price} x #{item.quantity} = $#{item.subtotal}
     else
       p.admin-no-orders No orders to display.

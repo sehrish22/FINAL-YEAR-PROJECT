@@ -6,6 +6,7 @@ var logger = require("morgan");
 var mongoose = require("mongoose");
 var session = require("express-session");
 var sessionAuth = require("./middlewares/sessionAuth");
+var { v4: uuidv4 } = require('uuid'); // For unique session IDs
 
 var indexRouter = require("./routes/index");
 var productsRouter = require("./routes/products");

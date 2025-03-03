@@ -45,7 +45,33 @@ router.post('/', async (req, res) => {
         res.status(500).json({ error: "Internal server error." });
     }
 });
+// router.get('/pet/:id', async (req, res) => {
+//     try {
+//         const pet = await Pet.findById(req.params.id);
+//         if (!pet) {
+//             return res.status(404).send('Pet not found');
+//         }
+//         res.render('pet-results', { pet });
+//     } catch (error) {
+//         console.error('Error finding the pet details', error);
+//         res.status(500).send('Internal server error');
+//     }
+// });
+router.get("/pet/:id", async (req, res) => {
+  const petId = req.params.id;
 
+  // Ensure the petId is a valid ObjectId before querying
+  if (!petId.match(/^[0-9a-fA-F]{24}$/)) {
+      return res.status(400).send("Invalid Pet ID");
+  }
+
+  const pet = await Pet.findById(petId);
+  if (!pet) {
+      return res.status(404).send("Pet not found");
+  }
+
+  res.render("pets/petsdetails", { title: pet.name, pet });
+});
 
 
 module.exports = router;

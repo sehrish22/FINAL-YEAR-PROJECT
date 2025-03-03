@@ -38,7 +38,6 @@ block content
         });
 
         const data = await response.json();
-        console.log("📊 Chatbot Response: ", data); // Debug chatbot response
         handleChatbotResponse(data);
       } catch (error) {
         addChatMessage("⚠️ Error connecting to the chatbot. Try again later.", 'bot');
@@ -50,22 +49,18 @@ block content
       const chatDisplay = document.getElementById('furever-chat-display');
       const messageDiv = document.createElement('div');
       messageDiv.className = sender === 'user' ? 'furever-chat-user-msg' : 'furever-chat-bot-msg';
-      messageDiv.innerText = text; // Use innerText to preserve newlines
+      messageDiv.innerHTML = text;
       chatDisplay.appendChild(messageDiv);
-      chatDisplay.scrollTop = chatDisplay.scrollHeight; // Auto-scroll to the bottom
+      chatDisplay.scrollTop = chatDisplay.scrollHeight; // Auto-scroll
     }
 
-    // Handle chatbot response (supports both array and non-array formats)
+    // Handle chatbot response
     function handleChatbotResponse(data) {
-      if (data.pets && Array.isArray(data.pets) && data.pets.length > 0) {
+      if (data.pets && data.pets.length > 0) {
         addChatMessage("🐾 Here are the pets matching your description:", 'bot');
-
         data.pets.forEach(pet => {
-          addChatMessage(`🧡 ${pet.name} - ${pet.type}\n📋 ${pet.description}`, 'bot');
+          addChatMessage(`🧡 <a href="/chatbot/pet/${pet._id}" target="_blank">${pet.name}</a> - ${pet.type}, ${pet.size}<br>📋 ${pet.description}`, 'bot');
         });
-      } else if (data.message) {
-        // Handle non-array responses (e.g., errors or no match)
-        addChatMessage(data.message, 'bot');
       } else {
         addChatMessage("😔 Sorry, no pets match your description. Try again!", 'bot');
       }

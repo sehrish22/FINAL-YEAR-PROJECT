@@ -6,6 +6,10 @@ var adoptionrequestSchema = mongoose.Schema({
   email: String,
   contact: String,
   address: String,
+  petId: { type: mongoose.Schema.Types.ObjectId, ref: "Pet" },
+  petName: String,
+  petImage: String,
+  adoptionRequestId: String,
 });
 
 const AdoptionRequest = mongoose.model("AdoptionRequest", adoptionrequestSchema);
