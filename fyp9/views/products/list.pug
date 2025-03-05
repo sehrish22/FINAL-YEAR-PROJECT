@@ -24,9 +24,7 @@ block content
                                 | #{product.instock}
                             else
                                 span.text-danger Out of Stock
-
-                        if user && product.owner
-                            if product.owner.toString() === user._id.toString()
+                        if user
                                 .btn-group
                                     a(href="/products/delete/"+product._id, class="btn btn-danger") 
                                         i(class="fas fa-trash") Delete
