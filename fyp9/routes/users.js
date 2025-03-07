@@ -14,15 +14,32 @@ router.get("/register", function (req, res, next) {
   res.render("users/register");
 });
 
-router.post("/register", validateUser, async function (req, res, next) {
-  console.log("new one");
+router.post("/register", async function (req, res, next) {
   let user = await User.findOne({ email: req.body.email });
   if (user) return res.status(400).send("User with this email already exists");
+  const { password } = req.body;
+  // Validate password length
+  if (!password || password.length < 8) {
+    return res.status(400).send("Password must be at least 8 characters long");
+  }
+
+  // Check for at least one digit
+  const digitRegex = /[0-9]/;
+  if (!digitRegex.test(password)) {
+    return res.status(400).send("Password must contain at least one digit");
+  }
+
+  // Check for at least one special character
+  const specialCharRegex = /[!@#$%^&*]/;
+  if (!specialCharRegex.test(password)) {
+    return res
+      .status(400)
+      .send("Password must contain at least one special character");
+  }
+
   user = new User(req.body);
   let salt = await bcrypt.genSalt(10);
   user.password = await bcrypt.hash(user.password, salt);
-  if (user.password.length < 8)
-    return res.status(400).send("Password must be at least 8 characters long");
   await user.save();
   res.redirect("/login");
 });
