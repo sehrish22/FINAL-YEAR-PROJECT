@@ -35,7 +35,7 @@ router.post("/register", async function (req, res) {
     return res.status(400).send("Password must contain at least one special character");
   }
 
-  user = new User(req.body);
+  user = new User({ ...req.body, role: req.body.role || "seller" });
   let salt = await bcrypt.genSalt(10);
   user.password = await bcrypt.hash(user.password, salt);
   await user.save();
@@ -55,7 +55,12 @@ router.post("/login", async function (req, res) {
   if (!isValid) return res.status(401).send("Invalid password");
 
   req.session.user = user;
-  res.redirect("/");
+
+  if (user.role === "admin") {
+    res.redirect("/admin");
+  } else {
+    res.redirect("/");
+  }
 });
 
 // Logout route
