@@ -54,7 +54,7 @@ html
                       a.dropdown-item(href='/clinics') Vet Clinics
                     li
                       a.dropdown-item(href='/petsitters') Petsitters
-                    if user 
+                    if user && user.role === 'admin'
                       li
                       a.dropdown-item(href='/admin') Admin Dashboard
                 if !user
