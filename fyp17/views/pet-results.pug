@@ -1,0 +1,13 @@
+extends layout
+
+block content
+    h1 Matching Pets
+    if pets.length
+      each pet in pets
+        .pet-card
+          h2= pet.name
+          p Type: #{pet.type}
+          p Size: #{pet.size}
+          p Description: #{pet.description}
+    else
+      p No matching pets found.
