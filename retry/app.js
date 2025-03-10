@@ -11,6 +11,7 @@ var { v4: uuidv4 } = require('uuid'); // For unique session IDs
 var indexRouter = require("./routes/index");
 var productsRouter = require("./routes/products");
 var adminRoutes = require("./routes/admin");
+var userprofileRoutes = require("./routes/userprofile");
 var ordersRoutes = require("./routes/orders");
 var adoptionrequestsRoutes = require("./routes/adoptionrequests");
 var profilesRoutes = require("./routes/profiles");
@@ -19,6 +20,8 @@ var usersRouter = require("./routes/users");
 var chatbotRoutes = require('./routes/chatbot');
 
 var app = express();
+app.use(express.urlencoded({ extended: true }));
+
 app.use(
   session({
     secret: "dummy text",
@@ -45,6 +48,9 @@ app.use("/pets", petsRouter);
 app.use("/admin", adminRoutes);
 app.use("/admin", ordersRoutes);
 app.use("/admin", adoptionrequestsRoutes);
+app.use("/userprofile", userprofileRoutes);
+app.use("/userprofile", ordersRoutes);
+app.use("/userprofile", adoptionrequestsRoutes);
 app.use("/admin", profilesRoutes);
 app.use("/products", ordersRoutes);
 app.use('/chatbot', chatbotRoutes);

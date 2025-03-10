@@ -20,6 +20,7 @@ router.post("/adoptionrequests", upload, validateAdoptionRequest, async function
   if (!pet) return res.status(404).send("Pet not found");
 
   let adoptionrequest = new AdoptionRequest({
+    userId: req.session.user._id,
     name,
     email,
     address,

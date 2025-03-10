@@ -2,6 +2,7 @@ var mongoose = require("mongoose");
 const Joi = require('@hapi/Joi')
 
 var adoptionrequestSchema = mongoose.Schema({
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   name: String,
   email: String,
   contact: String,

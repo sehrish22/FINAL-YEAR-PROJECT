@@ -2,6 +2,7 @@ var mongoose = require("mongoose");
 const Joi = require("@hapi/Joi");
 
 var orderSchema = mongoose.Schema({
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   name: { type: String, required: true },
   email: { type: String, required: true },
   contact: { type: String, required: true },
@@ -16,7 +17,8 @@ var orderSchema = mongoose.Schema({
       subtotal: { type: Number, required: true }, // quantity * price
     },
   ],
-  total: { type: Number, required: true }, // Total price of all items
+  total: { type: Number, required: true },
+  orderId: { type: String, required: true },
   createdAt: { type: Date, default: Date.now },
 });
 

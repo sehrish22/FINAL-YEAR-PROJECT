@@ -3,6 +3,7 @@ var router = express.Router();
 var { Product } = require("../models/product");
 var { Order } = require("../models/order");
 const Cart = require('../models/cart');
+var { User } = require("../models/user");
 var checkSessionAuth = require("../middlewares/checkSessionAuth");
 const validateProduct = require("../middlewares/validateProduct");
 const validateOrder = require("../middlewares/validateOrder");
@@ -14,14 +15,22 @@ const crypto = require("crypto");
 function generateOrderId() {
   return "ORD-" + crypto.randomBytes(4).toString("hex").toUpperCase();
 }
-// GET products list
+// GET products list (Only show logged-in seller's products)
 router.get("/", async function (req, res, next) {
-  let filter = {};
-  if (req.query.type) {
-    filter.type = req.query.type; // Filter by type if provided
+  try {
+    let filter = {}
+if (req.query.type) {
+   filter.type = req.query.type
+}
+if (req?.session?.user?._id) {
+   filter.uploadedBy = req.session.user._id;
+}
+    const products = await Product.find(filter);
+    res.render("products/list", { title: "Your Products", products });
+  } catch (err) {
+    console.error("Error fetching products:", err);
+    res.status(500).send("Internal Server Error");
   }
-  let products = await Product.find(filter);
-  res.render("products/list", { title: "Products of pets", products });
 });
 // Render add product page
 router.get("/add", checkSessionAuth, async function (req, res, next) {
@@ -40,6 +49,7 @@ router.post(
     if (req.file) {
       productData.image = "/uploads/" + req.file.filename; // Store image URL in the image field
     }
+    productData.uploadedBy=req.session.user._id;
     let product = new Product(productData);
     await product.save();
     res.redirect("/products");
@@ -105,16 +115,26 @@ router.post("/checkout", async function (req, res, next) {
       quantity: item.quantity,
       price: item.product.price,
       subtotal: item.product.price * item.quantity,
+      uploadedBy: item.product.uploadedBy,
     }));
 
     const total = items.reduce((sum, item) => sum + item.subtotal, 0);
     console.log("💵 Total amount:", total);
 
     // Create and save order
-    const order = new Order({ name, email, contact, address, items, total });
-    await order.save();
+    const orderId = generateOrderId();
+    const order = new Order({
+      userId: req.session.user ? req.session.user._id : null,
+      name,
+      email,
+      contact,
+      address,
+      items,
+      total,
+      orderId
+    });
     console.log("✅ Order saved successfully:", order);
-
+    await order.save();
     // Update stock quantities
     for (const item of cart.items) {
       await Product.findByIdAndUpdate(item.product._id, {
@@ -147,7 +167,7 @@ router.get("/:id", async (req, res) => {
       res.status(500).send("Server Error");
   }
 });
-// Delete a product
+//delete a product
 router.get("/delete/:id", async function (req, res, next) {
   await Product.findByIdAndDelete(req.params.id);
   res.redirect("/products");
@@ -182,7 +202,6 @@ router.post(
     res.redirect("/products");
   }
 );
-
 // Add a product to the cart
 router.get("/cart/:id", async function (req, res, next) { 
   const product = await Product.findById(req.params.id);

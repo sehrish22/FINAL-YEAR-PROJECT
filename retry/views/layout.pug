@@ -57,6 +57,9 @@ html
                     if user && user.role === 'admin'
                       li
                       a.dropdown-item(href='/admin') Admin Dashboard
+                    if user && user.role === 'seller'
+                      li 
+                      a.dropdown-item(href='/userprofile') User Profile
                 if !user
                   li.nav-item
                     a.nav-link(href='/login')

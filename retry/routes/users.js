@@ -50,17 +50,22 @@ router.get("/login", function (req, res, next) {
 });
 
 router.post("/login", async function (req, res) {
+  const {email,password}=req.body;
   const user = await User.findOne({ email: req.body.email });
   if (!user) return res.redirect("/login");
 
   const isValid = await bcrypt.compare(req.body.password, user.password);
   if (!isValid) return res.status(401).send("Invalid password");
 
-  req.session.user = user;
+  req.session.user = {
+      _id: user._id,
+      email: user.email,
+      role: user.role,
+    };
   if (user.role === "admin") {
     res.redirect("/admin");
   } else {
-    res.redirect("/");
+    res.redirect("/userprofile");
   }
 });
 //for logout
