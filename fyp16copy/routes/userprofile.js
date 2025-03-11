@@ -2,9 +2,8 @@ const express = require("express");
 const router = express.Router();
 const { AdoptionRequest } = require("../models/adoptionrequest");
 const { User } = require("../models/user");
+const checkSessionAuth = require("../middlewares/checkSessionAuth"); // Make sure this exists
 const upload = require("../middlewares/upload"); // Include multer middleware
-const validateUser = require("../middlewares/validateUser");
-var checkSessionAuth = require("../middlewares/checkSessionAuth");
 
 // User Profile Dashboard Route
 router.get("/", async (req, res) => {
@@ -41,7 +40,7 @@ router.get("/editprofile", checkSessionAuth, async (req, res) => {
 });
 
 // Process edit profile form with image upload
-router.post("/editprofile", checkSessionAuth, async (req, res) => {
+router.post("/editprofile",upload , checkSessionAuth, async (req, res) => {
   try {
     const user = await User.findById(req.session.user._id);
     if (!user) return res.redirect("/login");
@@ -57,6 +56,7 @@ router.post("/editprofile", checkSessionAuth, async (req, res) => {
     }
 
     await user.save();
+    console.log(req.body);
 
     // Optionally, update the session information too:
     req.session.user.name = user.name;
