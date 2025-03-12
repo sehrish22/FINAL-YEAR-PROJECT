@@ -1,0 +1,23 @@
+extends ../layout
+
+block content
+  h1 Edit Pet
+  form(action="/pets/petsedit/" + pet._id, method="POST", enctype="multipart/form-data")
+    .form-group
+      label(for="name") Name
+      input(type="text", class="form-control", id="name", name="name", value=pet.name, required)
+    .form-group
+      label(for="type") Type
+      input(type="text", class="form-control", id="type", name="type", value=pet.type, required)
+    .form-group
+      label(for="fee") Adoption Fee
+      input(type="text", class="form-control", id="fee", name="fee", value=pet.fee, required)
+    .form-group
+      label(for="description") Description
+      textarea(class="form-control", id="description", name="description", required)= pet.description
+    .form-group
+      label(for="image") Pet Image
+      input(type="file", class="form-control", id="image", name="image")
+      if pet.image
+        img(src=pet.image, alt=pet.name, class="img-fluid mb-2")
+    button(type="submit", class="btn btn-warning") Save Changes

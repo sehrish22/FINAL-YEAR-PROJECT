@@ -1,0 +1,58 @@
+extends layout
+
+block content
+  #chat-container
+    #chat-window
+
+    form#chat-form(action='/api/chatbot', method='POST')
+      input#user-input(type='text', name='message', placeholder='Ask about pet health...', required)
+      button(type='submit') Send
+
+  script.
+    const chatForm = document.getElementById('chat-form');
+    const chatWindow = document.getElementById('chat-window');
+    const chatHistory = []; // Store chat history
+
+    chatForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const userInput = document.getElementById('user-input');
+      const message = userInput.value;
+
+      if (!message) return;
+
+      // Display user message
+      chatWindow.innerHTML += `<div class="message user"><strong>You:</strong> ${message}</div>`;
+      userInput.value = '';
+
+      // Store user's message in chat history
+      chatHistory.push({ message, response: null });
+
+      try {
+        // Send message and chat history to backend
+        const response = await fetch('/chatbot/consult-chatbot', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message, previousChats: chatHistory })
+        });
+
+        const botResponse = await response.json();
+        console.log(botResponse);
+
+        // Store bot's response in chat history
+        chatHistory[chatHistory.length - 1].response = botResponse;
+
+        // Render formatted bot response
+        const formattedResponse = botResponse
+          .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')  // Bold
+          .replace(/\*(.*?)\*/g, '<em>$1</em>')              // Italic
+          .replace(/\# (.*?)\n/g, '<h2>$1</h2>')             // H2 Heading
+          .replace(/\#\# (.*?)\n/g, '<h3>$1</h3>')           // H3 Heading
+          .replace(/\n/g, '<br>');                           // Line Break
+
+        chatWindow.innerHTML += `<div class="message bot"><strong>Bot:</strong> ${formattedResponse}</div>`;
+        chatWindow.scrollTop = chatWindow.scrollHeight;
+
+      } catch (error) {
+        chatWindow.innerHTML += `<div class="message error">Error: Unable to fetch response.</div>`;
+      }
+    });

@@ -1,0 +1,51 @@
+extends ../layout
+
+block content
+  // User Information
+  h2 User Information
+  p Name: #{user.name}
+  p Email: #{user.email}
+  p Contact: #{user.contact}
+
+  form(action=`/admin/profile/${user._id}/delete`, method="POST")
+      button.btn.btn-danger(type="submit") Delete Profile
+
+  // Products Uploaded by User
+  h2 Products Uploaded
+  each product in products
+    img(src=product.image, width="100")
+    p #{product.name} - $#{product.price} - #{product.description}
+
+  // Pets Uploaded by User
+  h2 Pets Uploaded
+  each pet in pets
+    img(src=pet.image, width="100")
+    p #{pet.name} (#{pet.type}) - #{pet.description}
+
+  // User's Adoption Requests (Detailed)
+  h2 Adoption Requests
+  each adoption in adoptionRequests
+    h3 Adoption ID: #{adoption.adoptionRequestId}
+    p Pet: #{adoption.petId.name} (#{adoption.petId.type})
+    img(src=adoption.petId.image, width="100")
+    p Requestor: #{adoption.name} (#{adoption.email})
+    p Contact: #{adoption.contact}
+    p Address: #{adoption.address}
+
+  // Orders Received
+  h2 Orders Received
+  each order in orders
+    h3 Order ID: #{order.orderId}
+
+    if order.userId
+      p Customer: #{order.userId.name} (#{order.userId.email})
+    else
+      p Customer: Unknown User
+
+    p Address: #{order.address}
+    p Total: $#{order.total}
+
+    h4 Items:
+    each item in order.items
+      p #{item.product.name} - #{item.quantity} x $#{item.price} = $#{item.subtotal}
+      img(src=item.product.image, width="100")

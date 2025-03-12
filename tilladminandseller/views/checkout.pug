@@ -1,0 +1,38 @@
+extends layout
+
+block content
+  h1 Checkout
+  
+  h2 Order ID: #{orderId}
+  h3 Your Order Summary:
+  if cart.length
+    each item in cart
+      .cart-item
+        img(src=item.product.image, alt=item.product.name)
+        h4= item.product.name
+        p Quantity: #{item.quantity}
+        p Price: $#{item.product.price}
+        p Subtotal: $#{item.product.price * item.quantity}
+    h3 Total Amount: $#{total}
+
+    form(action="/products/checkout", method="post")
+      div.form-group
+        label(for="email") Email
+        input.form-control#email(type="text", name="email", required)
+      div.form-group
+        label(for="name") Name
+        input.form-control#name(type="text", name="name", required)
+      div.form-group
+        label(for="address") Address
+        textarea.form-control#address(name="address", required)
+      div.form-group
+        label(for="contact") Contact
+        input.form-control#contact(type="text", name="contact", required)
+      div.form-group
+        label(for="payment") Payment Method
+        select.form-control#payment(name="payment", required)
+          option(value="cash") Cash on Delivery
+      input(type="hidden", name="orderId", value=orderId)
+      button.btn.btn-primary(type="submit") Complete Checkout
+  else
+    p Your cart is empty.
