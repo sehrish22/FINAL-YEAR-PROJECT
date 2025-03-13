@@ -14,37 +14,48 @@ router.get("/register", function (req, res, next) {
   res.render("users/register");
 });
 
-router.post("/register", async function (req, res, next) {
-  let user = await User.findOne({ email: req.body.email });
+router.post("/register", async function (req, res) {
+  let errors = {};
+  const { name, email, password, role } = req.body;
+
+  // Check if email already exists
+  let user = await User.findOne({ email });
   if (user) {
-    return res.render("users/register", { error: "User with this email already exists" });
+    errors.email = "User with this email already exists";
   }
 
-  const { password } = req.body;
   // Validate password length
-  if (!password || password.length < 8){
-    return res.render("users/register", { error: "Passowrd must be 8 characters long" });
+  if (!password || password.length < 8) {
+    errors.password = "Password must be at least 8 characters long";
   }
 
   // Check for at least one digit
-  const digitRegex = /[0-9]/;
-  if (!digitRegex.test(password)) {
-    return res.render("users/register", { error: "Password must contain atleast 1 digit" });
+  if (!/[0-9]/.test(password)) {
+    errors.password = "Password must contain at least 1 digit";
   }
 
   // Check for at least one special character
-  const specialCharRegex = /[!@#$%^&*]/;
-  if (!specialCharRegex.test(password)) {
-    return res.render("users/register", { error: "Password must contain atleast 1 special character" });
+  if (!/[!@#$%^&*]/.test(password)) {
+    errors.password = "Password must contain at least 1 special character";
   }
 
+  // If any errors exist, re-render the form with input values and errors
+  if (Object.keys(errors).length > 0) {
+    return res.render("users/register", { errors, req });
+  }
 
-  user = new User(req.body);
-  let salt = await bcrypt.genSalt(10);
-  user.password = await bcrypt.hash(user.password, salt);
-  await user.save();
-  res.redirect("/login");
+  try {
+    user = new User(req.body);
+    let salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(user.password, salt);
+    await user.save();
+    res.redirect("/login");
+  } catch (err) {
+    console.error(err);
+    res.render("users/register", { errors: { general: "An error occurred" }, req });
+  }
 });
+
 
 // Login route
 router.get("/login", function (req, res, next) {
@@ -56,6 +67,7 @@ router.post("/login", async function (req, res) {
   const user = await User.findOne({ email: req.body.email });
   if (!user){
     return res.render("users/login", { error: "Invalid email or password" });
+    
   }
 
   const isValid = await bcrypt.compare(req.body.password, user.password);
