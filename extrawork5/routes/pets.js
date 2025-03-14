@@ -68,6 +68,8 @@ router.post("/petsedit/:id", checkSessionAuth, upload, validatePet, async functi
 
   pet.name = req.body.name;
   pet.type = req.body.type;
+  pet.breed = req.body.breed;
+  pet.color = req.body.color;
   pet.fee = req.body.fee;
   pet.description = req.body.description;
 

@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  h1 Stores Across Pakistan
+  if user && user.role === "admin"
+      h1 Stores Management
+      a.btn.btn-green(href="/admin/stores/new") Add New Store
+
+  each store in stores
+    .store-card
+      h2= store.name
+      p Address: #{store.address}
+      p Phone: #{store.contact}
+      p Opening Time: #{store.openingTime}
+      p Closing Time: #{store.closingTime}
+      if user && user.role === "admin"
+          a.btn.btn-brown(href=`/admin/stores/edit/${store._id}`) Edit
+          a.btn.btn-red(href=`/admin/stores/delete/${store._id}`) Delete

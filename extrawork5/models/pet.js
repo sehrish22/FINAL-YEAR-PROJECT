@@ -4,8 +4,10 @@ const Joi = require('@hapi/Joi')
 var petSchema = mongoose.Schema({
   name: String,
   type: String,
+  breed: String, // Add breed field
+  color: String, // Add color field
   description: String,
-  fee: String,
+  fee: Number, // Change fee to number type
   image: String, // Add image field to store image URL or path
   uploadedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }, // Linked to User
 });
@@ -15,9 +17,11 @@ const Pet = mongoose.model("Pet", petSchema);
 function validatePet(data){
   const schema = Joi.object({
     name: Joi.string().min(3).max(30).required(),
-    fee: Joi.string().min(0).required(),
     type: Joi.string().min(3).max(20).required(),
+    breed: Joi.string().min(3).max(30).required(),
+    color: Joi.string().min(3).max(20).required(),
     description: Joi.string().min(3).required(),
+    fee: Joi.number().min(0).required(), // Change fee validation to number
     image: Joi.string().optional()  // Make image optional during validation
   });
   return schema.validate(data,{abortEarly:false});

@@ -2,15 +2,19 @@ var express = require("express");
 var router = express.Router();var Cart = require("../models/cart");
 var SitterApplication = require("../models/SitterApplication");
 var PetSitter = require("../models/PetSitter");
+const Store = require("../models/Store");
+const Vet = require("../models/Vet");
 /* GET home page. */
 router.get("/", function (req, res, next) {
   res.render("home");
 });
-router.get("/stores", function (req, res, next) {
-  res.render("stores");
+router.get("/stores",async function (req, res, next) {
+  const stores = await Store.find();
+  res.render("stores",{ stores});
 });
-router.get("/clinics", function (req, res, next) {
-  res.render("clinics");
+router.get("/clinics", async function (req, res, next) {
+  const vets = await Vet.find();
+  res.render("vets", { vets });
 });
 router.get("/petsitters", async function (req, res, next) {
   const petsitters = await PetSitter.find();
