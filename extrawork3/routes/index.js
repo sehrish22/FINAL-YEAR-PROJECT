@@ -1,17 +1,22 @@
 var express = require("express");
 var router = express.Router();var Cart = require("../models/cart");
+var SitterApplication = require("../models/SitterApplication");
+var PetSitter = require("../models/PetSitter");
+const Store = require("../models/Store");
 /* GET home page. */
 router.get("/", function (req, res, next) {
   res.render("home");
 });
-router.get("/stores", function (req, res, next) {
-  res.render("stores");
+router.get("/stores",async function (req, res, next) {
+  const stores = await Store.find();
+  res.render("stores",{ stores});
 });
 router.get("/clinics", function (req, res, next) {
   res.render("clinics");
 });
-router.get("/petsitters", function (req, res, next) {
-  res.render("petsitters");
+router.get("/petsitters", async function (req, res, next) {
+  const petsitters = await PetSitter.find();
+  res.render("petsitters",{ petsitters });
 });
 router.get("/cart",async function (req, res, next) {
   const sessionId = req.session.sessionId;

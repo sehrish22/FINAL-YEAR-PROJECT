@@ -19,6 +19,10 @@ var profilesRoutes = require("./routes/profiles");
 var petsRouter = require("./routes/pets");
 var usersRouter = require("./routes/users");
 var chatbotRoutes = require('./routes/chatbot');
+var sitterapplicationsRoutes = require("./routes/sitterapplications");
+var sitterapplicationsRoutes = require("./routes/sitterapplications"); 
+var storesRouter = require("./routes/stores");
+var storesRouter = require("./routes/stores");
 
 var app = express();
 app.use(express.urlencoded({ extended: true }));
@@ -57,6 +61,12 @@ app.use("/products", ordersRoutes);
 app.use('/chatbot', chatbotRoutes);
 app.use("/", usersRouter);
 app.use("/images", express.static("public/imgs"));
+app.use("/", sitterapplicationsRoutes);
+app.use("/admin", sitterapplicationsRoutes);
+app.use("/", storesRouter);
+app.use("/admin", storesRouter);
+
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -8,11 +8,11 @@ block content
       p.user-name Name: #{user.name}
       p.user-email Email: #{user.email} 
 
-    // Added Edit Profile Card
     .admin-card.bg-blue
-        h5.admin-card-title Edit Profile
-        p.admin-card-text Update your profile information.
-        a.btn.btn-brown(href="/admin/editadminprofile") Edit Profile
+      h5.admin-card-title Edit Profile
+      p.admin-card-text Update your profile information.
+      a.btn.btn-brown(href="/admin/editadminprofile") Edit Profile
+
     .admin-content
       h2.admin-subtitle Welcome to the Admin Panel
       p.admin-text Manage users, pets, products, and adoption requests from here.
@@ -51,3 +51,13 @@ block content
           h5.admin-card-title Change Password
           p.admin-card-text Update your password securely.
           a.btn.btn-brown(href="/change-password") Change Password
+
+        .admin-card.bg-green
+          h5.admin-card-title PetSitter Applications
+          p.admin-card-text Review applications from potential pet sitters.
+          a.btn.btn-brown(href="/admin/admin-sitter-application") View Applications
+        
+        .admin-card.bg-blue
+          h5.admin-card-title Manage Stores
+          p.admin-card-text Add, edit, or delete physical stores.
+          a.btn.btn-brown(href="/stores") Manage Stores
