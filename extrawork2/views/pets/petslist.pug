@@ -1,0 +1,29 @@
+extends ../layout
+
+block content
+    .row.transparent-container 
+        .col-sm-6
+            h1= title
+        if user
+            .col-sm-3
+                a(href="/pets/petsadd", class="btn btn-success float-right") Add New Pet 
+    .row
+        each pet in pets
+            .col-sm-4.mb-3
+                .card
+                    .card-body
+                        if pet.image
+                            img(src=pet.image, alt=pet.name, class="img-fluid mb-2")
+                        h5.card-title 
+                            a(href="/pets/"+pet._id) #{pet.name}
+                        p.card-text Type: #{pet.type}
+                        p.card-text Price: #{pet.fee}
+                        p.card-text Description: #{pet.description}
+                        // Display the product image if it exists
+                        
+                        if user
+                            .btn-group
+                                a(href="/pets/delete/"+pet._id, class="btn btn-danger") Delete
+                                a(href="/pets/edit/"+pet._id, class="btn btn-warning") Edit
+                        .btn-group        
+                            a(href="/pets/adoptionrequest/" + pet._id, class="btn btn-info") Adoption Request

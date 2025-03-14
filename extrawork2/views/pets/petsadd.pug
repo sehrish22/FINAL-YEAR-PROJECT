@@ -1,0 +1,21 @@
+extends ../layout
+
+block content
+  h1 Add New Pet
+  form(action="/pets/petsadd", method="POST", enctype="multipart/form-data")
+    .form-group
+      label(for="name") Name
+      input(type="text", class="form-control", id="name", name="name", required)
+    .form-group
+      label(for="type") Type
+      input(type="text", class="form-control", id="type", name="type", required)
+    .form-group
+      label(for="fee") Adoption Fee
+      input(type="text", class="form-control", id="fee", name="fee", required)
+    .form-group
+      label(for="description") Description
+      textarea(class="form-control", id="description", name="description", required)
+    .form-group
+      label(for="image") Pet Image
+      input(type="file", class="form-control", id="image", name="image")
+    button(type="submit", class="btn btn-success") Add Pet

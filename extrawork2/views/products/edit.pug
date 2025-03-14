@@ -1,0 +1,26 @@
+extends ../layout
+
+block content
+  h1 Edit Product
+  form(action="/products/edit/" + product._id, method="POST", enctype="multipart/form-data")
+    .form-group
+      label(for="name") Name
+      input(type="text", class="form-control", id="name", name="name", value=product.name, required)
+    .form-group
+      label(for="type") Type
+      input(type="text", class="form-control", id="type", name="type", value=product.type, required)
+    .form-group
+      label(for="price") Price
+      input(type="text", class="form-control", id="price", name="price", value=product.price, required)
+    .form-group
+      label(for="description") Description
+      textarea(class="form-control", id="description", name="description", required)= product.description
+    .form-group
+      label(for="instock") In Stock
+      textarea(class="form-control", id="instock", name="instock", required)= product.instock
+    .form-group
+      label(for="image") Product Image
+      input(type="file", class="form-control", id="image", name="image")
+      if product.image
+        img(src=product.image, alt=product.name, class="img-fluid mb-2")
+    button(type="submit", class="btn btn-warning") Save Changes
