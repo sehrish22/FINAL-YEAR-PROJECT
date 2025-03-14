@@ -23,6 +23,8 @@ var sitterapplicationsRoutes = require("./routes/sitterapplications");
 var sitterapplicationsRoutes = require("./routes/sitterapplications"); 
 var storesRouter = require("./routes/stores");
 var storesRouter = require("./routes/stores");
+var vetsRouter = require("./routes/vets");
+var vetsRouter = require("./routes/vets");
 
 var app = express();
 app.use(express.urlencoded({ extended: true }));
@@ -65,6 +67,8 @@ app.use("/", sitterapplicationsRoutes);
 app.use("/admin", sitterapplicationsRoutes);
 app.use("/", storesRouter);
 app.use("/admin", storesRouter);
+app.use("/", vetsRouter);
+app.use("/admin", vetsRouter);
 
 
 
