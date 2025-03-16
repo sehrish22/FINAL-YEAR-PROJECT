@@ -26,5 +26,4 @@ block content
                         form(action=`/pets/delete/${pet._id}`, method="POST", style="display: inline;")
                             button(type="submit", class="btn btn-delete", onclick="return confirm('Are you sure?')") 🗑 Delete
                     else
-                        a.btn.btn-adopt(href=`/adopt/${pet._id}`) 🏡 Adopt This Pet
-                    a.btn.btn-back(href="/pets") ⬅️ Back to Pets
+                        a.btn.btn-adopt(href="/pets/adoptionrequest/"+pet._id) 🏡 Adopt This Pet

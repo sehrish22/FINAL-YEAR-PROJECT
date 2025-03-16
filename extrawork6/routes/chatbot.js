@@ -100,14 +100,14 @@ router.get('/pet/:id', async (req, res) => {
         if (!pet) {
             return res.status(404).send('Pet not found');
         }
-        res.render('pet-results', { pet });
+        res.render('pets/petsdetails', { title: pet.name, pet });
     } catch (error) {
         console.error('Error finding the pet details', error);
         res.status(500).send('Internal server error');
     }
 });
 //first chatbot details page hit 
-router.get("/pet/:id", async (req, res) => {
+router.get("/:id", async (req, res) => {
   const petId = req.params.id;
 
   // Ensure the petId is a valid ObjectId before querying
@@ -122,6 +122,7 @@ router.get("/pet/:id", async (req, res) => {
 
   res.render("pets/petsdetails", { title: pet.name, pet });
 });
+
 
 
 module.exports = router;
