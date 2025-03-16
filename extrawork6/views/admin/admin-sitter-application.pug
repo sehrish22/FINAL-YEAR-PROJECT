@@ -1,11 +1,12 @@
 extends ../layout
 
 block content
-  .container
+  link(rel='stylesheet', href='/stylesheets/admin-sitter-application.css')
+  .admin-sitter-container
     h1 PetSitter Applications
 
     if applications.length
-      table.table.table-striped
+      table.sitter-table
         thead
           tr
             th Name
@@ -29,7 +30,7 @@ block content
               // Approve button
               td
                 form(action=`/admin/add-petsitter/${application._id}` method="POST")
-                  button.btn.btn-success(type="submit") Approve
+                  button.sitter-approve-btn(type="submit") Approve
 
     else
-      p No applications available.
+      p.no-applications No applications available.

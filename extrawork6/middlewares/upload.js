@@ -24,7 +24,7 @@ const upload = multer({
   limits: { fileSize: 1024 * 1024 * 1024 }, // 1GB
   fileFilter: function (req, file, cb) {
     console.log("📂 File upload attempt:", file);
-    const filetypes = /jpeg|jpg|png|gif|webp/;
+    const filetypes = /jpeg|jpg|png|gif|avif|webp/;
     const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
     const mimetype = filetypes.test(file.mimetype);
 

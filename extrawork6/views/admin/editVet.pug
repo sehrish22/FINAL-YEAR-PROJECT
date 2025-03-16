@@ -1,22 +1,30 @@
 extends ../layout
 
 block content
-  h1 Edit Vet
+  link(rel='stylesheet', href='/stylesheets/editvet.css')
 
-  form(action=`/admin/vets/edit/${vet._id}` method="POST")
-    label Vet Name:
-    input(type="text" name="name" value=vet.name required)
+  .form-container
+    h1.page-title ✏️ Edit Vet
 
-    label Address:
-    input(type="text" name="address" value=vet.address required)
+    form.vet-form(action=`/admin/vets/edit/${vet._id}` method="POST")
+      .form-group
+        label(for="name") Vet Name:
+        input#name(type="text" name="name" value=vet.name required)
 
-    label Phone Number:
-    input(type="text" name="contact" value=vet.contact required)
+      .form-group
+        label(for="address") Address:
+        input#address(type="text" name="address" value=vet.address required)
 
-    label Opening Time:
-    input(type="text" name="openingTime" value=vet.openingTime required)
+      .form-group
+        label(for="contact") Phone Number:
+        input#contact(type="text" name="contact" value=vet.contact required)
 
-    label Closing Time:
-    input(type="text" name="closingTime" value=vet.closingTime required)
+      .form-group
+        label(for="openingTime") Opening Time:
+        input#openingTime(type="text" name="openingTime" value=vet.openingTime required)
 
-    button(type="submit") Update Vet
+      .form-group
+        label(for="closingTime") Closing Time:
+        input#closingTime(type="text" name="closingTime" value=vet.closingTime required)
+
+      button.btn-submit(type="submit") ✅ Update Vet

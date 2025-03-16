@@ -55,6 +55,7 @@ router.post("/editadminprofile",upload , checkSessionAuth, async (req, res) => {
     req.session.user.name = user.name;
     req.session.user.email = user.email;
     req.session.user.image = user.image;
+    req.session.user.contact = user.contact;
 
     res.redirect("/admin"); // or wherever you want to redirect
   } catch (error) {

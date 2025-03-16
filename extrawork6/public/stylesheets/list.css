@@ -1,10 +1,11 @@
 /* General Styling */
 .page-title {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #5a3e2b;
     text-align: center;
-    margin-bottom: 1.5rem;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #4a3221; /* Deep brown */
+    margin-bottom: 2rem;
+    text-transform: uppercase;
 }
 
 /* Product Cards */
@@ -83,11 +84,33 @@
 }
 
 .btn-add-product {
-    background-color: #4CAF50;
+    background-color: #4a3221;
     color: white;
+    font-size: 1rem;
     font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .btn-add-product:hover {
-    background-color: #388E3C;
+    background-color: #7a5542;
+    transform: scale(1.05);
+}
+.add-product-container {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+.product-management {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+.management-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #4a3221;
 }

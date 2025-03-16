@@ -1,96 +1,133 @@
-/* General Styling for Vets Page */
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+/* General Styles */
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #f4ede4;
-    color: #3d2b1f;
+    background-color: #f4ede4; /* Light beige background */
+    margin: 0;
+    padding: 0;
 }
 
-/* Page Heading */
-h1 {
+/* Page Title */
+.page-title {
     text-align: center;
-    font-size: 2.2rem;
+    font-size: 2.4rem;
     font-weight: 700;
-    color: #3f2a1d;
-    margin-bottom: 1.5rem;
-}
-
-/* Vet Cards - Styled to Match Stores Cards */
-.vet-card {
-    background: #eaddcf;
-    border-radius: 12px;
-    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin: 15px auto;
-    width: 90%;
-    max-width: 600px;
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    border: 2px solid #8b5a2b;
-}
-
-.vet-card:hover {
-    transform: scale(1.03);
-    box-shadow: 6px 6px 20px rgba(0, 0, 0, 0.15);
-}
-
-/* Vet Name */
-.vet-card h2 {
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: #5a3e2b;
-    margin-bottom: 10px;
-    text-align: center;
-}
-
-/* Vet Info (Address, Phone, Opening & Closing Time) */
-.vet-info {
-    font-size: 1.1rem;
-    font-weight: 400;
-    color: #4a3221;
-    margin-bottom: 8px;
-    text-align: center;
-}
-
-/* Headings for Vet Details */
-.vet-info strong {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: #3f2a1d;
+    color: #4a3221; /* Deep brown */
+    margin-bottom: 2rem;
     text-transform: uppercase;
 }
 
-/* Button Container */
-.vet-actions {
+/* Admin Panel */
+.admin-panel {
     display: flex;
     justify-content: center;
-    gap: 10px;
-    margin-top: 10px;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.admin-panel h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #4a3221;
+}
+
+/* Vet Container */
+.vet-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+}
+
+/* Vet Card */
+.vet-card {
+    background: #eaddcf; /* Soft brown tone */
+    padding: 1.2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 300px; /* Same width as store cards */
+    min-height: 320px; /* Ensures all cards have the same height */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Pushes buttons to bottom */
+    border: 2px solid #c2a383; /* Darker brown border for contrast */
+    transition: transform 0.3s ease-in-out;
+}
+
+.vet-card:hover {
+    transform: scale(1.05);
+}
+
+/* Vet Name */
+.vet-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #5c4033;
+    margin-bottom: 0.5rem;
+}
+
+/* Vet Info */
+.vet-info {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #3d2b1f;
+    margin-bottom: 0.3rem;
+    font-style: italic;
+    letter-spacing: 0.5px;
+}
+
+/* Vet Actions - Fixed button position */
+.vet-actions {
+    margin-top: auto; /* Pushes buttons to the bottom */
+    display: flex;
+    justify-content: center;
+    gap: 0.6rem;
+    padding-top: 1rem;
 }
 
 /* Buttons */
 .btn {
-    display: inline-block;
-    padding: 8px 15px;
-    border-radius: 8px;
-    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-size: 0.9rem;
     font-weight: 600;
-    transition: 0.3s ease-in-out;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
 }
 
+/* Green Button */
 .btn-green {
-    background-color: #6c8f46;
+    background: #4a2c1f;
     color: white;
 }
 
+.btn-green:hover {
+    background: #7a5542;
+}
+
+/* Brown Button */
 .btn-brown {
-    background-color: #8b5a2b;
+    background: #8b5e3b;
     color: white;
 }
 
+.btn-brown:hover {
+    background: #6d442a;
+}
+
+/* Red Button */
 .btn-red {
-    background-color: #c94f4f;
+    background: #d32f2f;
     color: white;
 }
 
-.btn:hover {
-    opacity: 0.85;
+.btn-red:hover {
+    background: #b71c1c;
 }

@@ -16,7 +16,7 @@ router.get("/register", function (req, res, next) {
 
 router.post("/register", async function (req, res) {
   let errors = {};
-  const { name, email, password, role } = req.body;
+  const { name, email, password,contact, role } = req.body;
 
   // Check if email already exists
   let user = await User.findOne({ email });
@@ -79,6 +79,7 @@ router.post("/login", async function (req, res) {
       _id: user._id,
       email: user.email,
       role: user.role,
+      contact : user.contact,
     };
   if (user.role === "admin") {
     res.redirect("/admin");

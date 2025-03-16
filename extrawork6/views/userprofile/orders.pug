@@ -1,23 +1,33 @@
 extends ../layout
 
 block content
-  .admin-orders-container
-    h2.admin-orders-title Orders
+  link(rel='stylesheet' href='/stylesheets/sellerorders.css')
+  .user-orders-container
+    h2.user-orders-title Orders
 
     if orders && orders.length > 0
-      .admin-orders-grid
-        each order in orders
-          .admin-order-card
-            .admin-order-card-body
-              h2 Order ID: #{order._id}
-              p.admin-order-text Name: #{order.name}
-              p.admin-order-text Email: #{order.email}
-              p.admin-order-text Address: #{order.address}
-              p.admin-order-text Contact: #{order.contact}
-              h3 Items Ordered:
-              each item in order.items
-                .item
-                  img(src=item.image, alt=item.name, width="100")
-                  p #{item.name} - $#{item.price} x #{item.quantity} = $#{item.subtotal}
+      table.user-orders-table
+        thead
+          tr
+            th Order ID
+            th Name
+            th Email
+            th Address
+            th Contact
+            th Items Ordered
+        tbody
+          each order in orders
+            tr
+              td #{order._id}
+              td #{order.name}
+              td #{order.email}
+              td #{order.address}
+              td #{order.contact}
+              td
+                ul
+                  each item in order.items
+                    li
+                      img(src=item.image, alt=item.name, width="50")
+                      | #{item.name} - $#{item.price} x #{item.quantity} = $#{item.subtotal}
     else
-      p.admin-no-orders No orders to display.
+      p.user-no-orders No orders to display.

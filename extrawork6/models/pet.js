@@ -22,7 +22,7 @@ function validatePet(data){
     color: Joi.string().min(3).max(20).required(),
     description: Joi.string().min(3).required(),
     fee: Joi.number().min(0).required(), // Change fee validation to number
-    image: Joi.string().optional()  // Make image optional during validation
+    image: Joi.string().required()  // Make image optional during validation
   });
   return schema.validate(data,{abortEarly:false});
 }

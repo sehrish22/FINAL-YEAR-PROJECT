@@ -2,13 +2,14 @@ extends ../layout
 
 block content
     link(rel='stylesheet' href='/stylesheets/list.css')
-    
+
     .container
-        .row.justify-content-between.align-items-center.header-container
-            .col-md-6
-                h1.page-title Browse Our Exclusive Pet Products
+        .header-container
+            h1.page-title 🛍️ Browse Our Exclusive Pet Products
+
             if user
-                .col-md-3.text-right
+                .product-management
+                    h2.management-title 📦 Products Management
                     a.btn.btn-add-product(href="/products/add") 
                         i(class="fas fa-plus") Add New Product 
 

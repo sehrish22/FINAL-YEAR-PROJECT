@@ -6,6 +6,7 @@ var UserSchema = mongoose.Schema({
   email: String,
   password: String,
   image: String, // Add image field to store image URL or path
+  contact:String,
   role: {
     type: String,
     enum: ["admin", "seller"],

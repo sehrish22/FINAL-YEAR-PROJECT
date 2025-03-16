@@ -1,22 +1,30 @@
 extends ../layout
 
 block content
-  h1 Add New Vet
+  link(rel='stylesheet', href='/stylesheets/addvet.css')
 
-  form(action="/vets" method="POST")
-    label Vet Name:
-    input(type="text" name="name" required)
+  .form-container
+    h1.page-title ➕ Add New Vet
 
-    label Address:
-    input(type="text" name="address" required)
+    form.vet-form(action="/vets" method="POST")
+      .form-group
+        label(for="name") Vet Name:
+        input#name(type="text" name="name" placeholder="Enter vet's name" required)
 
-    label Phone Number:
-    input(type="text" name="contact" required)
+      .form-group
+        label(for="address") Address:
+        input#address(type="text" name="address" placeholder="Enter clinic address" required)
 
-    label Opening Time:
-    input(type="text" name="openingTime" placeholder="9:00 AM" required)
+      .form-group
+        label(for="contact") Phone Number:
+        input#contact(type="text" name="contact" placeholder="Enter contact number" required)
 
-    label Closing Time:
-    input(type="text" name="closingTime" placeholder="9:00 PM" required)
+      .form-group
+        label(for="openingTime") Opening Time:
+        input#openingTime(type="text" name="openingTime" placeholder="e.g. 9:00 AM" required)
 
-    button(type="submit") Add Vet
+      .form-group
+        label(for="closingTime") Closing Time:
+        input#closingTime(type="text" name="closingTime" placeholder="e.g. 9:00 PM" required)
+
+      button.btn-submit(type="submit") ➕ Add Vet

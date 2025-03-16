@@ -10,9 +10,10 @@ block content
         .user-details
           p.user-name Name: #{user.name}
           p.user-email Email: #{user.email} 
+          p.user-contact Email: #{user.contact} 
           a.btn.btn-brown(href="/admin/editadminprofile") Edit Profile
-
-        img.user-img(src=user.image ? user.image : '/images/default.png', alt="Profile Picture")
+        if user.image
+            img.user-img(src=user.image ? user.image : '/images/default.png', alt="Profile Picture")
     .admin-content
       .admin-grid
         .admin-card.bg-brown

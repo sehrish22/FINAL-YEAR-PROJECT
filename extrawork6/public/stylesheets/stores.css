@@ -4,7 +4,7 @@
 /* General Styles */
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #f8f6f4; /* Light beige background */
+    background-color: #f4ede4; /* Light beige background */
     margin: 0;
     padding: 0;
 }
@@ -111,12 +111,12 @@ body {
 
 /* Green Button */
 .btn-green {
-    background: #4caf50;
+    background: #4a2c1f;
     color: white;
 }
 
 .btn-green:hover {
-    background: #388e3c;
+    background: #7a5542;
 }
 
 /* Brown Button */

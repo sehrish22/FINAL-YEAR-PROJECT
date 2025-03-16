@@ -1,32 +1,33 @@
 extends layout
 
 block content
-  .container
+  link(rel='stylesheet', href='/stylesheets/sitter-application.css')
+  .sitter-container
     h1 Apply to Become a PetSitter
 
-    form(action="/sitter-application" method="POST")
+    form.sitter-form(action="/sitter-application" method="POST")
       .form-group
         label(for="name") Full Name:
-        input#name.form-control(type="text" name="name" required)
+        input#name(type="text" name="name" required)
 
       .form-group
         label(for="email") Email:
-        input#email.form-control(type="email" name="email" required)
+        input#email(type="email" name="email" required)
 
       .form-group
         label(for="phone") Phone Number:
-        input#phone.form-control(type="text" name="phone" required)
+        input#phone(type="text" name="phone" required)
 
       .form-group
         label(for="address") Address:
-        input#address.form-control(type="text" name="address" required)
+        input#address(type="text" name="address" required)
 
       .form-group
         label(for="experience") Years of Experience:
-        input#experience.form-control(type="number" name="experience" min="0" required)
+        input#experience(type="number" name="experience" min="0" required)
 
       .form-group
         label(for="pets") Pets You Can Care For (comma-separated):
-        input#pets.form-control(type="text" name="pets" placeholder="e.g., dogs, cats, birds" required)
+        input#pets(type="text" name="pets" placeholder="e.g., dogs, cats, birds" required)
 
-      button.btn.btn-primary(type="submit") Submit Application
+      button(type="submit") Submit Application
