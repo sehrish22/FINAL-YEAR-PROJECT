@@ -76,10 +76,12 @@ router.post("/login", async function (req, res) {
   }
 
   req.session.user = {
+      name: user.name,
       _id: user._id,
       email: user.email,
       role: user.role,
       contact : user.contact,
+      image: user.image,
     };
   if (user.role === "admin") {
     res.redirect("/admin");
@@ -131,6 +133,10 @@ router.post("/change-password", async function (req, res) {
   user.password = await bcrypt.hash(newPassword, salt);
   await user.save();
 
-  res.send("Password updated successfully");
+  res.redirect("password-updated");
 });
+router.get("/password-updated", (req, res) => {
+  res.render("users/password-updated");
+});
+
 module.exports = router;

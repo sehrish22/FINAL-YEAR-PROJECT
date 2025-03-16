@@ -9,7 +9,10 @@ const upload = require("../middlewares/upload"); // Include multer middleware
 router.get("/", async function (req, res, next) {
   let filter = {};
   if (req.query.type) {
-      filter.type = req.query.type; // Filter by type if provided
+    console.log(req.query.type[0].toUpperCase() + req.query.type.substring(1));
+
+      filter.type = req.query.type[0].toUpperCase() + req.query.type.substring(1);
+      // Filter by type if provided
   }
   if (req?.session?.user?._id) {
     filter.uploadedBy = req.session.user._id;

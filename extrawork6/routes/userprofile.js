@@ -4,6 +4,7 @@ const { AdoptionRequest } = require("../models/adoptionrequest");
 const { User } = require("../models/user");
 const checkSessionAuth = require("../middlewares/checkSessionAuth"); // Make sure this exists
 const upload = require("../middlewares/upload"); // Include multer middleware
+var { Order } = require("../models/order");
 
 // User Profile Dashboard Route
 router.get("/", async (req, res) => {
@@ -15,10 +16,11 @@ router.get("/", async (req, res) => {
 
     // Fetch adoption requests specific to the logged-in user
     const adoptionrequests = await AdoptionRequest.find({ userId: user._id });
-
+    const ordersCount = await Order.find({ userId: req.session.user._id }).countDocuments();
     res.render("userprofile/userprofile", {
       user,
       adoptionrequests,
+      ordersCount,
     });
   } catch (error) {
     console.error("Error loading user profile:", error);

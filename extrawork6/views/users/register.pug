@@ -28,7 +28,7 @@ block content
                 label(for="role") Account Type
                 select#role(name="role", class="signup-input", required)
                     option(value="seller") Seller
-                    option(value="admin") Admin
+                    //- option(value="admin") Admin
                 if errors && errors.role
                     p.error-message= errors.role
             .signup-form-group

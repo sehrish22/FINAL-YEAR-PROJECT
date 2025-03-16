@@ -27,7 +27,9 @@ html
                     li
                       a.dropdown-item(href='/pets?type=dog') Dogs
                     li
-                      a.dropdown-item(href='/pets?type=other') Others
+                      a.dropdown-item(href='/pets?type=bird') Bird
+                    li
+                      a.dropdown-item(href='/pets?type=rabit') Rabbit
                     li 
                       a.dropdown-item(href="pets") View all
                 li.nav-item.dropdown
@@ -89,8 +91,6 @@ html
         a(href='/products') Products
       .f3
         h3 SignUp For Our NewsLetter
-        if user
-          a.nav-link(href='/logout') Logout
     div
       a#call.btn.btn-danger(href="tel:03494721836") Call Us!
     div

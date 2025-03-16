@@ -10,8 +10,9 @@ block content
         .user-details
           p.user-name Name: #{user.name}
           p.user-email Email: #{user.email} 
-          p.user-contact Contact: #{user.contact} 
-          a.btn.btn-brown(href="/change-password") Change Password
+          p.user-contact Contact: #{user.contact}
+          a.user-nav-link(href='/logout') Logout  
+  
           
       .user-image-container
         img.user-img(src=user.image ? user.image : '/images/default.png', alt="Profile Picture")

@@ -147,11 +147,14 @@ router.post("/checkout", async function (req, res, next) {
     await Cart.deleteOne({ sessionId });
     console.log("🗑️ Cart cleared.");
 
-    res.redirect("/");
+    res.redirect("/products/order-placed");
   } catch (error) {
     console.error("❌ Error during checkout:", error);
     res.status(500).send(`Something went wrong: ${error.message}`);
   }
+});
+router.get("/order-placed", (req, res) => {
+  res.render("order-placed");
 });
 
 //get details of a product
@@ -252,10 +255,20 @@ router.post("/cart/increment/:id", async function (req, res, next) {
 
   const cart = await Cart.findOne({ sessionId });
   const item = cart.items.find((item) => item.product.equals(product._id));
+  console.log(cart,item);
 
   if (item) {
     if (item.quantity + 1 > product.instock) {
-      return res.status(400).send(`Only ${product.instock} products are available.`);
+      // Calculate item subtotal and total
+      const cartWithTotals = cart.items.map((item) => {
+        return {
+        ...item.toObject(),
+      itemTotal: item.product.price * item.quantity,
+    };
+  });
+
+  const total = cartWithTotals.reduce((acc, item) => acc + item.itemTotal, 0);
+      return res.render("cart",{cart:cartWithTotals,total,error:`Only ${product.instock} products are available in stock`});
     }
     item.quantity += 1;
     await cart.save();

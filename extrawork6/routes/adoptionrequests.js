@@ -57,9 +57,13 @@ router.post(
     });
     await adoptionrequest.save();
 
-    res.redirect("/pets");
+    res.redirect("/admin/adoption-request-sent");
   }
 );
+router.get("/adoption-request-sent", (req, res) => {
+  res.render("adoption-request-sent");
+});
+
 
 // Show adoption request form with pet details
 router.get("/adoptionrequest/:id", async function (req, res, next) {

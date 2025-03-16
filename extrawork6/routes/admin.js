@@ -14,6 +14,7 @@ const { AdoptionRequest } = require("../models/adoptionrequest");
 
 // Admin Panel Home Route (optional)
 router.get("/", adminAuth,async (req, res) => {
+  console.log(req.session.user);
   const ordersCount = await Order.countDocuments(); // Get total order count
   console.log("🟢 Orders Count:", ordersCount);
   res.render("admin/admin", { ordersCount });
