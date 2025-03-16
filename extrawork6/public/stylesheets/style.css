@@ -1,0 +1,549 @@
+/* Reset and base styling */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  color: #4d3b3b; /* Dark brown shade for text */
+  background-color: #f5f0eb; /* Light skin tone for background */
+}
+
+#navbar {
+margin: 0;
+padding: 0;
+position: sticky;
+top: 0;
+z-index: 10;
+}
+
+.navbar {
+padding: 1rem 2rem; /* Add space around the navbar */
+background-color: black; /* Set the background color to black */
+text-align: center;  /* Center the navbar text */
+}
+
+.navbar-nav {
+display: flex;
+justify-content: center; /* Center navbar items */
+gap: 2rem; /* Add space between navbar items */
+width: 100%;
+}
+
+.navbar-nav .nav-item {
+padding: 0.5rem 1rem; /* Add space inside each nav-item */
+}
+
+.navbar-brand {
+font-size: 1.8rem; /* Increase font size of the logo */
+color: #f7e6d4; /* Light skin color for logo */
+padding-right: 2rem; /* Space between logo and nav items */
+}
+
+.navbar-brand:hover {
+color: #f1a6a6; /* Highlight color when hovering */
+}
+
+.nav-link {
+font-size: 1.2rem; /* Font size for navbar links */
+padding: 0.75rem 1rem; /* Padding around the text */
+color: #f7e6d4; /* Light skin color */
+}
+
+.navbar-nav .nav-link:hover {
+color: #f1a6a6; /* Hover color */
+}
+
+.navbar-toggler {
+margin-left: auto; /* Toggler button aligned to the right */
+}
+
+/* Navbar Dropdown styling */
+.nav-item.dropdown .dropdown-menu {
+min-width: 200px; /* Set a minimum width for the dropdown menu */
+}
+
+.navbar-toggler-icon {
+background-color: white; /* Change the color of the burger menu */
+}
+
+#video {
+  display: flex;
+  width: 100%;
+  height: 5%;
+  margin: 0 auto;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.5), transparent);
+}
+
+#vid {
+  width: 100vw;
+  height: 5%;
+  object-fit: cover;
+  opacity: 0.85;
+}
+
+/* Welcome Paragraph Styling */
+#paragraph {
+  text-align: center;
+  padding: 2em 1em;
+  background: #8c6b4a; /* Brown */
+  color: #f5f0eb; /* Light skin tone */
+}
+
+#para {
+  font-weight: bold;
+  font-size: 1.8em;
+  line-height: 1.4;
+  font-family: 'Georgia', 'Times New Roman', serif;
+  color: #f5f0eb;
+  padding: 1em;
+  letter-spacing: 0.05em;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Image Grid Styling */
+.row {
+  display: flex;
+  justify-content: center;
+  padding: 2em 0;
+  gap: 20px;
+}
+
+.inst {
+  height: 200px;
+  width: 200px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.inst:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+
+
+/* Footer Styling */
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 2em;
+  background: #4d3b3b; /* Dark brown */
+  color: #f5f0eb;
+  text-align: center;
+}
+
+.footer div {
+  width: 33%;
+  padding: 1em;
+}
+
+.footer h3 {
+  font-size: 1.5em;
+  margin-bottom: 1em;
+  color: #e2c4b8;
+}
+
+.footer a {
+  color: #f5f0eb;
+  text-decoration: none;
+  display: block;
+  margin: 0.5em 0;
+  transition: color 0.3s ease;
+}
+
+.footer a:hover {
+  color: #a58b6f; /* Medium brown */
+}
+
+/* Floating Call Button */
+#call {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #e63946;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1.2em;
+  border-radius: 50px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+/* Floating Call Button */
+#bot {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background-color: #e63946;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1.2em;
+  border-radius: 50px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+#call:hover {
+  background-color: #b02734; 
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.logo-style{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.transparent-container {
+  background-color: rgba(255, 255, 255, 0.8); /* Adjust the rgba values as needed */
+  padding: 20px; /* Optional: add some padding */
+  border-radius: 10px; /* Optional: add rounded corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: add a subtle shadow */
+}
+.backimg{
+  background-image: url("/fypcopy/public/imgs/backgorunf.jpeg");
+  background-position:center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100vw;
+  z-index: -99;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+
+.error-message {
+  margin-top: 0.5rem;
+  color: #E63946;
+  font-size: 1rem;
+}
+/* Orders Page Container */
+.admin-orders-container {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 20px;
+  background-color: #2d2d2d; /* Dark background */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Orders Title */
+.admin-orders-title {
+  text-align: center;
+  font-size: 28px;
+  color: #d2b48c; /* Light brown */
+  margin-bottom: 20px;
+}
+
+/* Grid Layout */
+.admin-orders-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+/* Order Card */
+.admin-order-card {
+  background-color: #1e1e1e; /* Slightly lighter dark shade */
+  color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.admin-order-card:hover {
+  transform: scale(1.02);
+}
+
+/* Order Card Body */
+.admin-order-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Order Text */
+.admin-order-text {
+  font-size: 16px;
+  color: #e0e0e0;
+}
+
+/* No Orders Message */
+.admin-no-orders {
+  text-align: center;
+  font-size: 18px;
+  color: #aaa;
+}
+/* Adoption Requests Container */
+.admin-adoption-container {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 20px;
+  background-color: #2d2d2d; /* Dark background */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Adoption Requests Title */
+.admin-adoption-title {
+  text-align: center;
+  font-size: 28px;
+  color: #d2b48c; /* Light brown */
+  margin-bottom: 20px;
+}
+
+/* Grid Layout */
+.admin-adoption-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+/* Adoption Card */
+.admin-adoption-card {
+  background-color: #1e1e1e; /* Slightly lighter dark shade */
+  color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.admin-adoption-card:hover {
+  transform: scale(1.02);
+}
+
+/* Adoption Card Body */
+.admin-adoption-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Adoption Text */
+.admin-adoption-text {
+  font-size: 16px;
+  color: #e0e0e0;
+}
+
+/* No Adoption Requests Message */
+.admin-no-adoption-requests {
+  text-align: center;
+  font-size: 18px;
+  color: #aaa;
+}
+/* Profiles Container */
+.admin-profiles-container {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 20px;
+  background-color: #2d2d2d; /* Dark background */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Profiles Title */
+.admin-profiles-title {
+  text-align: center;
+  font-size: 28px;
+  color: #d2b48c; /* Light brown */
+  margin-bottom: 20px;
+}
+
+/* Grid Layout */
+.admin-profiles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+/* Profile Card */
+.admin-profile-card {
+  background-color: #1e1e1e; /* Slightly lighter dark shade */
+  color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.admin-profile-card:hover {
+  transform: scale(1.02);
+}
+
+/* Profile Card Body */
+.admin-profile-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Profile Text */
+.admin-profile-text {
+  font-size: 16px;
+  color: #e0e0e0;
+}
+
+/* No Profiles Message */
+.admin-no-profiles {
+  text-align: center;
+  font-size: 18px;
+  color: #aaa;
+}
+.admin-card.bg-highlight {
+  background-color: #d2b48c; /* Light brown shade */
+  color: #000;
+  font-weight: bold;
+}
+.admin-profile {
+  display: flex;
+  align-items: center;
+}
+
+.admin-profile-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+/* FurEverHome Chatbot Styles - Scoped to #furever-chatbot-root */
+
+/* Limit chatbot styles to the chatbot container */
+#furever-chatbot-root {
+  font-family: 'Arial', sans-serif;
+  background: #f8f9fa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+/* Chatbot Container */
+#furever-chatbot-container {
+  width: 100%;
+  max-width: 650px;
+  height: 85vh;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Chat Header */
+#furever-chatbot-header {
+  background: #4a90e2;
+  color: white;
+  padding: 18px;
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+/* Chat Display Area */
+#furever-chat-display {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* User and Bot Messages */
+#furever-chatbot-container .furever-chat-user-msg,
+#furever-chatbot-container .furever-chat-bot-msg {
+  padding: 12px 16px;
+  border-radius: 18px;
+  max-width: 80%;
+  word-break: break-word;
+}
+
+/* User Message Styling */
+#furever-chatbot-container .furever-chat-user-msg {
+  background: #4a90e2;
+  color: white;
+  align-self: flex-end;
+}
+
+/* Bot Message Styling */
+#furever-chatbot-container .furever-chat-bot-msg {
+  background: #f1f1f1;
+  color: #333;
+  align-self: flex-start;
+}
+
+/* Input Section */
+#furever-chat-input-section {
+  display: flex;
+  border-top: 1px solid #ddd;
+}
+
+/* Input Field */
+#furever-chat-user-input {
+  flex: 1;
+  padding: 14px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+}
+
+/* Send Button */
+#furever-chat-send-btn {
+  padding: 14px 20px;
+  background: #4a90e2;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+/* Send Button Hover Effect */
+#furever-chat-send-btn:hover {
+  background: #357abd;
+}
+
+/* Scrollbar Styling */
+#furever-chat-display::-webkit-scrollbar {
+  width: 8px;
+}
+
+#furever-chat-display::-webkit-scrollbar-thumb {
+  background: #4a90e2;
+  border-radius: 10px;
+}
+
+#furever-chat-display::-webkit-scrollbar-track {
+  background: #e0e0e0;
+}
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
+#search {
+  position: fixed;
+  bottom: 80px;
+  left: 20px;
+  background-color: blue;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1.2em;
+  border-radius: 50px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}

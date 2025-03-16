@@ -1,0 +1,96 @@
+/* General Styling for Vets Page */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4ede4;
+    color: #3d2b1f;
+}
+
+/* Page Heading */
+h1 {
+    text-align: center;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #3f2a1d;
+    margin-bottom: 1.5rem;
+}
+
+/* Vet Cards - Styled to Match Stores Cards */
+.vet-card {
+    background: #eaddcf;
+    border-radius: 12px;
+    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 15px auto;
+    width: 90%;
+    max-width: 600px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    border: 2px solid #8b5a2b;
+}
+
+.vet-card:hover {
+    transform: scale(1.03);
+    box-shadow: 6px 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Vet Name */
+.vet-card h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #5a3e2b;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* Vet Info (Address, Phone, Opening & Closing Time) */
+.vet-info {
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: #4a3221;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+/* Headings for Vet Details */
+.vet-info strong {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #3f2a1d;
+    text-transform: uppercase;
+}
+
+/* Button Container */
+.vet-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 8px 15px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s ease-in-out;
+}
+
+.btn-green {
+    background-color: #6c8f46;
+    color: white;
+}
+
+.btn-brown {
+    background-color: #8b5a2b;
+    color: white;
+}
+
+.btn-red {
+    background-color: #c94f4f;
+    color: white;
+}
+
+.btn:hover {
+    opacity: 0.85;
+}

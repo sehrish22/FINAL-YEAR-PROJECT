@@ -1,0 +1,140 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+/* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f6f4; /* Light beige background */
+    margin: 0;
+    padding: 0;
+}
+
+/* Page Title */
+.page-title {
+    text-align: center;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #4a3221; /* Deep brown */
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+}
+
+/* Admin Panel */
+.admin-panel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.admin-panel h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #4a3221;
+}
+
+/* Store Container */
+.store-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+/* Store Card */
+.store-card {
+    background: #eaddcf; /* Soft brown tone */
+    padding: 1.8rem;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
+    text-align: center;
+    max-width: 380px;
+    width: 100%;
+    transition: transform 0.3s ease-in-out;
+    border: 2px solid #c2a383; /* Darker brown border for contrast */
+}
+
+.store-card:hover {
+    transform: scale(1.05);
+}
+
+/* Store Name */
+.store-name {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #5c4033;
+    margin-bottom: 0.8rem;
+}
+
+/* Store Info (Address, Phone, etc.) */
+.store-info {
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: #3d2b1f;
+    margin-bottom: 0.4rem;
+    font-style: italic;
+    letter-spacing: 0.5px;
+}
+
+/* Headings for Store Details */
+.store-info strong {
+    display: block;
+    font-size: 1.3rem; /* Slightly bigger */
+    font-weight: 700;  /* Bolder for emphasis */
+    color: #4a3221;    /* Dark brown for readability */
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+
+/* Store Actions */
+.store-actions {
+    display: flex;
+    justify-content: center;
+    gap: 0.8rem;
+    margin-top: 1rem;
+}
+
+/* Buttons */
+.btn {
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+/* Green Button */
+.btn-green {
+    background: #4caf50;
+    color: white;
+}
+
+.btn-green:hover {
+    background: #388e3c;
+}
+
+/* Brown Button */
+.btn-brown {
+    background: #8b5e3b;
+    color: white;
+}
+
+.btn-brown:hover {
+    background: #6d442a;
+}
+
+/* Red Button */
+.btn-red {
+    background: #d32f2f;
+    color: white;
+}
+
+.btn-red:hover {
+    background: #b71c1c;
+}

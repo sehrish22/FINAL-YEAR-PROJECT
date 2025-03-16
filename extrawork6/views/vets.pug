@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  link(rel='stylesheet', href='/stylesheets/vets.css')
+
+  h1.page-title Vet Clinics Across Pakistan
+
+  if user && user.role === "admin"
+    .admin-panel
+      h2 Clinic Management
+      a.btn.btn-green(href="/admin/vets/new") ➕ Add New Vet
+
+  .vet-container
+    each vet in vets
+      .vet-card
+        h2.vet-name= vet.name
+        p.vet-info 📍 Address: #{vet.address}
+        p.vet-info 📞 Phone: #{vet.contact}
+        p.vet-info ⏰ Opening Time: #{vet.openingTime}
+        p.vet-info ⏳ Closing Time: #{vet.closingTime}
+
+        if user && user.role === "admin"
+          .vet-actions
+            a.btn.btn-brown(href=`/admin/vets/edit/${vet._id}`) ✏️ Edit
+            a.btn.btn-red(href=`/admin/vets/delete/${vet._id}`) 🗑️ Delete
