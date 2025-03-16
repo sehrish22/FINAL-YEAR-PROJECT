@@ -54,8 +54,9 @@ router.post("/editadminprofile",upload , checkSessionAuth, async (req, res) => {
     // Optionally, update the session information too:
     req.session.user.name = user.name;
     req.session.user.email = user.email;
+    req.session.user.image = user.image;
 
-    res.redirect("/userprofile"); // or wherever you want to redirect
+    res.redirect("/admin"); // or wherever you want to redirect
   } catch (error) {
     console.error("Error updating profile:", error);
     res.status(500).send("Internal Server Error");
