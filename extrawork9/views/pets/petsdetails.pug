@@ -1,0 +1,29 @@
+extends ../layout
+
+block content
+    link(rel='stylesheet', href='/stylesheets/petsdetails.css')
+
+    .container.pet-details
+        .content-box
+            // Left Side - Pet Image
+            .image-container
+                if pet.image
+                    img(src=pet.image, alt=pet.name, class="pet-img")
+
+            // Right Side - Pet Details
+            .details-container
+                h1.pet-title= pet.name
+                p.pet-info 🏷️ Type: #{pet.type}
+                p.pet-info 🐾 Breed: #{pet.breed}
+                p.pet-info 🚻 Gender: #{pet.gender}
+                p.pet-info 🎨 Color: #{pet.color}
+                p.pet-info 💰 Adoption Fee: Rs.#{pet.fee}
+                p.pet-info 📌 Description: #{pet.description}
+
+                .btn-group.action-buttons
+                    if user && user._id.toString() === pet.uploadedBy.toString()
+                        a.btn.btn-edit(href=`/pets/petsedit/${pet._id}`) ✏️ Edit
+                        form(action=`/pets/delete/${pet._id}`, method="POST", style="display: inline;")
+                            button(type="submit", class="btn btn-delete", onclick="return confirm('Are you sure?')") 🗑 Delete
+                    else
+                        a.btn.btn-adopt(href="/pets/adoptionrequest/"+pet._id) 🏡 Adopt This Pet

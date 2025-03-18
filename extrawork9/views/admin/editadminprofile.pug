@@ -1,0 +1,26 @@
+extends ../layout
+
+block content
+  link(rel='stylesheet' href='/stylesheets/editadminprofile.css')
+  .profile-edit-container
+    h1 Edit Profile
+    form(method="POST", action="/admin/editadminprofile", enctype="multipart/form-data")
+      
+      .form-group
+        label(for="name") Name:
+        input(type="text", name="name", id="name", value=user.name required)
+      
+      .form-group
+        label(for="email") Email:
+        input(type="email", name="email", id="email", value=user.email required)
+      .form-group
+        label(for="contact") Contact:
+        input(type="contact", name="contact", id="contact", value=user.contact required)
+      .form-group
+        label(for="image") Profile Image:
+        input(type="file", name="image", id="image")
+
+      .form-group
+        button(type="submit") Save Changes
+      .form-group
+        a.btn.btn-brown(href="/change-password") Change Password

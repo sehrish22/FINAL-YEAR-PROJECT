@@ -1,0 +1,89 @@
+/* Adoption Request Page Styling */
+.adoption-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: #ede0d4; /* Light brown to match site theme */
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Pet Image */
+.adoption-image {
+    width: 100%;
+    max-width: 250px;
+    height: auto;
+    border-radius: 10px;
+    border: 2px solid #c4a484;
+    margin-bottom: 1rem;
+}
+
+/* Adoption Details */
+.adoption-details h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #5c4033;
+}
+
+/* Form Styling */
+.adoption-form {
+    text-align: left;
+}
+
+.form-group {
+    margin-bottom: 1.2rem;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.4rem;
+    color: #3d2b1f;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 0.7rem;
+    border: 1px solid #a67c52;
+    border-radius: 6px;
+    font-size: 1rem;
+    background: #f5f1eb;
+    transition: border 0.3s ease;
+}
+
+input:focus, textarea:focus {
+    border-color: #8b5e3b;
+    outline: none;
+}
+
+/* Submit Button */
+.btn-submit {
+    background: #8b5e3b;
+    color: white;
+    padding: 0.7rem 1.2rem;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+}
+
+.btn-submit:hover {
+    background: #6d4c41;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .adoption-container {
+        padding: 1.5rem;
+    }
+    
+    .adoption-image {
+        max-width: 200px;
+    }
+}

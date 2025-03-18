@@ -1,0 +1,50 @@
+extends ../layout
+
+block content
+  link(rel='stylesheet' href='/stylesheets/orders.css')
+  .admin-orders-container
+    h2.admin-orders-title Orders
+
+    if orders && orders.length > 0
+      table.admin-orders-table
+        thead
+          tr
+            th Order ID
+            th Name
+            th Email
+            th Address
+            th Contact
+            th Items Ordered
+            th Total
+            th Status
+            th Action
+        tbody
+          each order in orders
+            tr
+              td #{order._id}
+              td #{order.name}
+              td #{order.email}
+              td #{order.address}
+              td #{order.contact}
+              td
+                ul
+                  each item in order.items
+                    li
+                      img(src=item.image, alt=item.name, width="50")
+                      |  $#{item.price} x #{item.quantity} = $#{item.subtotal}
+              td $#{order.total}
+              td #{order.orderStatus}
+              td
+                if editableOrderIds && editableOrderIds.includes(order._id.toString())
+                  form(action=`/admin/orders/update-status/${order._id}` method="POST")
+                    select(name="newStatus")
+                      option(value="Pending" selected=(order.orderStatus === "Pending" ? "selected" : false)) Pending
+                      option(value="Processing" selected=(order.orderStatus === "Processing" ? "selected" : false)) Processing
+                      option(value="Shipped" selected=(order.orderStatus === "Shipped" ? "selected" : false)) Shipped
+                      option(value="Delivered" selected=(order.orderStatus === "Delivered" ? "selected" : false)) Delivered
+                      option(value="Cancelled" selected=(order.orderStatus === "Cancelled" ? "selected" : false)) Cancelled
+                    button(type="submit") Update
+                else
+                  p Can only View Order Status
+    else
+      p.admin-no-orders No orders to display.

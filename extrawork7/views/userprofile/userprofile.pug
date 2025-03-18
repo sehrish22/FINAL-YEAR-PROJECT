@@ -1,0 +1,45 @@
+extends ../layout
+
+block content
+  link(rel='stylesheet' href='/stylesheets/userprofile.css') 
+  .user-dashboard.container
+    h1.user-title User Profile
+
+    .user-header
+      .user-info
+        .user-details
+          p.user-name Name: #{user.name}
+          p.user-email Email: #{user.email} 
+          p.user-contact Contact: #{user.contact}
+          a.user-nav-link(href='/logout') Logout  
+  
+          
+      .user-image-container
+        img.user-img(src=user.image ? user.image : '/images/default.png', alt="Profile Picture")
+        a.btn.btn-brown(href="/userprofile/editprofile") Edit Profile
+
+    .user-content
+      .user-grid
+        .user-card.bg-brown
+          h5.user-card-title Adoption Requests
+          p.user-card-text Review and approve pet adoptions.
+          a.btn.btn-brown(href="/userprofile/adoptionrequests") View Requests
+
+        .user-card.bg-brown
+          h5.user-card-title Orders
+          p.user-card-text Manage orders and payments.
+          a.btn.btn-brown(href="/userprofile/orders") View Orders
+
+        .user-card.bg-brown
+          h5.user-card-title Pets
+          p.user-card-text Manage all pets available for adoption.
+          a.btn.btn-brown(href="/pets") Manage Pets
+
+        .user-card.bg-brown
+          h5.user-card-title Products
+          p.user-card-text Add, edit, or delete pet products.
+          a.btn.btn-brown(href="/products") Manage Products
+
+        .user-card.bg-brown
+          h5.user-card-title Total Orders
+          p.user-card-text #{ordersCount} Orders Received

@@ -1,0 +1,62 @@
+extends ../layout
+
+block content
+  link(rel='stylesheet' href='/stylesheets/admin.css') 
+  .admin-dashboard.container
+    h1.admin-title Admin Dashboard
+
+    .admin-header
+      .user-info
+        .user-details
+          p.user-name Name: #{user.name}
+          p.user-email Email: #{user.email} 
+          p.user-contact Contact: #{user.contact} 
+          a.user-nav-link(href='/logout') Logout 
+        .user-image-container
+            img.user-img(src=user.image ? `imgs/${user.image}` : '/images/default.png', alt="Profile Picture")
+            a.btn.btn-brown(href="/admin/editadminprofile") Edit Profile
+    .admin-content
+      .admin-grid
+        .admin-card.bg-brown
+          h5.admin-card-title User Profiles
+          p.admin-card-text Manage all registered users.
+          a.btn.btn-brown(href="/admin/profiles") View Profiles
+
+        .admin-card.bg-brown
+          h5.admin-card-title Adoption Requests
+          p.admin-card-text Review and approve pet adoptions.
+          a.btn.btn-brown(href="/admin/adoptionrequests") View Requests
+
+        .admin-card.bg-brown
+          h5.admin-card-title Orders
+          p.admin-card-text Manage orders and payments.
+          a.btn.btn-brown(href="/admin/orders") View Orders
+
+        .admin-card.bg-brown
+          h5.admin-card-title Pets
+          p.admin-card-text Manage all pets available for adoption.
+          a.btn.btn-brown(href="/pets") Manage Pets
+
+        .admin-card.bg-brown
+          h5.admin-card-title Products
+          p.admin-card-text Add, edit, or delete pet products.
+          a.btn.btn-brown(href="/products") Manage Products
+
+        .admin-card.bg-brown
+          h5.admin-card-title Total Orders
+          p.admin-card-text #{ordersCount} Orders Received
+
+        .admin-card.bg-brown
+          h5.admin-card-title PetSitter Applications
+          p.admin-card-text Review applications from potential pet sitters.
+          a.btn.btn-brown(href="/admin/admin-sitter-application") View Applications
+        
+        .admin-card.bg-brown
+          h5.admin-card-title Manage Stores
+          p.admin-card-text Add, edit, or delete physical stores.
+          a.btn.btn-brown(href="/stores") Manage Stores
+        
+        .admin-card.bg-brown
+          h5.admin-card-title Manage Clinics
+          p.admin-card-text Add, edit, or delete vet clinics.
+          a.btn.btn-brown(href="/clinics") Manage Clinics

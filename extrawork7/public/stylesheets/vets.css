@@ -1,0 +1,133 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+/* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4ede4; /* Light beige background */
+    margin: 0;
+    padding: 0;
+}
+
+/* Page Title */
+.page-title {
+    text-align: center;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #4a3221; /* Deep brown */
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+}
+
+/* Admin Panel */
+.admin-panel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.admin-panel h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #4a3221;
+}
+
+/* Vet Container */
+.vet-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+}
+
+/* Vet Card */
+.vet-card {
+    background: #eaddcf; /* Soft brown tone */
+    padding: 1.2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 300px; /* Same width as store cards */
+    min-height: 320px; /* Ensures all cards have the same height */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Pushes buttons to bottom */
+    border: 2px solid #c2a383; /* Darker brown border for contrast */
+    transition: transform 0.3s ease-in-out;
+}
+
+.vet-card:hover {
+    transform: scale(1.05);
+}
+
+/* Vet Name */
+.vet-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #5c4033;
+    margin-bottom: 0.5rem;
+}
+
+/* Vet Info */
+.vet-info {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #3d2b1f;
+    margin-bottom: 0.3rem;
+    font-style: italic;
+    letter-spacing: 0.5px;
+}
+
+/* Vet Actions - Fixed button position */
+.vet-actions {
+    margin-top: auto; /* Pushes buttons to the bottom */
+    display: flex;
+    justify-content: center;
+    gap: 0.6rem;
+    padding-top: 1rem;
+}
+
+/* Buttons */
+.btn {
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+/* Green Button */
+.btn-green {
+    background: #4a2c1f;
+    color: white;
+}
+
+.btn-green:hover {
+    background: #7a5542;
+}
+
+/* Brown Button */
+.btn-brown {
+    background: #8b5e3b;
+    color: white;
+}
+
+.btn-brown:hover {
+    background: #6d442a;
+}
+
+/* Red Button */
+.btn-red {
+    background: #d32f2f;
+    color: white;
+}
+
+.btn-red:hover {
+    background: #b71c1c;
+}

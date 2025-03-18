@@ -1,0 +1,31 @@
+extends ../layout
+
+block content
+  link(rel='stylesheet' href='/stylesheets/adoptionrequests.css')
+  .admin-adoption-container
+    h2.admin-adoption-title Adoption Requests
+
+    if adoptionrequests && adoptionrequests.length > 0
+      table.admin-adoption-table
+        thead
+          tr
+            th Order ID
+            th Name
+            th Email
+            th Address
+            th Contact
+            th Pet Name
+            th Pet Image
+        tbody
+          each adoptionrequest in adoptionrequests
+            tr
+              td #{adoptionrequest._id}
+              td #{adoptionrequest.name}
+              td #{adoptionrequest.email}
+              td #{adoptionrequest.address}
+              td #{adoptionrequest.contact}
+              td #{adoptionrequest.petName}
+              td
+                img.admin-adoption-img(src=adoptionrequest.petImage, alt="Pet Image", width="100")
+    else
+      p.admin-no-adoption-requests No adoption requests to display.
