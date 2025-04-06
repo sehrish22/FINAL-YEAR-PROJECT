@@ -1,0 +1,37 @@
+extends ../layout
+
+block content
+    link(rel='stylesheet' href='/stylesheets/petslist.css')
+
+    .container
+        .header-container
+            h1.page-title 🐾 Browse Available Pets for Adoption
+
+            if user && user.role == "seller" || user.role == "admin"
+                .pet-management
+                    h2.management-title 🐶 Pet Management
+                    a.btn.btn-add-pet(href="/pets/petsadd") 
+                        i(class="fas fa-plus") Add New Pet 
+
+        .row.pet-list
+            each pet in pets
+                .col-md-4.col-sm-6.mb-4
+                    .card.pet-card
+                        if pet.image
+                            img.card-img-top(src=pet.image, alt=pet.name)
+                        .card-body.text-center
+                            h4.card-title 
+                                a.pet-link(href="/pets/"+pet._id)= pet.name
+                            p.card-text.type 🐕 Type: #{pet.type}
+                            p.card-text.breed 🐾 Breed: #{pet.breed}
+                            p.card-text.color 🎨 Color: #{pet.color}
+                            p.card-text.price 💰 Adoption Fee: #{pet.fee}
+                            
+                            .btn-group.action-buttons
+                                a.btn.btn-adopt(href="/pets/adoptionrequest/"+pet._id) 
+                                    i(class="fas fa-heart") Adopt Pet
+                                if loggedInUserId && pet.uploadedBy == loggedInUserId
+                                    a.btn.btn-edit(href="/pets/edit/"+pet._id) 
+                                        i(class="fas fa-edit") Edit
+                                    a.btn.btn-delete(href="/pets/delete/"+pet._id) 
+                                        i(class="fas fa-trash") Delete
