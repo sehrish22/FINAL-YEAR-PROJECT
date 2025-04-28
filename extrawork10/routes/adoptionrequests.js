@@ -35,9 +35,11 @@ router.get("/adoptionrequests", async function (req, res, next) {
 router.post(
   "/adoptionrequests", // Ensures req.session.user is defined
   upload,
-  validateAdoptionRequest,
+  validateAdoptionRequest,checkSessionAuth,
   async function (req, res, next) {
     // At this point, req.session.user is guaranteed to exist
+    const sessionId = req.session.sessionId;
+    const userId = req.session.user._id;
     const { name, email, address, contact, petId, adoptionRequestId } = req.body;
 
     // Fetch the pet to save its image and name
@@ -54,9 +56,10 @@ router.post(
       petImage: pet.image,
       uploadedBy: pet.uploadedBy,
       adoptionRequestId,
+      userId,
     });
     await adoptionrequest.save();
-
+    console.log(adoptionrequest);
     res.redirect("/admin/adoption-request-sent");
   }
 );
@@ -66,7 +69,7 @@ router.get("/adoption-request-sent", (req, res) => {
 
 
 // Show adoption request form with pet details
-router.get("/adoptionrequest/:id", async function (req, res, next) {
+router.get("/adoptionrequest/:id",checkSessionAuth, async function (req, res, next) {
   try {
     console.log("✅ Pet ID received:", req.params.id);
     const pet = await Pet.findById(req.params.id);

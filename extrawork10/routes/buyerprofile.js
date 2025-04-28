@@ -4,6 +4,7 @@ const User = require("../models/user"); // Adjust path based on your project
 const { Order } = require("../models/order");
 const checkSessionAuth = require("../middlewares/checkSessionAuth"); 
 const upload = require("../middlewares/upload"); // Include multer middleware
+const { AdoptionRequest } = require("../models/adoptionrequest");
 
 router.get("/", async (req, res) => {
     if (!req.session.user || req.session.user.role !== "buyer") {
@@ -12,9 +13,13 @@ router.get("/", async (req, res) => {
 
     try {
         const buyer = await User.findById(req.session.user._id);
+     console.log(req.session.user._id,'my user is   ')
+        const adoptionrequests = await AdoptionRequest.find({userId: req.session.user._id});
+        console.log("tasting",adoptionrequests);
          // Fetch orders associated with the logged-in user
     const orders = await Order.find({ userId: req.session.user._id }).populate("items.product");
-        res.render("buyerprofile/buyerprofile", { user: buyer,orders }); // Render the profile page
+console.log("orders", orders);
+        res.render("buyerprofile/buyerprofile", { user: buyer,orders, adoptionrequests  }); // Render the profile page
     } catch (error) {
         console.error(error);
         res.redirect("/");

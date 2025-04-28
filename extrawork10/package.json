@@ -25,5 +25,10 @@
     "natural": "^8.0.1",
     "nodemailer": "^6.10.0",
     "pug": "2.0.0-beta11"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^4.1.4"
   }
 }

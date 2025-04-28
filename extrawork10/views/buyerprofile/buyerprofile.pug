@@ -56,3 +56,23 @@ block content
               span Rs.#{order.total}
     else
       p.no-orders You have not ordered yet.
+
+    // Adoption Requests Section
+    if adoptionrequests && adoptionrequests.length > 0
+      .adoption-requests-section
+        h2 Adoption Requests
+        each adoptionrequest in adoptionrequests
+          .adoption-request-card
+            //- h3 Adoption Request ID:  
+            //-   span #{adoptionrequest.adoptionRequestId}
+            .pet-details
+              p Pet Name:  
+                span #{adoptionrequest.petName}
+              p Pet Type:  
+                span #{adoptionrequest.petId ? adoptionrequest.petId.type : 'Unknown'}
+            //- p Status:  
+            //-   span #{request.status || 'Pending'}
+            p Submitted On:  
+              span #{new Date(adoptionrequest.createdAt).toLocaleDateString()}
+    else
+      p.no-adoption-requests You have not submitted any adoption requests yet.

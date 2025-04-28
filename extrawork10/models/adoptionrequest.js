@@ -19,9 +19,16 @@ function validateAdoptionRequest(data){
   const schema = Joi.object({
     name: Joi.string().min(3).max(30).required(),
     email: Joi.string().min(0).required(),
-    cotact: Joi.string().min(3).max(20).required(),
+    contact: Joi.string().min(3).max(20).required(),
     address: Joi.string().min(3).required(),
-  });
+    petId: { type: mongoose.Schema.Types.ObjectId, ref: "Pet", required: true },
+  petName: { type: String, required: true },
+  petImage: { type: String },
+  uploadedBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  adoptionRequestId: { type: String, required: true },
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true }, // Store buyer's ID
+  status: { type: String, default: "Pending" },
+}, { timestamps: true });
   return schema.validate(data,{abortEarly:false});
 }
 
