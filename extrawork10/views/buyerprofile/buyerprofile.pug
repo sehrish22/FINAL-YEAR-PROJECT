@@ -37,17 +37,22 @@ block content
                   th Quantity
                   th Price
                   th Subtotal
+                  th Order Status
               tbody
                 each item in order.items
                   tr
                     td 
-                      img.order-product-img(src=item.productImage, alt=item.productName)
+                      img.order-product-img(src=item.image, alt=item.name)
                     td 
-                      span #{item.productName}
+                      if item.product
+                        a.product-link(href="/products/"+item.product._id)= item.name
+                      else
+                        span.text-danger Product Not Found
                     td #{item.quantity}
-                    td $#{item.price}
-                    td $#{item.subtotal}
+                    td Rs.#{item.price}
+                    td Rs.#{item.subtotal}
+                    td #{order.orderStatus}
             p.order-total Total Amount:  
-              span $#{order.totalAmount}
+              span Rs.#{order.total}
     else
-      p.no-orders You have no orders yet.
+      p.no-orders You have not ordered yet.

@@ -3,7 +3,7 @@ extends ../layout
 block content
   link(rel='stylesheet' href='/stylesheets/userprofile.css') 
   .user-dashboard.container
-    h1.user-title User Profile
+    h1.user-title Seller Profile
 
     .user-header
       .user-info
@@ -11,6 +11,7 @@ block content
           p.user-name Name: #{user.name}
           p.user-email Email: #{user.email} 
           p.user-contact Contact: #{user.contact}
+          p.user-storeName Store Name: #{user.storeName}
           a.user-nav-link(href='/logout') Logout  
   
           

@@ -37,9 +37,9 @@ html
                     | Products
                   ul.dropdown-menu(aria-labelledby='navbarDropdown')
                     li
-                      a.dropdown-item(href='/products?type=Cat') Cat Food
+                      a.dropdown-item(href='/products?type=cat') Cat Food
                     li
-                      a.dropdown-item(href='/products?type=Dog') Dog Food
+                      a.dropdown-item(href='/products?type=dog') Dog Food
                     li
                       a.dropdown-item(href='/products?type=horse,snake') Other Food
                     li
@@ -95,15 +95,16 @@ html
       .f3
         h3 SignUp For Our NewsLetter
         form#newsletter-form(action="/newsletter/subscribe" method="POST")
-          input(type="text" name="name" placeholder="Enter your name" required)
-          input(type="email" name="email" placeholder="Enter your email" required)
-          button(type="submit") Subscribe
+          .form-group
+            input.form-control(type="text" name="name" placeholder="Enter your name" required)
+          .form-group
+            input.form-control(type="email" name="email" placeholder="Enter your email" required)
+          .form-group
+            button.btn.btn-primary(type="submit") Subscribee
 
     div
       a#call.btn.btn-danger(href="tel:03494721836") Call Us!
     div
       a#bot.btn.btn-info(href="/chatbot/consultation") Consult me Here
-    div
-      a#search.btn.btn-info(href="/chatbot/search") Intelligent Search
     div
       a#personal.btn.btn-info(href="/chatbot") My SearchBot

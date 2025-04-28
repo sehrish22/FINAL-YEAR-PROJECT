@@ -2,19 +2,21 @@ var express = require("express");
 var router = express.Router();
 var { Product } = require("../models/product");
 var { Order } = require("../models/order");
-const Cart = require('../models/cart');
+const Cart = require("../models/cart");
 var { User } = require("../models/user");
 var checkSessionAuth = require("../middlewares/checkSessionAuth");
 const validateProduct = require("../middlewares/validateProduct");
 const validateOrder = require("../middlewares/validateOrder");
 const upload = require("../middlewares/upload"); // Include multer middleware
 const mongoose = require("mongoose");
-var { v4: uuidv4 } = require('uuid'); // For generating unique session IDs
+var { v4: uuidv4 } = require("uuid"); // For generating unique session IDs
 const crypto = require("crypto");
+const  Review = require("../models/review");
 
 function generateOrderId() {
   return "ORD-" + crypto.randomBytes(4).toString("hex").toUpperCase();
 }
+// show all
 router.get("/", async function (req, res, next) {
   try {
     let filter = {};
@@ -30,27 +32,24 @@ router.get("/", async function (req, res, next) {
     let otherProducts = [];
 
     if (loggedInUserId) {
-      userProducts = products.filter(p => p.uploadedBy == loggedInUserId);
-      otherProducts = products.filter(p => p.uploadedBy != loggedInUserId);
+      userProducts = products.filter((p) => p.uploadedBy == loggedInUserId);
+      otherProducts = products.filter((p) => p.uploadedBy != loggedInUserId);
     } else {
       otherProducts = products; // If no user is logged in, show all products normally
     }
 
     const sortedProducts = [...userProducts, ...otherProducts]; // User's products first
 
-    res.render("products/list", { 
-      title: "Products", 
-      products: sortedProducts, 
-      loggedInUserId
+    res.render("products/list", {
+      title: "Products",
+      products: sortedProducts,
+      loggedInUserId,
     });
-
   } catch (err) {
     console.error("Error fetching products:", err);
     res.status(500).send("Internal Server Error");
   }
 });
-
-
 // Render add product page
 router.get("/add", checkSessionAuth, async function (req, res, next) {
   res.render("products/add");
@@ -67,14 +66,24 @@ router.post(
     if (req.file) {
       productData.image = "/uploads/" + req.file.filename; // Store image URL in the image field
     }
-    productData.uploadedBy=req.session.user._id;
+    let user = req.session.user;
+    productData.uploadedBy = req.session.user._id;
     let product = new Product(productData);
+
+    if (user.storeName) {
+      product.storeName = user.storeName; // Store the store name in the product document
+    }
+
+    console.log(user.storeName);
+
+    console.log(product.storeName);
     await product.save();
+    console.log(product);
     res.redirect("/products");
   }
 );
 //checkout page
-router.get("/checkout", async function (req, res, next) {
+router.get("/checkout",checkSessionAuth, async function (req, res, next) {
   const sessionId = req.session.sessionId;
   const cart = await Cart.findOne({ sessionId }).populate("items.product");
   if (!cart || cart.items.length === 0) {
@@ -88,14 +97,14 @@ router.get("/checkout", async function (req, res, next) {
 
   const orderId = generateOrderId();
 
-  res.render("checkout", { cart: cart.items, total, orderId });
+  res.render("checkout", { user:req.user,cart: cart.items, total, orderId });
 });
-//save data on checkout page 
+//save data on checkout page
 router.post("/checkout", async function (req, res, next) {
   try {
     // Ensure session exists
     const sessionId = req.session.sessionId;
-    const userId =  req.session.user._id ;
+    const userId = req.session.user._id;
     if (!sessionId) {
       console.error("❌ No session ID found");
       return res.status(400).send("Session not found.");
@@ -118,7 +127,9 @@ router.post("/checkout", async function (req, res, next) {
         return res.status(400).send("Product not found.");
       }
       if (item.quantity > product.instock) {
-        console.error(`❌ Insufficient stock for ${product.name}. Available: ${product.instock}, Requested: ${item.quantity}`);
+        console.error(
+          `❌ Insufficient stock for ${product.name}. Available: ${product.instock}, Requested: ${item.quantity}`
+        );
         return res.status(400).send(`Not enough stock for ${product.name}.`);
       }
     }
@@ -151,7 +162,7 @@ router.post("/checkout", async function (req, res, next) {
       address,
       items,
       total,
-      orderId
+      orderId,
     });
     console.log("✅ Order saved successfully:", order);
     await order.save();
@@ -176,18 +187,50 @@ router.post("/checkout", async function (req, res, next) {
 router.get("/order-placed", (req, res) => {
   res.render("order-placed");
 });
+// Get products by uploadedBy (store)
+router.get("/store/:userId", async function (req, res, next) {
+  try {
+    const userId = req.params.userId;
+    const products = await Product.find({ uploadedBy: userId });
 
-//get details of a product
+    if (!products || products.length === 0) {
+      return res.render("products/store", {
+        products: [],
+        storeName: "Unknown Store",
+        userId: userId,
+      });
+    }
+
+    res.render("products/store", {
+      products: products,
+      storeName: products[0].storeName,
+      userId: userId,
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+// Get details of a product
 router.get("/:id", async (req, res) => {
   try {
-      const product = await Product.findById(req.params.id);
-      if (!product) {
-          return res.status(404).send("Product not found");
-      }
-      res.render("products/details", { title: product.name, product });
+    const productId = req.params.id;  // Store the product ID from the route parameter
+
+    // Fetch the product details
+    const product = await Product.findById(productId);
+    
+    if (!product) {
+      return res.status(404).send("Product not found");
+    }
+
+    // Fetch the reviews related to the product
+    const reviews = await Review.find({ product: productId }).populate("product").exec();
+
+    // Render the product details page, passing product and reviews data
+    res.render("products/details", { product, reviews });
+    
   } catch (err) {
-      console.error(err);
-      res.status(500).send("Server Error");
+    console.error(err);
+    res.status(500).send("Server Error");
   }
 });
 //delete a product
@@ -226,43 +269,66 @@ router.post(
   }
 );
 // Add a product to the cart
-router.get("/cart/:id", async function (req, res, next) { 
-  const product = await Product.findById(req.params.id);
-    if (!product) return res.redirect("/products");
-    // Generate or retrieve sessionId
-    if (!req.session.sessionId) {
-      req.session.sessionId = uuidv4();
-    }
-    const sessionId = req.session.sessionId;
+router.get("/cart/:id", async function (req, res, next) {
+  const product = await Product.findById(req.params.id).populate("uploadedBy");
+  if (!product) return res.redirect("/products");
 
-    // Find or create cart for session
-    let cart = await Cart.findOne({ sessionId });
-    if (!cart) {
-      cart = new Cart({ sessionId, items: [] });
-    }
+  // Ensure session ID
+  if (!req.session.sessionId) {
+    req.session.sessionId = uuidv4();
+  }
+  const sessionId = req.session.sessionId;
 
-    // Check if product is already in cart
-    const existingItem = cart.items.find((item) => item.product.equals(product._id));
-    if (existingItem) {
-      if (existingItem.quantity + 1 > product.instock) {
-        return res.status(400).send(`Only ${product.instock} units available.`);
-      }
-      existingItem.quantity += 1;
-    } else {
-      if (product.instock < 1) {
-        return res.status(400).send(`Product is out of stock.`);
-      }
-      cart.items.push({ product: product._id, quantity: 1 });
-    }
+  // Find or create cart
+  let cart = await Cart.findOne({ sessionId }).populate({
+    path: "items.product",
+    populate: { path: "uploadedBy" },
+  });
 
-    await cart.save();
-    res.redirect("/products");
+  if (!cart) {
+    cart = new Cart({ sessionId, items: [] });
+  }
+
+  // If cart is not empty, check for store consistency
+  if (cart.items.length > 0) {
+    const existingStoreId = cart.items[0].product.uploadedBy._id.toString();
+    const newProductStoreId = product.uploadedBy._id.toString();
+
+    if (existingStoreId !== newProductStoreId) {
+      // Show error (use a flash message, query param, or redirect with message)
+      return res
+        .status(400)
+        .send("❌ You can only order from one store at a time.");
+    }
+  }
+
+  // Add or update quantity
+  const existingItem = cart.items.find((item) =>
+    item.product._id.equals(product._id)
+  );
+  if (existingItem) {
+    if (existingItem.quantity + 1 > product.instock) {
+      return res.status(400).send(`Only ${product.instock} units available.`);
+    }
+    existingItem.quantity += 1;
+  } else {
+    if (product.instock < 1) {
+      return res.status(400).send(`Product is out of stock.`);
+    }
+    cart.items.push({ product: product._id, quantity: 1 });
+  }
+
+  await cart.save();
+  res.redirect("/products");
 });
 
 // Remove a product from the cart
 router.get("/cart/remove/:id", async function (req, res, next) {
   const sessionId = req.session.sessionId;
-  await Cart.updateOne({ sessionId }, { $pull: { items: { product: req.params.id } } });
+  await Cart.updateOne(
+    { sessionId },
+    { $pull: { items: { product: req.params.id } } }
+  );
   res.redirect("/cart");
 });
 
@@ -275,25 +341,32 @@ router.post("/cart/increment/:id", async function (req, res, next) {
 
   const cart = await Cart.findOne({ sessionId });
   const item = cart.items.find((item) => item.product.equals(product._id));
-  console.log(cart,item);
+  console.log(cart, item);
 
   if (item) {
     if (item.quantity + 1 > product.instock) {
       // Calculate item subtotal and total
       const cartWithTotals = cart.items.map((item) => {
         return {
-        ...item.toObject(),
-      itemTotal: item.product.price * item.quantity,
-    };
-  });
+          ...item.toObject(),
+          itemTotal: item.product.price * item.quantity,
+        };
+      });
 
-  const total = cartWithTotals.reduce((acc, item) => acc + item.itemTotal, 0);
-      return res.render("cart",{cart:cartWithTotals,total,error:`Only ${product.instock} products are available in stock`});
+      const total = cartWithTotals.reduce(
+        (acc, item) => acc + item.itemTotal,
+        0
+      );
+      return res.render("cart", {
+        cart: cartWithTotals,
+        total,
+        error: `Only ${product.instock} products are available in stock`,
+      });
     }
     item.quantity += 1;
     await cart.save();
   }
-    res.redirect("/cart");
+  res.redirect("/cart");
 });
 
 // Decrement product quantity in the cart and update stock
@@ -317,29 +390,47 @@ router.post("/cart/decrement/:id", async function (req, res, next) {
       // Check if the item can be decremented
       if (item.quantity > 1) {
         item.quantity -= 1;
-
-        // Increment stock by 1 when the cart quantity decreases
-        await Product.findByIdAndUpdate(item.product, {
-          $inc: { instock: 1 },
-        });
+        await cart.save();
       } else {
         // Remove item if quantity is 1 and update stock
-        cart.items = cart.items.filter((item) => !item.product.equals(req.params.id));
+        cart.items = cart.items.filter(
+          (item) => !item.product.equals(req.params.id)
+        );
 
         // Restore stock by 1 if the item is removed
         await Product.findByIdAndUpdate(item.product, {
           $inc: { instock: 1 },
         });
-      }
 
-      // Save the updated cart
-      await cart.save();
+        // Save the updated cart after removing the item
+        await cart.save();
+      }
     }
 
     res.redirect("/cart");
   } catch (error) {
     console.error("❌ Error in decrement route:", error);
     res.status(500).send("Something went wrong.");
+  }
+});
+//post review 
+router.post("/:id/review", async (req, res) => {
+  try {
+    const { rating, comment } = req.body;
+    const product = await Product.findById(req.params.id);
+    if (!product) return res.status(404).send("Product not found");
+
+    const newReview = new Review({
+      product: product._id,
+      rating: parseInt(rating),
+      comment,
+    });
+
+    await newReview.save();
+    res.redirect(`/products/${product._id}`);
+  } catch (error) {
+    console.error("Review post error:", error); // 👈 Add this
+    res.status(500).send("Error adding review");
   }
 });
 

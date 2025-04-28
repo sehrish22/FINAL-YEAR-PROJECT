@@ -106,6 +106,136 @@
     background-color: #5a6268;
 }
 
+/* Review Section */
+h2.reviews-title {
+    font-size: 2rem;
+    color: #5a3e2b;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #e7c064;
+    padding-bottom: 10px;
+    font-weight: bold;
+}
+
+/* Review Cards (Posted Reviews) */
+.reviews-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between; /* To ensure reviews take full space */
+}
+
+.review-card {
+    background-color: #f8f1e4;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: calc(20% - 20px); /* 5 cards in a row with equal width */
+    display: inline-block;
+    vertical-align: top;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.review-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.review-card p {
+    font-size: 1rem;
+    color: #6b4f36;
+    margin-bottom: 10px;
+}
+
+.review-card small {
+    font-size: 0.9rem;
+    color: #888;
+}
+
+/* Add a Review Section */
+h2.add-review-title {
+    font-size: 1.8rem;
+    color: #5a3e2b;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #e7c064;
+    padding-bottom: 10px;
+    font-weight: bold;
+}
+
+/* Review Form */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    background-color: #f8f1e4;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+form label {
+    font-size: 1.1rem;
+    color: #5a3e2b;
+    margin-bottom: 8px;
+}
+
+form select,
+form textarea {
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    resize: vertical;
+    transition: border-color 0.3s ease;
+}
+
+form select:focus,
+form textarea:focus {
+    border-color: #5a3e2b;
+    outline: none;
+}
+
+form textarea {
+    min-height: 120px; /* Minimum height for the textarea */
+}
+
+form button {
+    background-color: #5a3e2b;
+    color: white;
+    font-size: 1.1rem;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    border: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+form button:hover {
+    background-color: #3d2c1e;
+    transform: scale(1.05);
+}
+
+form button:disabled {
+    background-color: #d1d1d1;
+    cursor: not-allowed;
+}
+
+/* Feedback for Logged In/Logged Out Users */
+p.review-feedback {
+    font-size: 1.1rem;
+    color: #6b4f36;
+    text-align: center;
+    margin-top: 15px;
+}
+
+p.review-feedback a {
+    color: #5a3e2b;
+    font-weight: bold;
+}
+
+p.review-feedback a:hover {
+    text-decoration: underline;
+}
 
 /* Responsive Fixes */
 @media (max-width: 768px) {
@@ -136,5 +266,9 @@
 
     .btn {
         margin-bottom: 10px;
+    }
+
+    .review-card {
+        width: calc(50% - 10px); /* Two cards in a row for smaller screens */
     }
 }

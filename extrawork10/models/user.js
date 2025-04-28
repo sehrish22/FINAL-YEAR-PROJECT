@@ -7,6 +7,7 @@ var UserSchema = mongoose.Schema({
   password: String,
   image: String, // Add image field to store image URL or path
   contact: String,
+  storeName: String,
   role: {
     type: String,
     enum: ["admin", "seller", "buyer"],
@@ -30,6 +31,7 @@ function validateUser(data) {
     password: Joi.string().min(8).max(30).required(),
     image: Joi.string().optional(), // Make image optional during validation
     role: Joi.string().valid("admin", "seller", "buyer").optional(),
+    storeName: Joi.string().optional(),
   });
   return schema.validate(data, { abortEarly: false });
 }

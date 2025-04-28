@@ -1,31 +1,71 @@
 extends ../layout
 
 block content
-    link(rel='stylesheet', href='/stylesheets/details.css')
+  link(rel='stylesheet', href='/stylesheets/details.css')
 
-    .container.product-details
-        .content-box
-            // Left Side - Image
-            .image-container
-                if product.image
-                    img(src=product.image, alt=product.name, class="product-img")
+  .container.product-details
+    .content-box
+      // Left Side - Image
+      .image-container
+        if product.image
+          img(src=product.image, alt=product.name, class="product-img")
 
-            // Right Side - Product Details
-            .details-container
-                h1.product-title= product.name
-                p.product-info 🏷️ Type: #{product.type}
-                p.product-info 💰 Price: Rs.#{product.price}
-                p.product-info 📌 Description: #{product.description}
-                p.product-info 📦 In Stock: 
-                    if product.instock > 0
-                        span.in-stock ✅ #{product.instock} available
-                    else
-                        span.out-stock ❌ Out of Stock
+      // Right Side - Product Details
+      .details-container
+        h1.product-title= product.name
+        p.product-info 🏷️ Type: #{product.type}
+        p.product-info 💰 Price: Rs.#{product.price}
+        p.product-info 📌 Description: #{product.description}
+        p.product-info 📦 In Stock:
+          if product.instock > 0
+            span.in-stock ✅ #{product.instock} available
+          else
+            span.out-stock ❌ Out of Stock
 
-                .btn-group.action-buttons
-                    a.btn.btn-cart(href="/products/cart/"+product._id) 🛒 Add to Cart
-                    //- a.btn.btn-back(href="/products") ⬅️ Back to Products
-                    if user
-                        a.btn.btn-edit(href="/products/edit/"+product._id) ✏️ Edit
-                        a.btn.btn-delete(href="/products/delete/"+product._id) 🗑 Delete
-            
+        .btn-group.action-buttons
+          a.btn.btn-cart(href="/products/cart/" + product._id) 🛒 Add to Cart
+          if user && user.role =="seller"
+            a.btn.btn-edit(href="/products/edit/" + product._id) ✏️ Edit
+            a.btn.btn-delete(href="/products/delete/" + product._id) 🗑 Delete
+    hr
+
+  h2.reviews-title Reviews
+  if reviews && reviews.length
+    .reviews-container
+      each review in reviews
+        .review-card
+          .review-header
+            .review-rating
+              span.rating-stars= '⭐'.repeat(review.rating)
+            .review-user
+              if review.user
+                p Posted by #{review.user.name} on #{review.createdAt.toDateString()}
+              else
+                p Posted by Anonymous on #{review.createdAt.toDateString()}
+          .review-comment
+            p= review.comment
+  else
+    p.no-reviews No reviews yet. Be the first to review this product!
+
+  hr
+
+  h2 Add a Review
+  if user && user.role === 'buyer'
+    form(action=`/products/${product._id}/review`, method="POST")
+      label(for="rating") Rating:
+      select(name="rating", id="rating", required)
+        option(value="") Select rating
+        option(value="1") 1 ⭐
+        option(value="2") 2 ⭐
+        option(value="3") 3 ⭐
+        option(value="4") 4 ⭐
+        option(value="5") 5 ⭐
+
+      label(for="comment") Comment:
+      textarea(name="comment", id="comment", required)
+
+      button(type="submit") Submit Review
+  else if !user
+    p Please log in as a buyer to leave a review.
+  else if user.role !== 'buyer'
+    p Only buyers can leave a review for this product.

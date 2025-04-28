@@ -7,7 +7,7 @@ block content
         .header-container
             h1.page-title 🐾 Browse Available Pets for Adoption
 
-            if user && user.role == "seller" || user.role == "admin"
+            if user && (user.role == "seller")
                 .pet-management
                     h2.management-title 🐶 Pet Management
                     a.btn.btn-add-pet(href="/pets/petsadd") 

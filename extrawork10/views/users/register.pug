@@ -17,7 +17,10 @@ block content
                     p.error-message= errors.email
             .signup-form-group
                 label(for="contact") Contact
-                input#contact(type="contact", class="signup-input", name="contact", placeholder="Enter your phone number", required) 
+                input#contact(type="contact", class="signup-input", name="contact", placeholder="Enter your phone number", required)
+            .signup-form-group
+                label(for="storeName") Store Name
+                input#storeName(type="storeName", class="signup-input", name="storeName", placeholder="Enter your Stoe Name")  
             .signup-form-group     
                 label(for="password") Password
                 input#password(type="password", class="signup-input", name="password", placeholder="Create a password", required)

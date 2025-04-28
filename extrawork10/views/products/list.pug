@@ -7,7 +7,7 @@ block content
         .header-container
             h1.page-title 🛍️ Browse Our Exclusive Pet Products
 
-            if user && user.role == "seller" || user.role == "admin"
+            if user && (user.role == "seller")
                 .product-management
                     h2.management-title 📦 Products Management
                     a.btn.btn-add-product(href="/products/add") 
@@ -28,7 +28,10 @@ block content
                                     | #{product.instock}
                                 else
                                     span.text-danger Out of Stock
-                            
+                                p.card-text.store
+                                    | 🏪 Sold by: 
+                                    a.store-link(href=`/products/store/${product.uploadedBy}`)= product.storeName
+
                             .btn-group.action-buttons
                                 a.btn.btn-cart(href="/products/cart/"+product._id) 
                                     i(class="fas fa-shopping-cart") Add to Cart

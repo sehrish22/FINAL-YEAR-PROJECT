@@ -17,6 +17,10 @@ block content
         p.profile-text 
           strong Contact:  
           | #{user.contact}
+        p.profile-text
+          strong Store Name:  
+          | #{user.storeName}
+          
         form(action=`/admin/profile/${user._id}/delete`, method="POST")
           button.btn.btn-danger(type="submit") Delete Profile
       img#profile-photo(src=user.image, alt="Profile Photo") 

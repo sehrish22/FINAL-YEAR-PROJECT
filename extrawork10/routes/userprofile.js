@@ -51,6 +51,7 @@ router.post("/editprofile",upload , checkSessionAuth, async (req, res) => {
     user.name = req.body.name;
     user.email = req.body.email;
     user.contact = req.body.contact;
+    user.storeName = req.body.storeName;
 
     // If an image file is provided, update the image path
     if (req.file) {
