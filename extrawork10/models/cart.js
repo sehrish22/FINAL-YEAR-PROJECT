@@ -1,12 +1,17 @@
-var mongoose = require('mongoose');
+var mongoose = require("mongoose");
 
 const cartItemSchema = new mongoose.Schema({
-  product: { type: mongoose.Schema.Types.ObjectId, ref: 'Product', required: true },
+  product: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Product",
+    required: true,
+  },
   quantity: { type: Number, default: 1 },
+  error: { type: String },
 });
 
 const cartSchema = new mongoose.Schema({
-  sessionId: { type: String ,required: true },
+  sessionId: { type: String, required: true },
   items: [cartItemSchema],
 });
 const Cart = mongoose.model("Cart", cartSchema);

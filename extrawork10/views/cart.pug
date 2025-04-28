@@ -4,6 +4,12 @@ block content
   link(rel='stylesheet' href='/stylesheets/cart.css')
   h1.cart-title My Shopping Cart
 
+  //- Show flash error if any
+  if messages.error
+    .alert.alert-danger
+      each error in messages.error
+        div= error
+
   if cart.length
     each item in cart
       .cart-item

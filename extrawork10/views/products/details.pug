@@ -24,10 +24,11 @@ block content
 
         .btn-group.action-buttons
           a.btn.btn-cart(href="/products/cart/" + product._id) 🛒 Add to Cart
-          if user && user.role =="seller"
+          if user && user.role == "seller"
             a.btn.btn-edit(href="/products/edit/" + product._id) ✏️ Edit
             a.btn.btn-delete(href="/products/delete/" + product._id) 🗑 Delete
-    hr
+  
+  hr
 
   h2.reviews-title Reviews
   if reviews && reviews.length
@@ -51,21 +52,26 @@ block content
 
   h2 Add a Review
   if user && user.role === 'buyer'
-    form(action=`/products/${product._id}/review`, method="POST")
-      label(for="rating") Rating:
-      select(name="rating", id="rating", required)
-        option(value="") Select rating
-        option(value="1") 1 ⭐
-        option(value="2") 2 ⭐
-        option(value="3") 3 ⭐
-        option(value="4") 4 ⭐
-        option(value="5") 5 ⭐
+    if hasReviewed
+      p.alert.alert-info(style="padding: 10px; margin-top: 10px; background: #d1ecf1; border: 1px solid #bee5eb; border-radius: 5px; color: #0c5460;") ⚠️ You have already reviewed this product.
+    else if hasPurchased
+      form(action=`/products/${product._id}/review`, method="POST")
+        label(for="rating") Rating:
+        select(name="rating", id="rating", required)
+          option(value="") Select rating
+          option(value="1") 1 ⭐
+          option(value="2") 2 ⭐
+          option(value="3") 3 ⭐
+          option(value="4") 4 ⭐
+          option(value="5") 5 ⭐
 
-      label(for="comment") Comment:
-      textarea(name="comment", id="comment", required)
+        label(for="comment") Comment:
+        textarea(name="comment", id="comment", required)
 
-      button(type="submit") Submit Review
+        button(type="submit") Submit Review
+    else
+      .alert.alert-warning(style="padding: 10px; margin-top: 10px; background: #fff3cd; border: 1px solid #ffeeba; border-radius: 5px; color: #856404;") ⚠️ You must purchase this product before leaving a review.
   else if !user
-    p Please log in as a buyer to leave a review.
+    p(style="color: red; margin-top: 10px;") Please log in as a buyer to leave a review.
   else if user.role !== 'buyer'
-    p Only buyers can leave a review for this product.
+    p(style="color: red; margin-top: 10px;") Only buyers can leave a review for this product.

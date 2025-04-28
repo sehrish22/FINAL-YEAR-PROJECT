@@ -4,6 +4,16 @@ block content
     link(rel='stylesheet' href='/stylesheets/list.css')
 
     .container
+        if messages.error
+            .alert.alert-danger
+                each error in messages.error
+                    div= error
+
+        if messages.success
+            .alert.alert-success
+                each success in messages.success
+                    div= success
+
         .header-container
             h1.page-title 🛍️ Browse Our Exclusive Pet Products
 
@@ -28,15 +38,19 @@ block content
                                     | #{product.instock}
                                 else
                                     span.text-danger Out of Stock
-                                p.card-text.store
-                                    | 🏪 Sold by: 
-                                    a.store-link(href=`/products/store/${product.uploadedBy}`)= product.storeName
+                            p.card-text.store
+                                | 🏪 Sold by: 
+                                a.store-link(href=`/products/store/${product.uploadedBy}`)= product.storeName
 
                             .btn-group.action-buttons
                                 a.btn.btn-cart(href="/products/cart/"+product._id) 
-                                    i(class="fas fa-shopping-cart") Add to Cart
+                                    i(class="fas fa-shopping-cart") Add to Cart #{product.error}
                                 if loggedInUserId && product.uploadedBy == loggedInUserId
                                     a.btn.btn-edit(href="/products/edit/"+product._id) 
                                         i(class="fas fa-edit") Edit
                                     a.btn.btn-delete(href="/products/delete/"+product._id) 
                                         i(class="fas fa-trash") Delete
+
+                            // Display the product-specific error message if available
+                            if product.error
+                                .alert.alert-danger= product.error
