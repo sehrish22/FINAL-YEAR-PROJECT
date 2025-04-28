@@ -366,6 +366,15 @@ router.get("/cart/:id", async function (req, res, next) {
 });
 
 // Remove a product from the cart
+router.get("/cart/remove/:id", async function (req, res, next) {
+  const sessionId = req.session.sessionId;
+  await Cart.updateOne(
+    { sessionId },
+    { $pull: { items: { product: req.params.id } } }
+  );
+  res.redirect("/cart");
+});
+// Increment product quantity in the cart
 router.post("/cart/increment/:id", async function (req, res, next) {
   const sessionId = req.session.sessionId;
 
@@ -408,43 +417,6 @@ router.post("/cart/increment/:id", async function (req, res, next) {
   }
 
   // Redirect to the cart page after updating
-  res.redirect("/cart");
-});
-
-// Increment product quantity in the cart
-router.post("/cart/increment/:id", async function (req, res, next) {
-  const sessionId = req.session.sessionId;
-  const product = await Product.findById(req.params.id);
-
-  if (!product) return res.redirect("/products");
-
-  const cart = await Cart.findOne({ sessionId });
-  const item = cart.items.find((item) => item.product.equals(product._id));
-  console.log(cart, item);
-
-  if (item) {
-    if (item.quantity + 1 > product.instock) {
-      // Calculate item subtotal and total
-      const cartWithTotals = cart.items.map((item) => {
-        return {
-          ...item.toObject(),
-          itemTotal: item.product.price * item.quantity,
-        };
-      });
-
-      const total = cartWithTotals.reduce(
-        (acc, item) => acc + item.itemTotal,
-        0
-      );
-      return res.render("cart", {
-        cart: cartWithTotals,
-        total,
-        error: `Only ${product.instock} products are available in stock`,
-      });
-    }
-    item.quantity += 1;
-    await cart.save();
-  }
   res.redirect("/cart");
 });
 
