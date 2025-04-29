@@ -1,0 +1,78 @@
+extends ../layout
+
+block content
+  link(rel='stylesheet' href='/stylesheets/buyerprofile.css') 
+
+  .user-dashboard.container
+    h1.user-title Buyer Profile
+
+    .user-header
+      .user-info
+        .user-details
+          p.user-name Name:  
+            span #{user.name}
+          p.user-email Email:  
+            span #{user.email} 
+          p.user-contact Contact:  
+            span #{user.contact}
+          a.user-nav-link(href='/logout') Logout  
+
+      .user-image-container
+        img.user-img(src=user.image ? user.image : '/images/default.png', alt="Profile Picture")
+        a.btn.btn-brown(href="/buyerprofile/editbuyerprofile") Edit Profile
+
+    // Orders Section
+    if orders && orders.length > 0
+      .orders-section
+        h2 Order History
+        each order in orders
+          .order-card
+            h3 Order ID:  
+              span #{order.orderId}
+            table.order-table
+              thead
+                tr
+                  th Image
+                  th Product Name
+                  th Quantity
+                  th Price
+                  th Subtotal
+                  th Order Status
+              tbody
+                each item in order.items
+                  tr
+                    td 
+                      img.order-product-img(src=item.image, alt=item.name)
+                    td 
+                      if item.product
+                        a.product-link(href="/products/"+item.product._id)= item.name
+                      else
+                        span.text-danger Product Not Found
+                    td #{item.quantity}
+                    td Rs.#{item.price}
+                    td Rs.#{item.subtotal}
+                    td #{order.orderStatus}
+            p.order-total Total Amount:  
+              span Rs.#{order.total}
+    else
+      p.no-orders You have not ordered yet.
+
+    // Adoption Requests Section
+    if adoptionrequests && adoptionrequests.length > 0
+      .adoption-requests-section
+        h2 Adoption Requests
+        each adoptionrequest in adoptionrequests
+          .adoption-request-card
+            //- h3 Adoption Request ID:  
+            //-   span #{adoptionrequest.adoptionRequestId}
+            .pet-details
+              p Pet Name:  
+                span #{adoptionrequest.petName}
+              p Pet Type:  
+                span #{adoptionrequest.petId ? adoptionrequest.petId.type : 'Unknown'}
+            //- p Status:  
+            //-   span #{request.status || 'Pending'}
+            p Submitted On:  
+              span #{new Date(adoptionrequest.createdAt).toLocaleDateString()}
+    else
+      p.no-adoption-requests You have not submitted any adoption requests yet.

@@ -1,0 +1,50 @@
+extends ../layout
+
+block content
+  link(rel='stylesheet' href='/stylesheets/sellerorders.css')
+
+  .user-orders-container
+    h2.user-orders-title Orders
+
+    if orders && orders.length > 0
+      table.user-orders-table
+        thead
+          tr
+            th Order ID
+            th Buyer Name
+            th Buyer Email
+            th Address
+            th Contact
+            th Items Ordered
+            th Total Amount
+             th Status
+            th Action
+        tbody
+          each order in orders
+            tr
+              td #{order._id}
+              td #{order.name}
+              td #{order.email}
+              td #{order.address}
+              td #{order.contact}
+              td
+                ul
+                  each item in order.items
+                    if item.product
+                      li
+                        img(src=item.product.image, alt=item.product.name, width="50")
+                        | $#{item.product.price} x #{item.quantity} = $#{item.subtotal}
+              td $#{order.total}
+              td #{order.orderStatus}
+              td 
+                form(action=`/userprofile/orders/update-status/${order._id}` method="POST")
+                  input(type="hidden" name="orderId" value=`${order._id}`)
+                  select(name="newStatus")
+                    option(value="Pending" selected=order.orderStatus==="Pending") Pending
+                    option(value="Processing" selected=order.orderStatus==="Processing") Processing
+                    option(value="Shipped" selected=order.orderStatus==="Shipped") Shipped
+                    option(value="Delivered" selected=order.orderStatus==="Delivered") Delivered
+                    option(value="Cancelled" selected=order.orderStatus==="Cancelled") Cancelled
+                  button(type="submit") Update
+    else
+      p.user-no-orders No orders to display.

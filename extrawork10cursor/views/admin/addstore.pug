@@ -1,0 +1,29 @@
+extends ../layout
+
+block content
+  link(rel='stylesheet', href='/stylesheets/addstore.css')
+  .store-form-container
+    h1 Add New Store
+
+    form(action="/stores" method="POST" class="store-form")
+      .form-group
+        label(for="name") Store Name:
+        input#name(type="text" name="name" required)
+
+      .form-group
+        label(for="address") Address:
+        input#address(type="text" name="address" required)
+
+      .form-group
+        label(for="contact") Phone Number:
+        input#contact(type="text" name="contact" required)
+
+      .form-group
+        label(for="openingTime") Opening Time:
+        input#openingTime(type="text" name="openingTime" placeholder="9:00 AM" required)
+
+      .form-group
+        label(for="closingTime") Closing Time:
+        input#closingTime(type="text" name="closingTime" placeholder="9:00 PM" required)
+
+      button.btn-theme(type="submit") Add Store

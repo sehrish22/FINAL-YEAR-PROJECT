@@ -44,8 +44,6 @@ html
                       a.dropdown-item(href='/products?type=horse,snake') Other Food
                     li
                       a.dropdown-item(href='/products') View All
-                //- li.nav-item
-                //-   a.nav-link(href='#') PlayTime Appointment
                 li.nav-item.dropdown
                   a#navbarDropdown.nav-link.dropdown-toggle(href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false')
                     | More
@@ -76,7 +74,7 @@ html
                       path(d='M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l.84 4.479 9.144-.459L13.89 4zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2', fill='white')
     block content
     .footer
-      .f1
+      .col.md-3.f1
         h3 Contact Us!
         |             +923494721836 
         br
@@ -85,14 +83,21 @@ html
         |             @sehrish7060@gmail.com 
         br
         |             @gulbano7060@gmail.com
-      .f2
-        h3 About Us
+      .col.md-3.f2
+        h3 Quick Links
         a(href='/pets') Adopt a Pet
         a(href='/clinics') Vet Clinics
         a(href='/stores') Pet Stores
         a(href='/petsitters') PetSitters 
         a(href='/products') Products
-      .f3
+      .col.md-3.f4 
+        h3 Privacy Policy
+        a(href='/support') Support
+        br
+        a(href='/return-policy') Return Policy
+        br
+        a(href='/terms-and-conditions') Terms and Conditions
+      .col.md-3.f3
         h3 SignUp For Our NewsLetter
         form#newsletter-form(action="/newsletter/subscribe" method="POST")
           .form-group
@@ -100,8 +105,7 @@ html
           .form-group
             input.form-control(type="email" name="email" placeholder="Enter your email" required)
           .form-group
-            button.btn.btn-primary(type="submit") Subscribee
-
+            button.btn.btn-primary(type="submit") Subscribe
     div
       a#call.btn.btn-danger(href="tel:03494721836") Call Us!
     div
