@@ -1,4 +1,4 @@
-/* Reset and base styling */
+/* Reset and Base Styles */
 * {
   margin: 0;
   padding: 0;
@@ -6,67 +6,267 @@
 }
 
 body {
-  font-family: 'Arial', sans-serif;
-  color: #4d3b3b; /* Dark brown shade for text */
-  background-color: #f5f0eb; /* Light skin tone for background */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-#navbar {
-margin: 0;
-padding: 0;
-position: sticky;
-top: 0;
-z-index: 10;
-}
-
+/* Navigation Styles */
 .navbar {
-padding: 1rem 2rem; /* Add space around the navbar */
-background-color: black; /* Set the background color to black */
-text-align: center;  /* Center the navbar text */
-}
-
-.navbar-nav {
-display: flex;
-justify-content: center; /* Center navbar items */
-gap: 2rem; /* Add space between navbar items */
-width: 100%;
-}
-
-.navbar-nav .nav-item {
-padding: 0.5rem 1rem; /* Add space inside each nav-item */
+  padding: 1rem 0;
+  background-color: #1a1a1a !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .navbar-brand {
-font-size: 1.8rem; /* Increase font size of the logo */
-color: #f7e6d4; /* Light skin color for logo */
-padding-right: 2rem; /* Space between logo and nav items */
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #ffffff !important;
 }
 
-.navbar-brand:hover {
-color: #f1a6a6; /* Highlight color when hovering */
+.logo-style {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
 }
 
 .nav-link {
-font-size: 1.2rem; /* Font size for navbar links */
-padding: 0.75rem 1rem; /* Padding around the text */
-color: #f7e6d4; /* Light skin color */
+  color: #ffffff !important;
+  font-weight: 500;
+  padding: 0.5rem 1rem !important;
+  transition: all 0.3s ease;
 }
 
-.navbar-nav .nav-link:hover {
-color: #f1a6a6; /* Hover color */
+.nav-link:hover {
+  color: #007bff !important;
+  transform: translateY(-2px);
 }
 
-.navbar-toggler {
-margin-left: auto; /* Toggler button aligned to the right */
+.dropdown-menu {
+  background-color: #2a2a2a;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* Navbar Dropdown styling */
-.nav-item.dropdown .dropdown-menu {
-min-width: 200px; /* Set a minimum width for the dropdown menu */
+.dropdown-item {
+  color: #ffffff;
+  padding: 0.75rem 1.5rem;
+  transition: all 0.3s ease;
 }
 
-.navbar-toggler-icon {
-background-color: white; /* Change the color of the burger menu */
+.dropdown-item:hover {
+  background-color: #3a3a3a;
+  color: #007bff;
+  transform: translateX(5px);
+}
+
+.dropdown-divider {
+  border-color: #3a3a3a;
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  padding-top: 80px;
+  padding-bottom: 2rem;
+}
+
+/* Footer Styles */
+.footer {
+  background-color: #1a1a1a;
+  color: #ffffff;
+  padding: 4rem 0 2rem;
+  margin-top: auto;
+}
+
+.footer-heading {
+  color: #ffffff;
+  font-size: 1.5rem;
+  font-weight: 600;
+  position: relative;
+  padding-bottom: 15px;
+  margin-bottom: 25px;
+}
+
+.footer-heading::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 50px;
+  height: 3px;
+  background-color: #007bff;
+  border-radius: 2px;
+}
+
+.contact-info p {
+  color: #ffffff;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.contact-info p:hover {
+  transform: translateX(10px);
+  color: #007bff;
+}
+
+.quick-links a {
+  color: #ffffff;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+}
+
+.quick-links a:hover {
+  color: #007bff;
+  transform: translateX(10px);
+}
+
+/* Newsletter Form */
+#newsletter-form .form-control {
+  background-color: #2a2a2a !important;
+  border: 1px solid #3a3a3a;
+  color: #ffffff !important;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+}
+
+#newsletter-form .form-control:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+#newsletter-form .btn-primary {
+  background-color: #007bff;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+#newsletter-form .btn-primary:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+/* Floating Action Buttons */
+.floating-buttons {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 1000;
+}
+
+.floating-buttons .btn {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+.floating-buttons .btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+#call {
+  background-color: #dc3545;
+}
+
+#bot,
+#personal {
+  background-color: #17a2b8;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .navbar-brand {
+    font-size: 1.2rem;
+  }
+
+  .logo-style {
+    width: 30px;
+    height: 30px;
+  }
+
+  .nav-link {
+    padding: 0.5rem !important;
+  }
+
+  .footer {
+    text-align: center;
+    padding: 3rem 0 1.5rem;
+  }
+
+  .footer-heading::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .contact-info p,
+  .quick-links a {
+    justify-content: center;
+  }
+
+  .contact-info p:hover,
+  .quick-links a:hover {
+    transform: none;
+  }
+
+  .floating-buttons {
+    bottom: 10px;
+    right: 10px;
+  }
+
+  .floating-buttons .btn {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* Utility Classes */
+.shadow-lg {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+.rounded-circle {
+  border-radius: 50% !important;
+}
+
+/* Animation Classes */
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 #video {
@@ -88,8 +288,10 @@ background-color: white; /* Change the color of the burger menu */
 #paragraph {
   text-align: center;
   padding: 2em 1em;
-  background: #8c6b4a; /* Brown */
-  color: #f5f0eb; /* Light skin tone */
+  background: #8c6b4a;
+  /* Brown */
+  color: #f5f0eb;
+  /* Light skin tone */
 }
 
 #para {
@@ -126,62 +328,20 @@ background-color: white; /* Change the color of the burger menu */
   box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
 }
 
-
-
-/* Footer Styling */
-
-.footer {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 2em;
-  background: #4d3b3b; /* Dark brown */
-  color: #f5f0eb;
-  text-align: center;
-}
-
-.footer div {
-  width: 33%;
-  padding: 1em;
-}
-
-.footer h3 {
-  font-size: 1.5em;
-  margin-bottom: 1em;
-  color: #e2c4b8;
-}
-
-.footer a {
-  color: #f5f0eb;
-  text-decoration: none;
-  display: block;
-  margin: 0.5em 0;
-  transition: color 0.3s ease;
-}
-.form-group{
-  color :#E63946;
- margin :0.5em;
- margin-left: 12em;
-}
-
-.footer a:hover {
-  color: #a58b6f; /* Medium brown */
-}
-
-.logo-style{
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-}
-
 .transparent-container {
-  background-color: rgba(255, 255, 255, 0.8); /* Adjust the rgba values as needed */
-  padding: 20px; /* Optional: add some padding */
-  border-radius: 10px; /* Optional: add rounded corners */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: add a subtle shadow */
+  background-color: rgba(255, 255, 255, 0.8);
+  /* Adjust the rgba values as needed */
+  padding: 20px;
+  /* Optional: add some padding */
+  border-radius: 10px;
+  /* Optional: add rounded corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  /* Optional: add a subtle shadow */
 }
-.backimg{
+
+.backimg {
   background-image: url("/fypcopy/public/imgs/backgorunf.jpeg");
-  background-position:center;
+  background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
   height: 100vh;
@@ -192,78 +352,14 @@ background-color: white; /* Change the color of the burger menu */
   left: 0;
 }
 
-
 .error-message {
   margin-top: 0.5rem;
   color: #E63946;
   font-size: 1rem;
 }
+
 .error-message {
   color: red;
   font-size: 14px;
   margin-top: 5px;
 }
-/* General Floating Button Styles */
-#call, #bot, #search, #personal {
-  position: fixed;
-  padding: 12px 24px;
-  font-size: 1.1em;
-  font-weight: bold;
-  color: white;
-  border: none;
-  border-radius: 50px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Call Button - Dark Brown */
-#call {
-  bottom: 20px;
-  right: 20px;
-  background-color: #5a3e2b;  /* Dark brown */
-}
-
-#call:hover {
-  background-color: #4a3222;
-  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
-  transform: scale(1.05);
-}
-
-/* Chatbot Consultation Button - Black */
-#bot {
-  bottom: 20px;
-  left: 20px;
-  background-color: #2d2d2d; /* Black */
-}
-
-#bot:hover {
-  background-color: #1f1f1f;
-  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
-  transform: scale(1.05);
-}
-
-/* Personal Chatbot Button - Soft Brown */
-#personal {
-  bottom: 80px;
-  left: 20px;
-  background-color: #8b5e3b;  /* Soft warm brown */
-}
-
-#personal:hover {
-  background-color: #754a2a;
-  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
-  transform: scale(1.05);
-}
-
-/* Responsive Adjustments */
-@media screen and (max-width: 768px) {
-  #call, #bot, #search, #personal {
-    padding: 10px 18px;
-    font-size: 1em;
-  }
-}
-
