@@ -1,0 +1,20 @@
+extends layout
+
+block content
+  .reviews-section
+    h2.reviews-title All Reviews
+    if reviews && reviews.length
+      .reviews-container
+        each review, index in reviews
+          if index < 3
+            .review-card
+              .review-content
+                if review.product
+                  h3.product-name= review.product.name
+                if review.user
+                  p.user-name Posted By: #{review.user.name}
+                p.rating Rating: #{review.rating} / 5
+                p.comment "#{review.comment}"
+                p.date Posted on: #{new Date(review.createdAt).toLocaleDateString()}
+    else
+      p.no-reviews No reviews available yet!
