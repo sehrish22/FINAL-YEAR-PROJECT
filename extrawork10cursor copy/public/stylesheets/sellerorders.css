@@ -1,0 +1,91 @@
+/* Orders Page Container */
+.user-orders-container {
+  max-width: 1400px;
+  margin: 30px auto;
+  padding: 25px;
+  background-color: #2d2d2d; /* Dark background */
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Orders Title */
+.user-orders-title {
+  text-align: center;
+  font-size: 28px;
+  color: #d2b48c; /* Light brown */
+  margin-bottom: 25px;
+}
+
+/* Orders Table */
+.user-orders-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  border: 1px solid #444; /* Table border */
+}
+
+/* Table Header */
+.user-orders-table th {
+  background-color: #8b5e3b; /* Warm Brown */
+  color: #fff;
+  padding: 12px 15px;
+  text-align: left;
+  font-size: 16px;
+  border-right: 1px solid #444;
+  border-bottom: 2px solid #444;
+}
+
+/* Table Rows */
+.user-orders-table td {
+  padding: 12px 15px;
+  color: #e0e0e0;
+  border-right: 1px solid #444;
+  border-bottom: 1px solid #444;
+  font-size: 14px;
+}
+
+/* Hover Effect on Rows */
+.user-orders-table tr:hover {
+  background-color: #3a3a3a;
+}
+
+/* No Orders Message */
+.user-no-orders {
+  text-align: center;
+  font-size: 18px;
+  color: #aaa;
+}
+
+/* Dropdown Styling */
+.user-orders-table select {
+  padding: 6px 10px;
+  border: 2px solid #8b5e3b;
+  background-color: #3a3a3a;
+  color: #fff;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.user-orders-table select:hover {
+  border-color: #d2b48c;
+  background-color: #4b4b4b;
+}
+
+/* Update Button Styling */
+.user-orders-table button {
+  padding: 6px 12px;
+  background-color: #8b5e3b;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+.user-orders-table button:hover {
+  background-color: #a06942;
+}

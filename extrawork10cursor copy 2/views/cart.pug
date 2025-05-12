@@ -1,0 +1,71 @@
+extends layout
+
+block content
+  link(rel='stylesheet' href='/stylesheets/cart.css')
+  .cart-container
+    .cart-header
+      h1.cart-title Shopping Cart
+
+    //- Show flash error if any
+    if messages.error
+      .alert.alert-danger.fade-in
+        each error in messages.error
+          div= error
+
+    if cart.length
+      .cart-grid
+        .cart-items-container
+          each item in cart
+            .cart-item
+              .cart-item-image-container
+                img.cart-item-image(src=item.product.image, alt=item.product.name)
+              
+              .cart-item-content
+                .cart-item-details
+                  h3.product-name= item.product.name
+                  p.product-price Rs.#{item.product.price}
+                
+                .cart-item-controls
+                  .quantity-controls
+                    form(action=`/products/cart/decrement/${item.product._id}`, method="POST")
+                      button.btn-quantity.btn-decrease(type="submit", disabled=item.quantity === 1) −
+                    span.quantity #{item.quantity}
+                    form(action=`/products/cart/increment/${item.product._id}`, method="POST")
+                      button.btn-quantity.btn-increase(type="submit") +
+                  
+                  if error
+                    .error-message= error
+                
+                .cart-item-actions
+                  a.btn-remove(href="/products/cart/remove/" + item.product._id)
+                    i.fas.fa-trash
+                    span Remove
+                
+                .cart-item-subtotal
+                  span.subtotal-label Item Total:
+                  span.subtotal-amount Rs.#{item.itemTotal}
+
+        .cart-summary
+          .summary-card
+            h2.summary-title Order Summary
+            .summary-details
+              .summary-row
+                span Items
+                span #{cart.length}
+              .summary-row
+                span Subtotal
+                span.cart-subtotal Rs.#{total}
+              .summary-row.total
+                span.total-label Total
+                span.cart-total Rs.#{total}
+            
+            a.btn-checkout(href="/products/checkout")
+              span Proceed to Checkout
+              i.fas.fa-arrow-right
+
+    else
+      .empty-cart
+        i.fas.fa-shopping-cart
+        h2 Your cart is empty
+        p Looks like you haven't added anything to your cart yet.
+        a.btn-continue-shopping(href="/products") Continue Shopping

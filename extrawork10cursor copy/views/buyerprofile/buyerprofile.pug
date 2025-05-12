@@ -1,0 +1,127 @@
+extends ../layout
+
+block content
+  link(rel='stylesheet' href='/stylesheets/buyerprofile.css')
+
+  .container
+    h1.user-title Welcome back, #{user.name}!
+
+    .user-header
+      .user-info
+        .user-details
+          p
+            i.fas.fa-user
+            | Name: 
+            span #{user.name}
+          p
+            i.fas.fa-envelope
+            | Email: 
+            span #{user.email}
+          p
+            i.fas.fa-phone
+            | Contact: 
+            span #{user.contact}
+          a.btn.btn-secondary(href='/users/logout')
+              i.fas.fa-sign-out-alt
+              | Logout
+
+      .user-image-container
+        img.user-img(src=user.image ? user.image : '/images/default.png', alt=user.name)
+        a.btn.btn-primary(href="/buyerprofile/editbuyerprofile")
+          i.fas.fa-edit
+          | Edit Profile
+
+    if orders && orders.length > 0
+      .orders-section
+        h2
+          i.fas.fa-shopping-bag
+          |  Order History
+        each order in orders
+          .order-card
+            .order-header
+              .order-id
+                i.fas.fa-hashtag
+                |  Order ID: #{order.orderId}
+              .order-date
+                i.far.fa-calendar-alt
+                |  #{new Date(order.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+            table.order-table
+              thead
+                tr
+                  th Product
+                  th Quantity
+                  th Price
+                  th Subtotal
+                  th Status
+              tbody
+                each item in order.items
+                  tr
+                    td
+                      .product-cell
+                        img.order-product-img(src=item.image, alt=item.name)
+                        if item.product
+                          a.product-link(href="/products/"+item.product._id)= item.name
+                        else
+                          span.text-danger Product Not Found
+                    td #{item.quantity}
+                    td Rs.#{item.price.toLocaleString()}
+                    td Rs.#{item.subtotal.toLocaleString()}
+                    td
+                      span.status-badge(class=order.orderStatus.toLowerCase())
+                        i.fas.fa-circle
+                        | #{order.orderStatus}
+            .order-total
+              | Total Amount: 
+              span Rs.#{order.total.toLocaleString()}
+    else
+      .no-orders
+        i.fas.fa-shopping-cart
+        p You haven't placed any orders yet.
+        a.btn.btn-primary(href="/products") Start Shopping
+
+    if adoptionrequests && adoptionrequests.length > 0
+      .adoption-requests-section
+        h2
+          i.fas.fa-paw
+          |  Adoption Requests
+        each adoptionrequest in adoptionrequests
+          .order-card
+            .order-header
+              .order-id
+                i.fas.fa-hashtag
+                |  Request ID: #{adoptionrequest.adoptionRequestId}
+              .order-date
+                i.far.fa-calendar-alt
+                |  #{new Date(adoptionrequest.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+            table.order-table
+              thead
+                tr
+                  th Pet
+                  th Type
+                  th Breed
+                  th Color
+                  th Fee
+                  th Status
+              tbody
+                tr
+                  td
+                    .product-cell
+                      if adoptionrequest.petId && adoptionrequest.petId.image
+                        img.order-product-img(src=adoptionrequest.petId.image, alt=adoptionrequest.petName)
+                      else
+                        .pet-image-placeholder
+                          i.fas.fa-image
+                      a.product-link(href="/pets/"+adoptionrequest.petId._id)= adoptionrequest.petName
+                  td #{adoptionrequest.petId ? adoptionrequest.petId.type : 'Unknown'}
+                  td #{adoptionrequest.petId ? adoptionrequest.petId.breed : 'Unknown'}
+                  td #{adoptionrequest.petId ? adoptionrequest.petId.color : 'Unknown'}
+                  td Rs.#{adoptionrequest.petId ? adoptionrequest.petId.fee.toLocaleString() : '0'}
+                  td
+                    span.status-badge(class=(adoptionrequest.status || 'pending').toLowerCase())
+                      i.fas.fa-circle
+                      | #{adoptionrequest.status || 'Pending'}
+    else
+      .no-adoption-requests
+        i.fas.fa-heart
+        p You haven't submitted any adoption requests yet.
+        a.btn.btn-primary(href="/pets") Browse Pets

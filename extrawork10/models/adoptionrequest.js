@@ -19,7 +19,6 @@ function validateAdoptionRequest(data){
   const schema = Joi.object({
     name: Joi.string().min(3).max(30).required(),
     email: Joi.string().min(0).required(),
-    contact: Joi.string().min(3).max(20).required(),
     address: Joi.string().min(3).required(),
     petId: { type: mongoose.Schema.Types.ObjectId, ref: "Pet", required: true },
   petName: { type: String, required: true },

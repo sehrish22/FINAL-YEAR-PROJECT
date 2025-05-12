@@ -1,0 +1,66 @@
+extends ../layout
+
+block content
+    link(rel='stylesheet' href='/stylesheets/list.css')
+    link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css')
+
+    .products-container
+        if messages.error
+            .alert.alert-danger
+                each error in messages.error
+                    div= error
+
+        if messages.success
+            .alert.alert-success
+                each success in messages.success
+                    div= success
+
+        .products-header
+            h1.products-title 
+                i.bi.bi-shop.me-2
+                | Our Exclusive Pet Products
+            if user && (user.role == "seller")
+                .product-management
+                    a.btn-add-product(href="/products/add") 
+                        i.bi.bi-plus-circle.me-2
+                        | Add New Product
+
+        .products-grid
+            each product in products
+                .product-card
+                    .product-image-container
+                        if product.image
+                            img.product-image(src=product.image, alt=product.name)
+                        else
+                            .product-image-placeholder
+                                i.bi.bi-image
+                    .product-info
+                        h3.product-name
+                            a(href="/products/"+product._id)= product.name
+                        .product-details
+                            .product-detail
+                                i.bi.bi-currency-dollar
+                                span= product.price
+                            .product-detail
+                                i.bi.bi-box-seam
+                                if product.instock > 0
+                                    span In Stock: #{product.instock}
+                                else
+                                    span.text-danger Out of Stock
+                            .product-detail
+                                i.bi.bi-shop
+                                a.store-link(href=`/products/store/${product.uploadedBy}`)= product.storeName
+                        .product-actions
+                            a.btn-cart(href="/products/cart/"+product._id)
+                                i.bi.bi-cart-fill.me-2
+                                | Add to Cart
+                            if loggedInUserId && product.uploadedBy == loggedInUserId
+                                .product-management-actions
+                                    a.btn-edit(href="/products/edit/"+product._id)
+                                        i.bi.bi-pencil-fill.me-2
+                                        | Edit
+                                    a.btn-delete(href="/products/delete/"+product._id)
+                                        i.bi.bi-trash-fill.me-2
+                                        | Delete
+                        if product.error
+                            .product-error= product.error

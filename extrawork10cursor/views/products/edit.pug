@@ -1,0 +1,36 @@
+extends ../layout
+
+block content
+  link(rel='stylesheet', href='/stylesheets/edit.css')
+
+  .container
+    h1.page-title ✏️ Edit Product
+    .form-container
+      form(action="/products/edit/" + product._id, method="POST", enctype="multipart/form-data")
+        .form-group
+          label(for="name") Name
+          input(type="text", class="form-control", id="name", name="name", value=product.name, required, placeholder="Enter product name")
+
+        .form-group
+          label(for="type") Type
+          input(type="text", class="form-control", id="type", name="type", value=product.type, required, placeholder="Enter pet type (e.g., Cat, Dog)")
+
+        .form-group
+          label(for="price") Price
+          input(type="text", class="form-control", id="price", name="price", value=product.price, required, placeholder="Enter product price")
+
+        .form-group
+          label(for="description") Description
+          textarea(class="form-control", id="description", name="description", required, placeholder="Enter product description")= product.description
+
+        .form-group
+          label(for="instock") In Stock
+          input(type="number", class="form-control", id="instock", name="instock", value=product.instock, required, placeholder="Enter available stock")
+
+        .form-group
+          label(for="image") Product Image
+          input(type="file", class="form-control file-input", id="image", name="image")
+          if product.image
+            img.product-image-preview(src=product.image, alt=product.name, class="img-fluid mb-2")
+
+        button(type="submit", class="btn btn-save-changes") 💾 Save Changes

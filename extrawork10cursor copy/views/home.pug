@@ -1,0 +1,116 @@
+extends layout
+
+block content
+  link(rel='stylesheet' href='/stylesheets/home.css')
+
+  // Hero Section with Video
+  section.hero-section
+    .video-container
+      video#vid(autoplay='' loop='' muted='' playsinline='')
+        source(src='./imgs/853722-hd_1920_1080_25fps.mp4' type='video/mp4')
+    .hero-overlay
+      h1.hero-title Welcome to FurEverHome
+      p.hero-subtitle Where pets and people come together in harmony
+
+  // Welcome Section
+  section.welcome-section
+    .container
+      .welcome-content
+        p.welcome-text
+          | "Welcome to FurEverHome—a place where pets and people come together in harmony. Whether you're
+          | looking to adopt, find reliable care tips, or explore a wide range of pet products, we're here to
+          | support every step of your journey. At FurEverHome, we believe that every animal deserves a loving
+          | family and a safe place to thrive. Join us in making a difference and discover how easy it can be to
+          | give a pet their forever home."
+
+  // Benefits Section
+  section.benefits-section
+    .container
+      h2.section-title Our Benefits
+      .benefits-grid
+        .benefit-card
+          .benefit-icon
+            i.bi.bi-house-heart
+          h3.benefit-title Buyer Benefits
+          ul.benefit-list
+            li Search for your furry family member near your location
+            li Contact the seller via phone or our messaging system
+            li Search for pets in your area by specifying a radius
+            li Find pets in your immediate vicinity
+
+        .benefit-card
+          .benefit-icon
+            i.bi.bi-shop
+          h3.benefit-title Seller Benefits
+          ul.benefit-list
+            li Free and Premium services for quick sales
+            li Interact with interested buyers
+            li Upgrade your ads anytime
+            li Upload multiple photos and videos
+            li Premium ad radius priority
+
+        .benefit-card
+          .benefit-icon
+            i.bi.bi-heart
+          h3.benefit-title Why FurEverHome?
+          ul.benefit-list
+            li Safe and reliable platform for pet transactions
+            li Easy pet finding process
+            li Simple pet selling process
+            li Wide variety of pets available
+
+  // Pets Section
+  section.pets-section
+    .container
+      h2.section-title Our Pets
+      .pets-grid
+        .pet-card
+          a.pet-link(href='/pets?type=dog')
+            .pet-image
+              img(src='/imgs/pet1.jpeg' alt='Dog')
+            h3.pet-name Dogs
+        .pet-card
+          a.pet-link(href='/pets?type=bird')
+            .pet-image
+              img(src='/imgs/pet2.jpeg' alt='Bird')
+            h3.pet-name Birds
+        .pet-card
+          a.pet-link(href='/pets?type=cat')
+            .pet-image
+              img(src='/imgs/pet1.avif' alt='Cat')
+            h3.pet-name Cats
+        .pet-card
+          a.pet-link(href='/pets?type=rabbit')
+            .pet-image
+              img(src='/imgs/pet6.jpeg' alt='Rabbit')
+            h3.pet-name Rabbits
+
+  // Reviews Section
+  section.reviews-section
+    .container
+      h2.section-title What they say!
+      if reviews && reviews.length
+        .reviews-grid
+          each review, index in reviews
+            if index < 3
+              .review-card
+                .review-content
+                  if review.product
+                    h3.product-name= review.product.name
+                  if review.user
+                    p.user-name
+                      i.bi.bi-person
+                      | Posted By: #{review.user.name}
+                  .rating
+                    - for(let i = 0; i < review.rating; i++)
+                      i.bi.bi-star-fill
+                  p.comment "#{review.comment}"
+                  p.date
+                    i.bi.bi-calendar
+                    | Posted on: #{new Date(review.createdAt).toLocaleDateString()}
+        .see-all-reviews
+          a.btn-see-all(href='/reviews')
+            | See All Reviews
+            i.bi.bi-arrow-right
+      else
+        p.no-reviews No reviews available yet!

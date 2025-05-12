@@ -1,0 +1,362 @@
+/* General Styling */
+.page-title {
+    text-align: center;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #4a3221;
+    /* Deep brown */
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+}
+
+/* Pet Cards */
+.pet-card {
+    border: 1px solid #d1a77a;
+    border-radius: 12px;
+    background: #f9f5f0;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+.pet-card:hover {
+    transform: scale(1.02);
+}
+
+/* Pet Image */
+.card-img-top {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+/* Pet Text */
+.card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #3d2c1e;
+}
+
+.card-text {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #555;
+}
+
+/* Buttons */
+.action-buttons .btn {
+    font-size: 0.9rem;
+    padding: 8px 12px;
+    border-radius: 8px;
+}
+
+.btn-adopt {
+    background-color: #5a3e2b;
+    color: white;
+}
+
+.btn-adopt:hover {
+    background-color: #3d2c1e;
+}
+
+.btn-edit {
+    background-color: #e7c064;
+    color: white;
+}
+
+.btn-edit:hover {
+    background-color: #d1a04f;
+}
+
+.btn-delete {
+    background-color: #d9534f;
+    color: white;
+}
+
+.btn-delete:hover {
+    background-color: #c9302c;
+}
+
+.btn-add-pet {
+    background-color: #4a3221;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-add-pet:hover {
+    background-color: #7a5542;
+    transform: scale(1.05);
+}
+
+.add-pet-container {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.pet-management {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.management-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #4a3221;
+}
+
+.pets-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.pets-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.pets-title {
+    color: #4d3b3b;
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin: 0 0 1.5rem 0;
+    text-align: center;
+}
+
+.pet-management {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-add-pet {
+    background: #8c6b4a;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.btn-add-pet:hover {
+    background: #6d5238;
+    color: white;
+    transform: translateY(-2px);
+}
+
+.pets-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding: 1rem 0;
+    justify-content: center;
+}
+
+.pet-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: calc(33.333% - 1.33rem);
+    min-width: 300px;
+    max-width: 350px;
+}
+
+.pet-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.pet-image-container {
+    position: relative;
+    padding-top: 75%;
+    overflow: hidden;
+}
+
+.pet-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.pet-card:hover .pet-image {
+    transform: scale(1.05);
+}
+
+.pet-image-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #f5f0eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #8c6b4a;
+    font-size: 3rem;
+}
+
+.pet-info {
+    padding: 1.5rem;
+}
+
+.pet-name {
+    margin: 0 0 1rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #4d3b3b;
+}
+
+.pet-name a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.pet-name a:hover {
+    color: #8c6b4a;
+}
+
+.pet-details {
+    display: grid;
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
+}
+
+.pet-detail {
+    display: flex;
+    align-items: center;
+    color: #666;
+    font-size: 1rem;
+}
+
+.pet-detail i {
+    color: #8c6b4a;
+    margin-right: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.pet-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.btn-adopt,
+.btn-edit,
+.btn-delete {
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.btn-adopt {
+    background: #8c6b4a;
+    color: white;
+    flex: 1;
+    justify-content: center;
+}
+
+.btn-adopt:hover {
+    background: #6d5238;
+    color: white;
+    transform: translateY(-2px);
+}
+
+.pet-management-actions {
+    display: flex;
+    gap: 0.5rem;
+    flex: 1;
+}
+
+.btn-edit {
+    background: #f5f0eb;
+    color: #4d3b3b;
+    flex: 1;
+    justify-content: center;
+}
+
+.btn-edit:hover {
+    background: #e2c4b8;
+    color: #4d3b3b;
+    transform: translateY(-2px);
+}
+
+.btn-delete {
+    background: #f5f0eb;
+    color: #dc3545;
+    flex: 1;
+    justify-content: center;
+}
+
+.btn-delete:hover {
+    background: #dc3545;
+    color: white;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 1200px) {
+    .pet-card {
+        width: calc(50% - 1rem);
+    }
+}
+
+@media (max-width: 768px) {
+    .pets-header {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+
+    .pets-title {
+        font-size: 2rem;
+    }
+
+    .pet-card {
+        width: 100%;
+        max-width: 350px;
+    }
+
+    .pet-info {
+        padding: 1rem;
+    }
+
+    .pet-name {
+        font-size: 1.3rem;
+    }
+
+    .pet-actions {
+        flex-direction: column;
+    }
+
+    .btn-adopt,
+    .btn-edit,
+    .btn-delete {
+        width: 100%;
+    }
+}

@@ -1,0 +1,86 @@
+extends layout
+
+block content
+  link(rel='stylesheet' href='/stylesheets/home.css')
+
+  // Video Section
+  #video
+    video#vid(autoplay='' loop='' muted='' playsinline='')
+      source(src='./imgs/853722-hd_1920_1080_25fps.mp4' type='video/mp4')
+
+  // Paragraph Section
+  #paragraph
+    p#para
+      | "Welcome to FurEverHome—a place where pets and people come together in harmony. Whether you're
+      | looking to adopt, find reliable care tips, or explore a wide range of pet products, we're here to
+      | support every step of your journey. At FurEverHome, we believe that every animal deserves a loving
+      | family and a safe place to thrive. Join us in making a difference and discover how easy it can be to
+      | give a pet their forever home."
+
+  // Benefits Section
+  .benefits-section
+    h2.benefits-title Our Benefits
+    .benefits-container
+      .benefit-column
+        .benefit-title Buyer Benefits
+        .benefit-box Search for your furry family member near your location.
+        .benefit-box Contact the seller via phone or our messaging system.
+        .benefit-box Search for pets in your area by specifying a radius.
+        .benefit-box By specifying a radius, you can search for pets in your immediate vicinity.
+
+      .benefit-column
+        .benefit-title Seller Benefits
+        .benefit-box Our Free and Premium services will help you sell your pets quickly.
+        .benefit-box Interact with buyers who are interested in your ads.
+        .benefit-box You can upgrade your ads at any time.
+        .benefit-box Upload multiple photos and videos and then choose the default one.
+        .benefit-box In Premium Ad, mention the radius within which you want your ad to be shown to the buyers in higher priority.
+
+      .benefit-column
+        .benefit-title Why FurEverHome?
+        .benefit-box If you are looking for a safe and reliable platform to buy or sell pets, then FurEverHome is the best choice for you.
+        .benefit-box With FurEverHome, you can easily find the perfect pet for your family without any hassle.
+        .benefit-box Not only that, but you can also easily sell your pet if needed. It connects pet owners who want to find a new home for their beloved pets with potential adopters.
+        .benefit-box You can find a wide variety of pets, from cats and dogs to reptiles, birds, and much more...
+
+  // Pets Section
+  .pets-section
+    h2.our-pets-title Our Pets
+    .row
+      .col-xl-2
+        a(href='/pets?type=dog')
+          img.inst(src='/imgs/pet1.jpeg' alt='Dog')
+          h5.pet-name Dogs
+      .col-xl-2
+        a(href='/pets?type=bird')
+          img.inst(src='/imgs/pet2.jpeg' alt='Bird')
+          h5.pet-name Birds
+      .col-xl-2
+        a(href='/pets?type=cat')
+          img.inst(src='/imgs/pet1.avif' alt='Cat')
+          h5.pet-name Cats
+      .col-xl-2
+        a(href='/pets?type=rabbit')
+          img.inst(src='/imgs/pet6.jpeg' alt='Rabbit')
+          h5.pet-name Rabbits
+
+  // Reviews Section
+  .reviews-section
+    h2.reviews-title What they say!
+    if reviews && reviews.length
+      .reviews-container
+        each review, index in reviews
+          if index < 3
+            .review-card
+              .review-content
+                if review.product
+                  h3.product-name= review.product.name
+                if review.user
+                  p.user-name Posted By: #{review.user.name}
+                p.rating Rating: #{review.rating} / 5
+                p.comment "#{review.comment}"
+                p.date Posted on: #{new Date(review.createdAt).toLocaleDateString()}
+      .see-all-reviews
+        a(href='/reviews') See All Reviews
+    else
+      p.no-reviews No reviews available yet!

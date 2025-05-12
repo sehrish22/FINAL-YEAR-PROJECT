@@ -1,0 +1,45 @@
+extends layout
+
+block content
+  link(rel='stylesheet' href='/stylesheets/adoptionrequest.css')
+
+  .adoption-container
+    .image-section
+      h1.adoption-title Adoption Request
+      
+      if pet.image
+        img(src=pet.image, alt=pet.name, class="adoption-image")
+      else
+        img(src="/imgs/default-pet.jpg", alt="Default Pet Image", class="adoption-image")
+      
+      h2.pet-name #{pet.name}
+
+    .form-section
+      h3.form-heading Fill in your details to adopt #{pet.name}
+      p.form-subheading Please provide your information so we can process your adoption request
+
+      form.adoption-form(action="/admin/adoptionrequests", method="post")
+        input(type="hidden", name="petId", value=pet._id)
+        input(type="hidden", name="adoptionRequestId", value=adoptionRequestId)
+
+        .form-group
+          label(for="email")
+            i.bi.bi-envelope-fill
+            span Email
+          input#email.form-control(type="email", name="email", required, placeholder="Enter your email")
+
+        .form-group
+          label(for="name")
+            i.bi.bi-person-fill
+            span Name
+          input#name.form-control(type="text", name="name", required, placeholder="Enter your name")
+
+        .form-group
+          label(for="contact")
+            i.bi.bi-telephone-fill
+            span Contact
+          input#contact.form-control(type="tel", name="contact", required, placeholder="Enter your contact number")
+
+        button.btn-submit(type="submit")
+          i.bi.bi-send-fill
+          span Submit Request

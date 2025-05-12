@@ -1,0 +1,145 @@
+/* General Container */
+.container {
+    max-width: 600px;
+    margin: 40px auto;
+    background: #fffaf0; /* Light beige */
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Page Title */
+.page-title {
+    text-align: center;
+    color: #5a3e1b; /* Dark brown */
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Form Styling */
+.pet-form .form-group {
+    margin-bottom: 15px;
+}
+
+/* Labels */
+label {
+    font-weight: bold;
+    color: #5a3e1b;
+    font-size: 16px;
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* Input Fields */
+.form-control {
+    width: 100%;
+    border: 2px solid #c2a17c;
+    border-radius: 6px;
+    padding: 10px;
+    font-size: 16px;
+    background: #fff;
+    transition: 0.3s;
+}
+
+.form-control:focus {
+    border-color: #8b5e3b;
+    outline: none;
+    box-shadow: 0 0 8px rgba(139, 94, 59, 0.5);
+}
+
+/* Dropdown Styling */
+select.form-control {
+    cursor: pointer;
+}
+
+/* Textarea */
+textarea.form-control {
+    resize: none;
+}
+
+/* File Upload Styling */
+.file-upload {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.file-label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #5a3e1b;
+}
+
+.form-control-file {
+    border: 2px solid #c2a17c;
+    border-radius: 6px;
+    padding: 8px;
+    width: 100%;
+    cursor: pointer;
+}
+
+/* Button Container */
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+/* Add Pet Button */
+.btn-submit {
+    background-color: #523e30; /* Strong visible brown */
+    color: #ffffff;
+    border: none;
+    padding: 12px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    flex: 1;
+    text-align: center;
+    margin-right: 10px;
+    transition: 0.3s ease-in-out;
+}
+
+.btn-submit:hover {
+    background-color: #a0522d; /* Darker brown */
+}
+
+/* Back Button */
+.btn-cancel {
+    flex: 1;
+    text-align: center;
+    background: #f3e5d0;
+    color: #5a3e1b;
+    padding: 12px 20px;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    border: 2px solid #8b5e3b;
+    border-radius: 8px;
+    transition: 0.3s ease-in-out;
+}
+
+.btn-cancel:hover {
+    background-color: #e0c3a5;
+    color: #5a3e1b;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
+
+    .btn-submit,
+    .btn-cancel {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}

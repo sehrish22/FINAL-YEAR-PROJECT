@@ -1,0 +1,32 @@
+extends ../layout
+
+block content
+  link(rel='stylesheet' href='/stylesheets/editprofile.css')
+  .profile-edit-container
+    h1 Edit Profile
+    form(method="POST", action="/userprofile/editprofile", enctype="multipart/form-data")
+      
+      .form-group
+        label(for="user-name") Name:
+        input(type="text", name="name", id="user-name", value=user.name required)
+      
+      .form-group
+        label(for="user-email") Email:
+        input(type="email", name="email", id="user-email", value=user.email required)
+      
+      .form-group
+        label(for="user-contact") Contact:
+        input(type="text", name="contact", id="user-contact", value=user.contact required)
+      
+      .form-group
+        label(for="user-storeName") Store Name:
+        input(type="text", name="storeName", id="user-storeName", value=user.storeName required)
+
+      .form-group
+        label(for="user-image") Profile Image:
+        input(type="file", name="image", id="user-image")
+
+      .form-group
+        button(type="submit") Save Changes
+      .form-group
+        a.btn.btn-brown(href="/users/change-password") Change Password

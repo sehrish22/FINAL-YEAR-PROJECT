@@ -1,0 +1,57 @@
+extends ../layout
+
+block content
+  link(rel='stylesheet', href='/stylesheets/editStore.css')
+
+  .store-form-container
+    h1 Edit Store
+
+    form(action=`/admin/stores/edit/${store._id}` method="POST" class="store-form" enctype="multipart/form-data")
+      .form-group
+        label(for="name") Store Name:
+        input#name(type="text" name="name" value=store.name required)
+
+      .form-group
+        label(for="address") Address:
+        input#address(type="text" name="address" value=store.address required)
+
+      .form-group
+        label(for="contact") Phone Number:
+        input#contact(type="text" name="contact" value=store.contact required)
+
+      .form-group
+        label(for="openingTime") Opening Time:
+        input#openingTime(type="text" name="openingTime" value=store.openingTime required)
+
+      .form-group
+        label(for="closingTime") Closing Time:
+        input#closingTime(type="text" name="closingTime" value=store.closingTime required)
+
+      .form-group
+        label(for="image") Store Image:
+        if store.image
+          .current-image
+            img(src=store.image alt=store.name style="max-width: 200px; margin-bottom: 10px;")
+            p.text-muted Current Image
+        input#image(type="file" name="image" accept="image/*")
+        .image-preview
+          img#imagePreview(src="#" alt="New image preview" style="display: none; max-width: 200px;")
+
+      button.btn-theme(type="submit") Update Store
+
+  script.
+    // Image preview functionality
+    document.getElementById('image').onchange = function(e) {
+      const preview = document.getElementById('imagePreview');
+      const file = e.target.files[0];
+      const reader = new FileReader();
+
+      reader.onload = function(e) {
+        preview.src = e.target.result;
+        preview.style.display = 'block';
+      }
+
+      if (file) {
+        reader.readAsDataURL(file);
+      }
+    };

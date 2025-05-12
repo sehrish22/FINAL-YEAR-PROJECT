@@ -1,0 +1,64 @@
+extends ../layout
+
+block content
+  link(rel='stylesheet' href='/stylesheets/adoptionrequests.css')
+  .admin-adoption-container
+    h2.admin-adoption-title All Adoption Requests
+
+    if adoptionrequests && adoptionrequests.length > 0
+      table.admin-adoption-table
+        thead
+          tr
+            th Request ID
+            th Date
+            th Buyer Name
+            th Buyer Email
+            th Buyer Contact
+            th Pet Name
+            th Pet Type
+            th Pet Image
+            th Status
+            th Seller
+        tbody
+          each request in adoptionrequests
+            tr
+              td #{request.adoptionRequestId || request._id}
+              td #{new Date(request.createdAt).toLocaleDateString()}
+              td #{request.userId ? request.userId.name : 'N/A'}
+              td #{request.userId ? request.userId.email : 'N/A'}
+              td #{request.userId ? request.userId.contact : 'N/A'}
+              td #{request.petId ? request.petId.name : 'N/A'}
+              td #{request.petId ? request.petId.type : 'N/A'}
+              td
+                if request.petId && request.petId.image
+                  img.admin-adoption-img(src=request.petId.image, alt=request.petId.name)
+                else
+                  span No Image
+              td
+                span.status-badge(class=request.status || 'pending')
+                  | #{request.status || 'Pending'}
+              td #{request.petId && request.petId.uploadedBy ? request.petId.uploadedBy.name : 'N/A'}
+    else
+      p.admin-no-adoption-requests No adoption requests to display.
+
+  script.
+    async function updateStatus(requestId, status) {
+      try {
+        const response = await fetch(`/admin/adoptionrequests/${requestId}/status`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ status })
+        });
+        
+        if (response.ok) {
+          window.location.reload();
+        } else {
+          alert('Failed to update status');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Failed to update status');
+      }
+    }
