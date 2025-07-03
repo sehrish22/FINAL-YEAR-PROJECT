@@ -22,6 +22,7 @@ html
                 span.navbar-toggler-icon
               #navbarNav.collapse.navbar-collapse
                 ul.navbar-nav.mx-auto.main-nav
+                  //- (Avatar dropdown removed from here; will be placed before cart icon below)
                   li.nav-item
                     a.nav-link.active(aria-current='page' href="/")
                       i.bi.bi-house-door.me-1
@@ -88,21 +89,47 @@ html
                   if !user
                     a.nav-link.me-4(href='#' id='loginBtn')
                       i.bi.bi-person-circle.fs-4
-                  else if user && user.role === 'admin'
-                    a.nav-link.me-4(href='/admin')
-                      i.bi.bi-speedometer2.fs-4
-                      | Admin
-                  else if user && user.role === 'seller'
-                    a.nav-link.me-4(href='/userprofile')
-                      i.bi.bi-person.fs-4
-                      | Seller
-                  else if user && user.role === 'buyer'
-                    a.nav-link.me-4(href='/buyerprofile')
-                      i.bi.bi-person.fs-4
-                      | Buyer
                   else
-                    a.nav-link.me-4(href='#' id='loginBtn')
-                      i.bi.bi-box-arrow-right.fs-4
+                    li.nav-item.dropdown.d-flex.align-items-center.ms-2.me-2.navbar-profile-dropdown(style='list-style:none;')
+                      a#userAvatarDropdown.nav-link.dropdown-toggle(href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false' style='padding:0;display:flex;align-items:center;')
+                        if user.role === 'admin'
+                          img.rounded-circle.shadow-sm.navbar-profile-img(src=(user && user.image ? `/imgs/${user.image}` : '/images/default.png') alt='Profile' width='38' height='38' style='object-fit:cover;border:2px solid #b0855b;')
+                        else if user.role === 'seller'
+                          img.rounded-circle.shadow-sm.navbar-profile-img(src=(user && user.image ? user.image : '/images/default.png') alt='Profile' width='38' height='38' style='object-fit:cover;border:2px solid #b0855b;')
+                        else if user.role === 'buyer'
+                          img.rounded-circle.shadow-sm.navbar-profile-img(src=(user && user.image ? user.image : '/images/default.png') alt='Profile' width='38' height='38' style='object-fit:cover;border:2px solid #b0855b;')
+                      ul.dropdown-menu.dropdown-menu-end(aria-labelledby='userAvatarDropdown')
+                        if user.role === 'admin'
+                          li
+                            a.dropdown-item(href='/admin')
+                              i.bi.bi-speedometer2.me-2
+                              | Admin
+                          li
+                            a.dropdown-item(href='/admin/editadminprofile')
+                              i.bi.bi-pencil-square.me-2
+                              | Edit Profile
+                        else if user.role === 'buyer'
+                          li
+                            a.dropdown-item(href='/buyerprofile')
+                              i.bi.bi-person.me-2
+                              | Buyer Profile
+                          li
+                            a.dropdown-item(href='/buyerprofile/editbuyerprofile')
+                              i.bi.bi-pencil-square.me-2
+                              | Edit Profile
+                        else if user.role === 'seller'
+                          li
+                            a.dropdown-item(href='/userprofile')
+                              i.bi.bi-person.me-2
+                              | Seller Profile
+                          li
+                            a.dropdown-item(href='/userprofile/editprofile')
+                              i.bi.bi-pencil-square.me-2
+                              | Edit Profile
+                        li
+                          a.dropdown-item(href='/users/logout')
+                            i.bi.bi-box-arrow-right.me-2
+                            | Logout
                   a.nav-link(href='/cart')
                     i.bi.bi-cart3.fs-4
       block content
