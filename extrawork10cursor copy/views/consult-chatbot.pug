@@ -1,0 +1,65 @@
+extends layout
+
+block content
+  link(rel='stylesheet' href='/stylesheets/consult-chatbot.css')
+  #chat-container
+    h1 Pet Health Consultation
+    #chat-window
+
+    form#chat-form(action='/api/chatbot', method='POST')
+      input#user-input(type='text', name='message', placeholder='Ask about pet health...', required)
+      button(type='submit') Send
+
+  script.
+    const chatForm = document.getElementById('chat-form');
+    const chatWindow = document.getElementById('chat-window');
+    const chatHistory = [];
+
+    chatForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const userInput = document.getElementById('user-input');
+      const message = userInput.value;
+
+      if (!message) return;
+
+      chatWindow.innerHTML += `<div class="message user">${message}</div>`;
+      userInput.value = '';
+      chatHistory.push({ message, response: null });
+
+      // Show typing indicator
+      const typingIndicator = document.createElement('div');
+      typingIndicator.className = 'typing-indicator';
+      typingIndicator.innerHTML = '<span></span><span></span><span></span>';
+      chatWindow.appendChild(typingIndicator);
+      chatWindow.scrollTop = chatWindow.scrollHeight;
+
+      try {
+        const response = await fetch('/chatbot/consult-chatbot', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message, previousChats: chatHistory })
+        });
+
+        // Remove typing indicator
+        typingIndicator.remove();
+
+        const botResponse = await response.json();
+
+        chatHistory[chatHistory.length - 1].response = botResponse;
+
+        const formattedResponse = botResponse
+          .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+          .replace(/\*(.*?)\*/g, '<em>$1</em>')
+          .replace(/\# (.*?)\n/g, '<h2>$1</h2>')
+          .replace(/\#\# (.*?)\n/g, '<h3>$1</h3>')
+          .replace(/\n/g, '<br>');
+
+        chatWindow.innerHTML += `<div class="message bot">${formattedResponse}</div>`;
+        chatWindow.scrollTop = chatWindow.scrollHeight;
+
+      } catch (error) {
+        // Remove typing indicator
+        typingIndicator.remove();
+        chatWindow.innerHTML += `<div class="message error">Error: Unable to fetch response.</div>`;
+      }
+    });

@@ -1,0 +1,44 @@
+extends layout
+
+block content
+  link(rel='stylesheet', href='/stylesheets/petsitters.css')
+  link(rel='stylesheet', href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css')
+  link(rel='stylesheet', href='https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap')
+
+  .petsitters-page-container
+    .hero-section
+      .hero-content
+        h1.hero-title 🐾 Professional Pet Sitters
+        p.hero-subtitle Find trusted pet sitters across Pakistan for your beloved pets
+        .apply-container
+          a.btn.btn-primary(href="/sitter-application")
+            i.bi.bi-plus-circle.me-2
+            | Apply as a Pet Sitter
+
+    .sitters-section
+      h2.section-title Approved Pet Sitters
+      
+      if petsitters.length
+        .sitters-grid
+          each sitter in petsitters
+            .sitter-card
+              .sitter-header
+                h3.sitter-name= sitter.name
+                if user && user.role === "admin"
+                  form(action=`/admin/delete-petsitter/${sitter._id}`, method="POST")
+                    button.btn-delete(type="submit")
+                      i.bi.bi-trash
+              .sitter-info
+                .info-item
+                  i.bi.bi-envelope
+                  span= sitter.email
+                .info-item
+                  i.bi.bi-telephone
+                  span= sitter.phone
+                .info-item
+                  i.bi.bi-calendar-check
+                  span #{sitter.experience} years of trusted #{sitter.pets.join(", ")} Sitting experience, providing loving and reliable care for feline companions
+      else
+        .no-sitters-container
+          i.bi.bi-emoji-frown
+          p.no-sitters No approved sitters available at the moment.

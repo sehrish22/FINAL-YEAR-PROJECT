@@ -68,14 +68,14 @@ router.post("/editadminprofile",upload , checkSessionAuth, async (req, res) => {
 // Render user detail page with complete order and adoption request details
 router.get("/profile/:id", adminAuth, async (req, res) => {
   try {
-    const user = await User.findById(req.params.id);
-    if (!user) {
+    const profileUser = await User.findById(req.params.id);
+    if (!profileUser) {
       return res.status(404).send("User not found");
     }
 
     // Fetch user's products and pets
-    const products = await Product.find({ uploadedBy: user._id });
-    const pets = await Pet.find({ uploadedBy: user._id });
+    const products = await Product.find({ uploadedBy: profileUser._id });
+    const pets = await Pet.find({ uploadedBy: profileUser._id });
 
     // Fetch detailed orders including product info
     const orders = await Order.find({
@@ -89,13 +89,9 @@ router.get("/profile/:id", adminAuth, async (req, res) => {
       petId: { $in: pets.map((pet) => pet._id) },
     }).populate("petId", "name image type description");
 
-    console.log("✅ Products:", products);
-    console.log("✅ Pets:", pets);
-    console.log("✅ Orders:", orders);
-    console.log("✅ Adoption Requests:", adoptionRequests);
-
     res.render("admin/profileDetail", {
-      user,
+      user: req.user,             // <-- logged-in admin for navbar
+      profileUser,                // <-- profile being viewed
       products,
       pets,
       orders,

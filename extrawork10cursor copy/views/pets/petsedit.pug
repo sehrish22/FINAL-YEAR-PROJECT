@@ -1,0 +1,79 @@
+extends ../layout
+
+block content
+  link(rel='stylesheet' href='/stylesheets/petsedit.css')
+  .edit-pet-container
+    h1 Edit Pet
+    form(action="/pets/petsedit/" + pet._id, method="POST", enctype="multipart/form-data")
+      .form-group
+        label(for="name") Name
+        input(type="text", class="form-control", id="name", name="name", value=pet.name, required)
+      .form-group
+        label(for="type") Type
+        select(class="form-control", id="type", name="type", required, onchange="updateBreedOptions(this)")
+          option(value="") Select Type
+          option(value="Dog", selected=pet.type == 'Dog') Dog
+          option(value="Cat", selected=pet.type == 'Cat') Cat
+          option(value="Bird", selected=pet.type == 'Bird') Bird
+          option(value="Rabbit", selected=pet.type == 'Rabbit') Rabbit
+      .form-group
+        label(for="breed") Breed
+        select(class="form-control", id="breed", name="breed", required)
+          // Breed options will be dynamically populated based on selected type
+      .form-group
+        label(for="gender") Gender
+        select(class="form-control", id="gender", name="gender", required)
+          option(value="Male", selected=pet.gender == 'Male') Male
+          option(value="Female", selected=pet.gender == 'Female') Female
+      .form-group
+        label(for="color") Color
+        select(class="form-control", id="color", name="color", required)
+          option(value="Black", selected=pet.color == 'Black') Black
+          option(value="White", selected=pet.color == 'White') White
+          option(value="Black and White", selected=pet.color == 'Black and White') Black and White
+          option(value="Brown", selected=pet.color == 'Brown') Brown
+          option(value="Golden", selected=pet.color == 'Golden') Golden
+          option(value="Gray", selected=pet.color == 'Gray') Gray
+          option(value="Yellow", selected=pet.color == 'Yellow') Yellow
+          option(value="Orange", selected=pet.color == 'Orange') Orange
+      .form-group
+        label(for="fee") Adoption Fee
+        input(type="number", class="form-control", id="fee", name="fee", value=pet.fee, required)
+      .form-group
+        label(for="description") Description
+        textarea(class="form-control", id="description", name="description", rows="10", required)= pet.description || 'Enter pet description here must add important features like breed, weight, color etc...'
+      .form-group
+        label(for="image") Pet Image
+        input(type="file", class="form-control", id="image", name="image")
+        if pet.image
+          img(src=pet.image, alt=pet.name, class="pet-image-preview")
+      button(type="submit", class="btn-save") Save Changes
+
+  script.
+    function updateBreedOptions(select) {
+      var breedSelect = document.getElementById('breed');
+      breedSelect.innerHTML = ''; // Clear existing options
+
+      var breeds = {
+        Dog: ["Labrador Retriever", "German Shepherd", "Golden Retriever", "Bulldog", "Poodle", "Siberian Husky", "Dachshund", "Doberman Pinscher", "Shih Tzu", "Rottweiler"],
+        Cat: ["Persian", "Maine Coon", "Siamese", "Bengal", "Ragdoll", "British Shorthair", "Scottish Fold", "Sphynx", "Abyssinian", "Norwegian Forest Cat"],
+        Rabbit: ["Holland Lop", "Netherland Dwarf", "Mini Rex", "Flemish Giant", "Lionhead", "French Lop", "English Angora", "Harlequin", "Dutch Rabbit", "American Fuzzy Lop"],
+        Bird: ["African Grey Parrot", "Budgerigar (Budgie)", "Cockatiel", "Macaw", "Lovebird", "Canary", "Finch", "Amazon Parrot", "Quaker Parrot", "Cockatoo"]
+      };
+
+      var selectedType = select.value;
+      if (breeds[selectedType]) {
+        breeds[selectedType].forEach(function(breed) {
+          var option = document.createElement('option');
+          option.value = breed;
+          option.text = breed;
+          breedSelect.appendChild(option);
+        });
+      }
+    }
+
+    // Initialize breed options on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      var typeSelect = document.getElementById('type');
+      updateBreedOptions(typeSelect);
+    });

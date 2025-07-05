@@ -1,64 +1,109 @@
 .admin-sitter-container {
-    max-width: 90%;
+    max-width: 1100px;
     margin: 40px auto;
-    padding: 20px;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 24px 18px 12px 18px;
+    background: #23272f;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(44, 40, 37, 0.12);
     text-align: center;
+    color: #e0e0e0;
 }
 
+
 .admin-sitter-container h1 {
-    font-size: 28px;
-    font-weight: bold;
+    font-size: 2.1rem;
+    font-weight: 700;
     text-transform: uppercase;
-    color: #4a2c1f;
+    color: #fff;
     letter-spacing: 1.2px;
-    margin-bottom: 20px;
+    margin-bottom: 28px;
+    text-shadow: 0 2px 8px rgba(44, 40, 37, 0.08);
 }
+
 
 /* Table Styling */
 .sitter-table {
     width: 100%;
-    border-collapse: collapse;
-    background: #fdf8f4;
-    border-radius: 8px;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: #292d36;
+    border-radius: 10px;
     overflow: hidden;
-    border: 2px solid #4a2c1f; /* Dark border around the table */
+    box-shadow: 0 4px 16px rgba(44, 40, 37, 0.10);
+    border: none;
+    margin-bottom: 24px;
 }
+
 
 .sitter-table thead {
-    background: #4a2c1f;
-    color: white;
-    font-size: 16px;
+    background: linear-gradient(90deg, #b0855b 0%, #e8d3b9 100%);
+    color: #fff;
+    font-size: 1.07rem;
     text-transform: uppercase;
+    letter-spacing: 0.8px;
 }
 
-.sitter-table th, 
+
+.sitter-table th,
 .sitter-table td {
-    padding: 12px;
-    border: 1px solid #4a2c1f; /* Separating lines */
+    padding: 14px 18px;
+    border: none;
     text-align: left;
+    font-size: 1rem;
+    color: #e0e0e0;
+}
+
+
+.sitter-table tbody tr {
+    transition: background 0.2s;
+}
+
+.sitter-table tbody tr:nth-child(even) {
+    background: #23272f;
+}
+
+.sitter-table tbody tr:nth-child(odd) {
+    background: #292d36;
 }
 
 .sitter-table tbody tr:hover {
-    background: #f5e6dc;
+    background: #363b44;
 }
+
 
 /* Approve Button */
 .sitter-approve-btn {
-    background: #4a2c1f;
-    color: white;
-    padding: 8px 12px;
-    font-size: 14px;
+    background: #b0855b;
+    color: #23272f;
+    padding: 8px 18px;
+    font-size: 15px;
     border: none;
-    border-radius: 5px;
+    border-radius: 6px;
     cursor: pointer;
-    transition: 0.3s;
+    font-weight: 600;
+    box-shadow: 0 1px 4px rgba(44, 40, 37, 0.07);
+    transition: background 0.2s, color 0.2s;
 }
 
+
 .sitter-approve-btn:hover {
-    background: #7a5542;
+    background: #c7a16e;
+    color: #23272f;
+    box-shadow: 0 2px 8px rgba(44, 40, 37, 0.18);
+}
+
+/* Empty State Styling */
+.admin-no-sitter-applications {
+    text-align: center;
+    font-size: 1.22rem;
+    color: #b0855b;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    padding: 44px 0 60px 0;
+    background: #23272f;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(44, 40, 37, 0.10);
+    margin: 32px auto 0 auto;
 }
 
 /* No Applications Message */

@@ -17,36 +17,37 @@ block content
               | Add New Vet Clinic
 
     .vet-container
-      each vet in vets
-        .vet-card
-          if vet.image
-            .vet-image-container
-              img.vet-image(src=vet.image, alt=vet.name)
-          else
-            .vet-image-placeholder
-              i.bi.bi-hospital
-          .vet-content
-            h2.vet-name= vet.name
-            .vet-info-group
-              .vet-info-item
-                i.bi.bi-geo-alt
-                span= vet.address
-              .vet-info-item
-                i.bi.bi-telephone
-                span= vet.contact
-              .vet-info-item
-                i.bi.bi-clock
-                span #{vet.openingTime} - #{vet.closingTime}
-            if vet.description
-              .vet-description
-                i.bi.bi-info-circle
-                p= vet.description
-
-            if user && user.role === "admin"
-              .vet-actions
-                a.btn.btn-brown(href=`/admin/vets/edit/${vet._id}`)
-                  i.bi.bi-pencil-square.me-2
-                  | Edit
-                a.btn.btn-red(href=`/admin/vets/delete/${vet._id}`)
-                  i.bi.bi-trash.me-2
-                  | Delete
+      .row
+        each vet in vets
+          .col-md-4.col-12
+            .vet-card
+              if vet.image
+                .vet-image-container
+                  img.vet-image(src=vet.image, alt=vet.name)
+              else
+                .vet-image-placeholder
+                  i.bi.bi-hospital
+              .vet-content
+                h2.vet-name= vet.name
+                .vet-info-group
+                  .vet-info-item
+                    i.bi.bi-geo-alt
+                    span= vet.address
+                  .vet-info-item
+                    i.bi.bi-telephone
+                    span= vet.contact
+                  .vet-info-item
+                    i.bi.bi-clock
+                    span #{vet.openingTime} - #{vet.closingTime}
+                if vet.description
+                  .vet-description
+                    i.bi.bi-info-circle
+                    p= vet.description
+                if user && user.role === "admin"
+                  .vet-actions
+                    a.btn.btn-brown(href=`/admin/vets/edit/${vet._id}`)
+                      i.bi.bi-pencil-square.me-2
+                      | Edit
+                    a.btn.btn-red(href=`/admin/vets/delete/${vet._id}`)
+                      i.bi.bi-trash.me-2
+                      | Delete

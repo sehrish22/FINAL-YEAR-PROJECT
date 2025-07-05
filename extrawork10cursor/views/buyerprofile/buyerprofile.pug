@@ -4,33 +4,6 @@ block content
   link(rel='stylesheet' href='/stylesheets/buyerprofile.css')
 
   .container
-    h1.user-title Welcome back, #{user.name}!
-
-    .user-header
-      .user-info
-        .user-details
-          p
-            i.fas.fa-user
-            | Name: 
-            span #{user.name}
-          p
-            i.fas.fa-envelope
-            | Email: 
-            span #{user.email}
-          p
-            i.fas.fa-phone
-            | Contact: 
-            span #{user.contact}
-          a.btn.btn-secondary(href='/users/logout')
-              i.fas.fa-sign-out-alt
-              | Logout
-
-      .user-image-container
-        img.user-img(src=user.image ? user.image : '/images/default.png', alt=user.name)
-        a.btn.btn-primary(href="/buyerprofile/editbuyerprofile")
-          i.fas.fa-edit
-          | Edit Profile
-
     if orders && orders.length > 0
       .orders-section
         h2

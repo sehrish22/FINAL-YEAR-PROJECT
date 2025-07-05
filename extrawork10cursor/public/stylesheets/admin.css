@@ -5,7 +5,8 @@
     max-width: 1200px;
     margin: 0 auto;
     padding: 32px 16px;
-    background-color: #f5eee6; /* Light beige */
+    background-color: #f5eee6;
+    /* Light beige */
     min-height: 100vh;
     box-shadow: none;
     color: #000 !important;
@@ -31,7 +32,8 @@
 .admin-title {
     text-align: center;
     font-size: 28px;
-    color: #6b4226; /* Dark brown */
+    color: #6b4226;
+    /* Dark brown */
     margin-bottom: 20px;
 }
 
@@ -44,8 +46,10 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(90deg, #7c5434 0%, #b0855b 100%); /* Soft brown gradient */
-    color: #f5eee6; /* Beige text */
+    background: linear-gradient(90deg, #7c5434 0%, #b0855b 100%);
+    /* Soft brown gradient */
+    color: #f5eee6;
+    /* Beige text */
     box-shadow: 0 4px 24px rgba(44, 62, 80, 0.13);
     border-radius: 18px;
     padding: 32px 36px;
@@ -57,12 +61,12 @@
 
 
 @media (max-width: 700px) {
-  .admin-header {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 18px 10px;
-    gap: 10px;
-  }
+    .admin-header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 18px 10px;
+        gap: 10px;
+    }
 }
 
 .user-info {
@@ -72,20 +76,20 @@
 }
 
 @media (max-width: 900px) {
-  .user-info {
-    flex-direction: column;
-    align-items: center;
-    gap: 18px;
-  }
+    .user-info {
+        flex-direction: column;
+        align-items: center;
+        gap: 18px;
+    }
 }
 
 
 @media (max-width: 700px) {
-  .user-info {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-  }
+    .user-info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
 }
 
 .user-details {
@@ -114,7 +118,8 @@
     margin-bottom: 3px;
 }
 
-.user-email, .user-contact {
+.user-email,
+.user-contact {
     color: #fbe9d0;
     font-size: 1.08rem;
     margin-bottom: 2px;
@@ -128,19 +133,20 @@
     margin-bottom: 4px;
 }
 
-.user-email, .user-contact {
+.user-email,
+.user-contact {
     color: inherit;
     font-size: 0.98rem;
     margin-bottom: 2px;
 }
 
 @media (max-width: 700px) {
-  .user-details {
-    margin-right: 0;
-    margin-bottom: 10px;
-    width: 100%;
-    max-width: 100%;
-  }
+    .user-details {
+        margin-right: 0;
+        margin-bottom: 10px;
+        width: 100%;
+        max-width: 100%;
+    }
 }
 
 
@@ -148,13 +154,16 @@
     font-size: 1.15rem;
     font-weight: 600;
     margin-bottom: 4px;
-    color: #f5eee6; /* Beige for header */
+    color: #f5eee6;
+    /* Beige for header */
 }
 
 
-.user-email, .user-contact {
+.user-email,
+.user-contact {
     font-size: 0.98rem;
-    color: #f5eee6; /* Beige for header */
+    color: #f5eee6;
+    /* Beige for header */
     margin-bottom: 2px;
 }
 
@@ -174,6 +183,7 @@
     font-size: 1.1rem;
     box-shadow: 0 1px 4px rgba(44, 62, 80, 0.07);
 }
+
 .user-nav-link:hover {
     background: #b0855b;
     color: #fffaf3;
@@ -193,6 +203,7 @@
     font-weight: 600;
     box-shadow: 0 1px 4px rgba(44, 62, 80, 0.07);
 }
+
 .btn.btn-edit:hover {
     background: #b0855b;
     color: #fffaf3;
@@ -205,6 +216,7 @@
     margin-top: 10px;
     display: inline-block;
 }
+
 .user-details .btn.btn-edit:last-child {
     margin-right: 0;
 }
@@ -224,9 +236,9 @@
 }
 
 @media (max-width: 900px) {
-  .user-image-container {
-    margin-right: 0;
-  }
+    .user-image-container {
+        margin-right: 0;
+    }
 }
 
 
@@ -254,6 +266,7 @@
     text-decoration: none;
     display: inline-block;
 }
+
 .btn.btn-edit:hover {
     background: #d2b48c;
     color: #6b4226;
@@ -277,7 +290,8 @@
     height: 80px;
     border-radius: 50%;
     border: 2px solid #8b5e3b;
-    margin-left: auto; /* Moves image to the right */
+    margin-left: auto;
+    /* Moves image to the right */
     object-fit: cover;
     display: block;
 }
@@ -293,20 +307,22 @@
 }
 
 @media (max-width: 900px) {
-  .admin-grid.animated-dashboard {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
+    .admin-grid.animated-dashboard {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
 }
 
 
 /* Admin Dashboard Cards */
 /* Admin Cards: off-white with brown accent border */
 .admin-card {
-    background: #fffaf3; /* Off-white/skin */
+    background: #fffaf3;
+    /* Off-white/skin */
     border-radius: 14px;
     box-shadow: 0 2px 12px rgba(44, 62, 80, 0.10);
-    border: 1.5px solid #8b5e3c; /* Brown accent */
+    border: 1.5px solid #8b5e3c;
+    /* Brown accent */
     padding: 44px 36px 32px 36px;
     display: flex;
     flex-direction: column;
@@ -332,14 +348,15 @@
 }
 
 @keyframes fadeInCard {
-  from {
-    opacity: 0;
-    transform: translateY(40px) scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+    from {
+        opacity: 0;
+        transform: translateY(40px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
 
@@ -350,34 +367,38 @@
 }
 
 @keyframes fadeInCard {
-  from {
-    opacity: 0;
-    transform: translateY(24px) scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+    from {
+        opacity: 0;
+        transform: translateY(24px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
 .admin-card:hover {
     box-shadow: 0 8px 32px rgba(139, 94, 60, 0.16);
     transform: translateY(-3px) scale(1.01);
-    background: #f5eee6; /* Light beige on hover */
+    background: #f5eee6;
+    /* Light beige on hover */
 }
 
 
 .admin-card .admin-card-title {
     font-size: 2.1rem;
     font-weight: 700;
-    color: #6b4226; /* Dark brown */
+    color: #6b4226;
+    /* Dark brown */
     margin-bottom: 20px;
 }
 
 
 .admin-card .admin-card-text {
     font-size: 1.32rem;
-    color: #3d2c18; /* Rich brown */
+    color: #3d2c18;
+    /* Rich brown */
     margin-bottom: 28px;
 }
 
@@ -396,15 +417,18 @@
 
 /* Background Colors */
 .bg-dark {
-    background-color: #121212; /* Dark background for the entire dashboard */
+    background-color: #121212;
+    /* Dark background for the entire dashboard */
 }
 
 .bg-brown {
-    background-color: #8b5e3b; /* Consistent warm brown for header and sections */
+    background-color: #8b5e3b;
+    /* Consistent warm brown for header and sections */
 }
 
 .bg-gray {
-    background-color: #3a3a3a; /* Gray shade for additional sections */
+    background-color: #3a3a3a;
+    /* Gray shade for additional sections */
 }
 
 /* Admin Card Title */
@@ -418,7 +442,8 @@
 .admin-card-text {
     font-size: 14px;
     color: #e0e0e0;
-    flex-grow: 1; /* Allows text area to expand but keep button at the bottom */
+    flex-grow: 1;
+    /* Allows text area to expand but keep button at the bottom */
 }
 
 /* Buttons */
@@ -428,18 +453,22 @@
     padding: 10px 0;
     font-size: 14px;
     color: #fff;
-    background-color: #6b4226; /* Dark Brown */
+    background-color: #6b4226;
+    /* Dark Brown */
     border: none;
     border-radius: 5px;
     text-align: center;
     text-decoration: none;
     transition: background 0.3s ease-in-out;
-    margin-top: auto; /* Pushes button to bottom */
+    margin-top: auto;
+    /* Pushes button to bottom */
 }
 
 .btn-brown:hover {
-    background-color: #55351d; /* Slightly darker brown for hover effect */
+    background-color: #55351d;
+    /* Slightly darker brown for hover effect */
 }
+
 .user-image-container {
     display: flex;
     flex-direction: column;
@@ -448,13 +477,16 @@
 }
 
 .user-image-container .btn {
-    margin-top: 10px; /* Adds space between the image and button */
+    margin-top: 10px;
+    /* Adds space between the image and button */
 }
+
 /* Logout Button */
 .user-nav-link {
     display: inline-block;
     color: #ffffff;
-    background-color: #6b4226; /* Dark Brown */
+    background-color: #6b4226;
+    /* Dark Brown */
     padding: 10px 20px;
     border-radius: 5px;
     font-size: 14px;
@@ -463,21 +495,25 @@
     text-decoration: none;
     transition: all 0.3s ease-in-out;
     border: 2px solid transparent;
-    margin-top: 10px; /* Space below contact */
+    margin-top: 10px;
+    /* Space below contact */
 }
 
 /* Hover Effect */
 .user-nav-link:hover {
-    background-color: #8b5e3b; /* Lighter Brown */
-    border-color: #d2b48c; /* Light brown border */
+    background-color: #8b5e3b;
+    /* Lighter Brown */
+    border-color: #d2b48c;
+    /* Light brown border */
     color: #ffffff;
     transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(210, 180, 140, 0.3); /* Light brown glow */
+    box-shadow: 0 4px 10px rgba(210, 180, 140, 0.3);
+    /* Light brown glow */
 }
 
 /* Active Click Effect */
 .user-nav-link:active {
-    background-color: #55351d; /* Darker brown */
+    background-color: #55351d;
+    /* Darker brown */
     transform: scale(0.98);
 }
-
