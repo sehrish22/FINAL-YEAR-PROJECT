@@ -1,0 +1,137 @@
+/* Main Container */
+.container {
+    max-width: 700px;
+    margin: 48px auto;
+    background: #fffaf3;
+    padding: 38px 36px 32px 36px;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(139, 94, 60, 0.13);
+    animation: fadeIn 1.1s cubic-bezier(.39, .58, .57, 1) both;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(40px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* Title Styling */
+.page-title {
+    text-align: center;
+    color: #6b4226;
+    font-size: 2.4rem;
+    font-weight: 700;
+    margin-bottom: 32px;
+    letter-spacing: 1px;
+    animation: shimmerTitle 2.5s infinite linear;
+}
+
+@keyframes shimmerTitle {
+    0% {
+        text-shadow: 0 0 0 #fffaf3, 0 2px 8px rgba(199, 161, 110, 0.09);
+    }
+
+    60% {
+        text-shadow: 0 0 16px #ffe7ba, 0 2px 8px rgba(199, 161, 110, 0.19);
+    }
+
+    100% {
+        text-shadow: 0 0 0 #fffaf3, 0 2px 8px rgba(199, 161, 110, 0.09);
+    }
+}
+
+/* Form Container */
+.form-container {
+    width: 100%;
+}
+
+/* Form Group */
+.form-group {
+    margin-bottom: 15px;
+}
+
+/* Labels */
+label {
+    font-weight: bold;
+    color: #5a3e1b;
+    font-size: 16px;
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* Inputs, Textareas, Selects */
+.form-control {
+    width: 100%;
+    border: 2px solid #c2a17c;
+    border-radius: 6px;
+    padding: 10px;
+    font-size: 16px;
+    background: #fff !important;
+    color: #4e2e0e !important;
+    transition: 0.3s;
+}
+
+textarea.form-control {
+    resize: none;
+}
+
+.form-control::placeholder {
+    color: #555;
+    font-weight: normal;
+}
+
+.form-control:focus {
+    border-color: #8b5e3b;
+    outline: none;
+    box-shadow: 0 0 8px rgba(139, 94, 59, 0.5);
+}
+
+/* File Upload Input */
+.file-input {
+    border: 2px solid #c2a17c;
+    border-radius: 10px;
+    padding: 12px;
+    background: #f5eee6;
+    font-size: 1rem;
+    color: #4e2e0e;
+    cursor: pointer;
+}
+
+.file-input:focus {
+    border-color: #b0855b;
+    box-shadow: 0 0 8px #e5d4c2;
+}
+
+/* Submit Button */
+.btn-add-product {
+    background-color: #523e30;
+    color: #ffffff;
+    border: none;
+    padding: 12px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.btn-add-product:hover {
+    background-color: #6b4a38;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+        padding: 15px;
+    }
+}

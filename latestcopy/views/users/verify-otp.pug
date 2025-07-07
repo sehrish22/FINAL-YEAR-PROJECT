@@ -1,0 +1,22 @@
+extends ../layout
+
+block content
+  link(rel='stylesheet' href='/stylesheets/otp.css')
+  .otp-container
+    h1 Verify Your Email
+    form(action="/users/verify-otp", method="post", class="otp-form")
+      input(type="hidden", name="email", value=email)
+      .otp-form-group
+        label(for="otp") Enter OTP
+        input#otp(type="text", class="otp-input", name="otp", placeholder="Enter the OTP", required) 
+      if error
+        p.error-message= error
+      .otp-form-group
+        input(type="submit", class="otp-btn", value="Verify")
+
+    // Resend OTP Section
+    .resend-otp
+      p Didn't receive the OTP? 
+      form(action="/users/resend-otp", method="post", class="resend-otp-form")
+        input(type="hidden", name="email", value=email)
+        button(type="submit", class="resend-otp-btn") Resend OTP

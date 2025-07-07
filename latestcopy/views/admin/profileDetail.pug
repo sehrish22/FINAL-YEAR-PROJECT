@@ -1,0 +1,114 @@
+extends ../layout
+
+block content
+  link(rel='stylesheet' href='/stylesheets/profileDetail.css')
+
+  // Banner/Header
+  .profile-banner
+    img.profile-banner-img(src='/images/banner-pattern.jpg', alt='Banner')
+    .profile-banner-overlay
+      img#profile-photo-large(src=profileUser.image, alt="Profile Photo")
+      .profile-banner-info
+        .seller-name-row
+          h1.seller-name #{profileUser.name}
+          form.seller-delete-form(action=`/admin/profile/${profileUser._id}/delete`, method="POST")
+            button.btn.btn-danger(type="submit")
+              i.icon-trash
+              |  Delete Profile
+        span.seller-badge Verified Seller
+        p.seller-store
+          i.icon-store
+          | #{profileUser.storeName}
+
+  .profile-main
+    // User Information Section
+    .profile-section
+      h2.section-title
+        i.icon-user
+        |  Seller Information
+      .profile-info-cards
+        .info-card
+          i.icon-mail
+          span Email:
+          span.info-value #{profileUser.email}
+        .info-card
+          i.icon-phone
+          span Contact:
+          span.info-value #{profileUser.contact}
+        .info-card
+          i.icon-shop
+          span Store Name:
+          span.info-value #{profileUser.storeName}
+
+    // Products Section
+    .profile-section
+      h2.section-title
+        i.icon-box
+        |  Products Uploaded
+      if products.length
+        .profile-grid
+          each product in products
+            .profile-card
+              img.small-photo(src=product.image, alt="Product Image")
+              p.profile-text.product-title #{product.name}
+              p.profile-text.product-price Rs#{product.price}
+      else
+        p.empty-msg No products uploaded yet.
+
+    // Pets Section
+    .profile-section
+      h2.section-title
+        i.icon-paw
+        |  Pets Uploaded
+      if pets.length
+        .profile-grid
+          each pet in pets
+            .profile-card
+              img.small-photo(src=pet.image, alt="Pet Image")
+              p.profile-text.pet-title #{pet.name} (#{pet.type})
+              p.profile-text.pet-desc #{pet.description}
+      else
+        p.empty-msg No pets uploaded yet.
+
+    // Adoption Requests Section
+    .profile-section
+      h2.section-title
+        i.icon-heart
+        |  Adoption Requests
+      if adoptionRequests.length
+        .profile-grid
+          each adoption in adoptionRequests
+            .profile-card
+              h3.profile-text Adoption ID: #{adoption.adoptionRequestId}
+              img.small-photo(src=adoption.petId.image, alt="Adopted Pet")
+              p.profile-text Pet: #{adoption.petId.name} (#{adoption.petId.type})
+              p.profile-text Requestor: #{adoption.name} (#{adoption.email})
+              p.profile-text Contact: #{adoption.contact}
+      else
+        p.empty-msg No adoption requests yet.
+
+    // Orders Section
+    .profile-section
+      h2.section-title
+        i.icon-cart
+        |  Orders Received
+      if orders.length
+        .profile-grid
+          each order in orders
+            .profile-card
+              h3.profile-text Order ID: #{order.orderId}
+              if order.userId
+                p.profile-text Customer: #{order.userId.name} (#{order.userId.email})
+              else
+                p.profile-text Customer: Unknown User
+              p.profile-text Address: #{order.address}
+              p.profile-text Total: $#{order.total}
+              h4.profile-subtitle Items:
+              .profile-items
+                each item in order.items
+                  .profile-item
+                    img.small-photo(src=item.product.image, alt="Product Image")
+                    p.profile-text #{item.product.name} - #{item.quantity} x $#{item.price} = $#{item.subtotal}
+      else
+        p.empty-msg No orders received yet.
+

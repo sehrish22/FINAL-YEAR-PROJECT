@@ -1,0 +1,120 @@
+/* Login Modal Styling */
+#loginModal.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(60, 40, 20, 0.18);
+    justify-content: center;
+    align-items: center;
+}
+
+#loginModal .modal-content {
+    background: #fffaf3;
+    border-radius: 14px;
+    box-shadow: 0 8px 32px rgba(139,94,60,0.13);
+    padding: 32px 30px 24px 30px;
+    min-width: 340px;
+    max-width: 360px;
+    margin: auto;
+    position: relative;
+    animation: fadeIn 0.8s cubic-bezier(.39,.58,.57,1) both;
+}
+
+#loginModal h1 {
+    color: #6b4226;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 18px;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+#loginModal .login-form-group {
+    margin-bottom: 18px;
+}
+
+#loginModal label {
+    color: #4e2e0e;
+    font-weight: 600;
+    margin-bottom: 4px;
+    display: block;
+}
+
+#loginModal input.login-input {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #c2a17c;
+    border-radius: 7px;
+    font-size: 1rem;
+    color: #4e2e0e;
+    background: #fff;
+    transition: border 0.2s, box-shadow 0.2s;
+}
+
+#loginModal input.login-input:focus {
+    border-color: #8b5e3b;
+    box-shadow: 0 0 8px #b0855b;
+    outline: none;
+}
+
+#loginModal .login-btn {
+    background: #8b5e3b;
+    color: #fff;
+    border: none;
+    border-radius: 7px;
+    padding: 10px 0;
+    width: 100%;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-top: 6px;
+    cursor: pointer;
+    transition: background 0.18s, color 0.18s, transform 0.18s;
+}
+#loginModal .login-btn:hover {
+    background: #6b4226;
+}
+
+#loginModal .login-links {
+    text-align: center;
+    margin-top: 6px;
+}
+#loginModal .login-link {
+    color: #8b5e3b;
+    text-decoration: underline;
+    font-weight: 500;
+    margin-left: 4px;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+#loginModal .login-link:hover {
+    color: #6b4226;
+}
+
+#loginModal .error-message {
+    color: #c94f4f;
+    font-size: 0.98rem;
+    margin-top: 4px;
+    display: none;
+}
+
+#loginModal .close-btn {
+    position: absolute;
+    right: 16px;
+    top: 10px;
+    font-size: 1.4rem;
+    color: #b0855b;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+#loginModal .close-btn:hover {
+    color: #6b4226;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(40px) scale(0.98); }
+    to { opacity: 1; transform: none; }
+}
