@@ -3,6 +3,8 @@ extends layout
 block content
   link(rel='stylesheet' href='/stylesheets/checkout.css')
   .checkout-container
+    if error
+      .alert.alert-danger(style="margin-bottom:1rem;text-align:center;font-weight:bold;font-size:1.1rem;") #{error}
     h1 Checkout
 
     .order-summary
@@ -24,16 +26,16 @@ block content
           form(action="/products/checkout", method="post")
             .form-group
               label(for="email") Email
-              input.form-control#email(type="text", name="email", required, placeholder="Enter your email")
+              input.form-control#email(type="text", name="email", required, placeholder="Enter your email", value=form && form.email ? form.email : "")
             .form-group
               label(for="name") Name
-              input.form-control#name(type="text", name="name", required, placeholder="Enter your name")
+              input.form-control#name(type="text", name="name", required, placeholder="Enter your name", value=form && form.name ? form.name : "")
             .form-group
               label(for="address") Address
-              textarea.form-control#address(name="address", required, placeholder="Enter your Address")
+              textarea.form-control#address(name="address", required, placeholder="Enter your Address") #{form && form.address ? form.address : ""}
             .form-group
               label(for="contact") Contact
-              input.form-control#contact(type="text", name="contact", required, placeholder="Enter your contact number")
+              input.form-control#contact(type="text", name="contact", required, placeholder="Enter your contact number", value=form && form.contact ? form.contact : "")
             .form-group
               label(for="payment") Payment Method
               select.form-control#payment(name="payment", required)

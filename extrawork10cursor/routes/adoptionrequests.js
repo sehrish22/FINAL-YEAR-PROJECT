@@ -47,7 +47,16 @@ router.post(
     // Fetch the pet to save its image and name
     const pet = await Pet.findById(petId);
     if (!pet) return res.status(404).send("Pet not found");
-
+    if (!req.session.user || req.session.user.role !== "buyer") {
+        req.flash("error", "⚠️ Only buyers can Adopt Pet. Please log in as a buyer.");
+        // Render the adoption request form page with error
+        return res.render("adoptionrequest", {
+            pet,
+            user: req.session.user,
+            error: req.flash("error"),
+            // Add any other variables your template expects
+        });
+      }
     let adoptionrequest = new AdoptionRequest({
       name,
       email,

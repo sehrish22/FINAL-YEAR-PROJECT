@@ -1,8 +1,9 @@
 const { validate } = require("../models/order");
+
 function validateOrder(req, res, next) {
-  //sets variable for every pug file
-  let error = validate(req.body);
-  //if(error) return res.status(400).send(error.details[0].message);
+  const { error } = validate(req.body);
+  req.validationError = error || null;
   next();
 }
+
 module.exports = validateOrder;

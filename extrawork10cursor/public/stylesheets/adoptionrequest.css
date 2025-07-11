@@ -1,4 +1,15 @@
 /* Adoption Request Page Styling */
+.alert.alert-danger {
+  margin: 32px auto 16px auto;
+  max-width: 600px;
+  font-size: 1.12rem;
+  font-weight: 500;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(220, 53, 69, 0.08);
+  letter-spacing: 0.01em;
+  text-align: center;
+}
+
 .adoption-container {
     max-width: 1200px;
     margin: 2rem auto;
@@ -200,7 +211,18 @@ textarea.form-control {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .adoption-container {
+    .alert.alert-danger {
+  margin: 32px auto 16px auto;
+  max-width: 600px;
+  font-size: 1.12rem;
+  font-weight: 500;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(220, 53, 69, 0.08);
+  letter-spacing: 0.01em;
+  text-align: center;
+}
+
+.adoption-container {
         margin: 1rem;
         padding: 1.5rem;
         flex-direction: column;

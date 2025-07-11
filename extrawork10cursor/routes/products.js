@@ -11,6 +11,7 @@ const upload = require("../middlewares/upload"); // Include multer middleware
 const mongoose = require("mongoose");
 var { v4: uuidv4 } = require("uuid"); // For generating unique session IDs
 const crypto = require("crypto");
+const { validate } = require("../models/order");
 const Review = require("../models/Review");
 const flash = require("connect-flash"); // make sure you have this middleware in your app.js
 
@@ -95,11 +96,15 @@ router.post(
   }
 );
 //checkout page
-router.get("/checkout", checkSessionAuth, async function (req, res, next) {
+router.get("/checkout", async function (req, res, next) {
   const user = req.session.user;
 
-  if (!user || user.role !== "buyer") {
-    req.flash("error", "⚠️ Only buyers can place orders. Please log in as a buyer.");
+  if (!user) {
+    req.flash("error", "Please login to place an order");
+    return res.redirect("/cart");
+  }
+  if (user.role !== "buyer") {
+    req.flash("error", "Only buyers can place orders");
     return res.redirect("/cart");
   }
 
@@ -121,29 +126,52 @@ router.get("/checkout", checkSessionAuth, async function (req, res, next) {
 //save data on checkout page
 router.post("/checkout", async function (req, res, next) {
   try {
+    // Validate order input
+   
+    const { error } = validate(req.body);
+    if (error) {
+      const user = req.session.user;
+      const sessionId = req.session.sessionId;
+      const cart = await Cart.findOne({ sessionId }).populate("items.product");
+      const total = cart ? cart.items.reduce((sum, item) => sum + item.product.price * item.quantity, 0) : 0;
+      const orderId = req.body.orderId || "";
+      return res.render("checkout", {
+        user,
+        cart: cart ? cart.items : [],
+        total,
+        orderId,
+        error: error.details[0].message,
+        form: {
+          email: req.body.email || "",
+          name: req.body.name || "",
+          address: req.body.address || "",
+          contact: req.body.contact || ""
+        }
+      });
+    }
     // Ensure session exists
     const sessionId = req.session.sessionId;
 
     const userId = req.session.user._id;
     if (!sessionId) {
-      console.error("❌ No session ID found");
+      console.error(" No session ID found");
       return res.status(400).send("Session not found.");
     }
 
     // Fetch the cart and populate products
     const cart = await Cart.findOne({ sessionId }).populate("items.product");
     if (!cart || cart.items.length === 0) {
-      console.error("❌ Cart not found or empty.");
+      console.error(" Cart not found or empty.");
       return res.redirect("/cart");
     }
 
-    console.log("🛒 Cart details:", JSON.stringify(cart, null, 2));
+    console.log(" Cart details:", JSON.stringify(cart, null, 2));
 
     // Check stock availability for each product
     for (const item of cart.items) {
       const product = await Product.findById(item.product._id);
       if (!product) {
-        console.error(`❌ Product not found for ID: ${item.product._id}`);
+        console.error(` Product not found for ID: ${item.product._id}`);
         return res.status(400).send("Product not found.");
       }
       if (item.quantity > product.instock) {
@@ -285,26 +313,32 @@ router.get("/:id", async (req, res) => {
       .exec();
 
     let hasPurchased = false;
+    let hasReviewed = false;
     if (req.session.user) {
       // Check if the user has purchased the product
-      const order = await Order.findOne({
+      const latestorder = await Order.findOne({
         userId: req.session.user._id,
         "items.product": productId,
-      });
+      }).sort({ createdAt: -1 });
 
-      if (order) {
+      if (latestorder) {
         hasPurchased = true;
       }
 
-      // Check if the user has already reviewed the product
-      const existingReview = await Review.findOne({
+      // Check if the user has already reviewed the product after their latest order
+      const lastReview = await Review.findOne({
         product: productId,
         user: req.session.user._id,
-      });
-
-      const hasReviewed = existingReview ? true : false; // Set this value
-
-      // Pass the data to the template
+      }).sort({ createdAt: -1 });
+      // Allow review if latest order is after last review
+      if (!lastReview || latestorder.createdAt > lastReview.createdAt) {
+        hasReviewed = false;
+      } else {
+        hasReviewed = true;
+      }
+    }
+    // Pass the data to the template
+    if (req.session.user) {
       res.render("products/details", {
         product,
         reviews,

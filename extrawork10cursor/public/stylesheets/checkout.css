@@ -99,7 +99,8 @@ h1 {
 /* Item Info */
 .cart-item-info {
     color: #5a4633;
-    font-size: 0.85rem;
+    font-size: 1.15rem;
+    font-weight: bold;
     text-align: center;
     min-width: 80px;
 }
@@ -108,7 +109,7 @@ h1 {
 .cart-item-subtotal {
     font-weight: bold;
     color: #3d2b1f;
-    font-size: 0.9rem;
+    font-size: 1.15rem;
     text-align: right;
 }
 

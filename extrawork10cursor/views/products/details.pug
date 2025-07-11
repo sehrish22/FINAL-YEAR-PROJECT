@@ -63,11 +63,11 @@ block content
   hr
 
   //- Add Review Section
-  .section-card.add-review-section
-    h2.add-review-title Add a Review
-    if user && user.role === 'buyer'
+  if user
+    .section-card.add-review-section
+      h2.add-review-title Add a Review
       if hasReviewed
-        p.alert.alert-info(style="padding: 10px; margin-top: 10px; background: #d1ecf1; border: 1px solid #bee5eb; border-radius: 5px; color: #0c5460;") ⚠️ You have already reviewed this product.
+        p(style="color: green; margin-top: 10px;") Thank you for your review!
       else if hasPurchased
         form(action=`/products/${product._id}/review`, method="POST")
           label(for="rating") Rating:
@@ -81,9 +81,7 @@ block content
           label(for="comment") Comment:
           textarea(name="comment", id="comment", required)
           button(type="submit") Submit Review
+      else if user.role !== 'buyer'
+        p(style="color: red; margin-top: 10px;") Only buyers can leave a review for this product.
       else
         .alert.alert-warning(style="padding: 10px; margin-top: 10px; background: #fff3cd; border: 1px solid #ffeeba; border-radius: 5px; color: #856404;") ⚠️ You must purchase this product before leaving a review.
-    else if !user
-      p(style="color: red; margin-top: 10px;") Please log in as a buyer to leave a review.
-    else if user.role !== 'buyer'
-      p(style="color: red; margin-top: 10px;") Only buyers can leave a review for this product.

@@ -3,6 +3,9 @@ extends layout
 block content
   link(rel='stylesheet' href='/stylesheets/adoptionrequest.css')
 
+  if error && error.length
+    each msg in error
+      .alert.alert-danger #{msg}
   .adoption-container
     .image-section
       h1.adoption-title Adoption Request

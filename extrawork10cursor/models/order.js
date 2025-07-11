@@ -34,10 +34,10 @@ function validateOrder(data) {
   const schema = Joi.object({
     name: Joi.string().min(3).max(30).required(),
     email: Joi.string().required(),
-    contact: Joi.string().min(3).max(20).required(),
-    address: Joi.string().min(3).required(),
+    contact: Joi.string().min(11).max(12).required(),
+    address: Joi.string().min(15).required(),
   });
-  return schema.validate(data, { abortEarly: false });
+  return schema.validate(data, { abortEarly: false, allowUnknown: true });
 }
 
 module.exports.Order = Order;
