@@ -23,7 +23,14 @@ router.get("/", async function (req, res, next) {
     const filter = {};
     const query = req.query;
 
-    if (query.type) filter.type = new RegExp(query.type, 'i');
+    if (query.type) {
+      if (query.type.toLowerCase() === "other") {
+        // Exclude cat and dog
+        filter.type = { $nin: [/cat/i, /dog/i] };
+      } else {
+        filter.type = new RegExp(query.type, "i");
+      }
+    }
     if (query.name) filter.name = new RegExp(query.name, 'i');
     if (query.price) filter.price = { $lte: query.price };
     if (query.storeName) filter.storeName = new RegExp(query.storeName, 'i');
@@ -89,6 +96,13 @@ router.post(
 );
 //checkout page
 router.get("/checkout", checkSessionAuth, async function (req, res, next) {
+  const user = req.session.user;
+
+  if (!user || user.role !== "buyer") {
+    req.flash("error", "⚠️ Only buyers can place orders. Please log in as a buyer.");
+    return res.redirect("/cart");
+  }
+
   const sessionId = req.session.sessionId;
   const cart = await Cart.findOne({ sessionId }).populate("items.product");
   if (!cart || cart.items.length === 0) {
@@ -102,13 +116,14 @@ router.get("/checkout", checkSessionAuth, async function (req, res, next) {
 
   const orderId = generateOrderId();
 
-  res.render("checkout", { user: req.user, cart: cart.items, total, orderId });
+  res.render("checkout", { user: req.session.user, cart: cart.items, total, orderId });
 });
 //save data on checkout page
 router.post("/checkout", async function (req, res, next) {
   try {
     // Ensure session exists
     const sessionId = req.session.sessionId;
+
     const userId = req.session.user._id;
     if (!sessionId) {
       console.error("❌ No session ID found");

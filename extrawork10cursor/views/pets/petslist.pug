@@ -34,8 +34,8 @@ block content
                                 i.bi.bi-palette-fill
                                 span= pet.color
                             .pet-detail
-                                i.bi.bi-currency-dollar
-                                span= pet.fee
+                                i.bi
+                                span Rs. #{pet.fee}
                         .pet-actions
                             a.btn-adopt(href="/pets/adoptionrequest/"+pet._id)
                                 i.bi.bi-heart-fill.me-2

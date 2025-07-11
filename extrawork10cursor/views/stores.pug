@@ -13,19 +13,20 @@ block content
   .store-container
     each store in stores
       .store-card
-        if store.image
-          .store-image-container
+        .store-image-container
+          if store.image
             img.store-image(src=store.image, alt=store.name)
-        else
-          .store-image-placeholder
-            i.bi.bi-shop
-        h2.store-name= store.name
-        p.store-info 📍 Address: #{store.address}
-        p.store-info 📞 Phone: #{store.contact}
-        p.store-info ⏰ Opening Time: #{store.openingTime}
-        p.store-info ⏳ Closing Time: #{store.closingTime}
+          else
+            .store-image-placeholder
+              i.bi.bi-shop
+        .store-content
+          h2.store-name= store.name
+          p.store-info 📍 Address: #{store.address}
+          p.store-info 📞 Phone: #{store.contact}
+          p.store-info ⏰ Opening Time: #{store.openingTime}
+          p.store-info ⏳ Closing Time: #{store.closingTime}
 
-        if user && user.role === "admin"
-          .store-actions
-            a.btn.btn-brown(href=`/admin/stores/edit/${store._id}`) ✏️ Edit
-            a.btn.btn-red(href=`/admin/stores/delete/${store._id}`) 🗑️ Delete
+          if user && user.role === "admin"
+            .store-actions
+              a.btn.btn-brown(href=`/admin/stores/edit/${store._id}`) ✏️ Edit
+              a.btn.btn-red(href=`/admin/stores/delete/${store._id}`) 🗑️ Delete

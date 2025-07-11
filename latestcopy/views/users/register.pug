@@ -2,46 +2,51 @@
 #registerModal.modal(style="display: none;")
   .modal-content
     span.close-btn(data-modal="registerModal") &times;
-    .signup-container
+    .login-container
       h1 SIGN UP
-      form#registerForm.signup-form(method="post" enctype="multipart/form-data")
-        .signup-form-group
+      form#registerForm.login-form(method="post" enctype="multipart/form-data")
+        .login-form-group
           label(for="name") Name
-          input#registerName(type="text", class="signup-input", name="name", placeholder="Enter your name", required)
+          input#registerName(type="text", class="login-input", name="name", placeholder="Enter your name", required)
 
-        .signup-form-group
+        .login-form-group
           label(for="email") Email
-          input#registerEmail(type="email", class="signup-input", name="email", placeholder="Enter your email", required)
+          input#registerEmail(type="email", class="login-input", name="email", placeholder="Enter your email", required)
 
-        .signup-form-group
+        .login-form-group
           label(for="contact") Contact
-          input#registerContact(type="text", class="signup-input", name="contact", placeholder="Enter your phone number", required)
+          input#registerContact(type="text", class="login-input", name="contact", placeholder="Enter your phone number", required)
 
-        .signup-form-group
+        .login-form-group
           label(for="role") Account Type
-          select#registerRole(name="role", class="signup-input", required)
+          select#registerRole(name="role", class="login-input", required)
             option(value="" selected disabled) Select a role
             option(value="seller") Seller
             option(value="buyer") Buyer
 
-        .signup-form-group#storeNameGroup(style="display: none;")
+        .login-form-group#storeNameGroup(style="display: none;")
           label(for="storeName") Store Name
-          input#storeName(type="text", class="signup-input", name="storeName", placeholder="Enter your store name")
+          input#storeName(type="text", class="login-input", name="storeName", placeholder="Enter your store name")
 
-        .signup-form-group
+        .login-form-group
           label(for="password") Password
-          input#registerPassword(type="password", class="signup-input", name="password", placeholder="Create a password", required)
+          input#registerPassword(type="password", class="login-input", name="password", placeholder="Create a password", required)
           p.password-hint Password must be at least 8 characters with 1 digit and 1 special character.
 
-        .signup-form-group
+        .login-form-group
           label(for="image") Upload Image
-          input(type="file", class="form-control", id="image", name="image")
+          input(type="file", class="login-input", id="image", name="image")
 
         // Error display block
         #registerErrorMessage(style="color: red; display: none;")
 
-        .signup-form-group
-          input.signup-btn.btn-block(type="submit", value="SIGN UP")
+        .login-form-group
+          input#registerSubmitBtn.login-btn.btn-block(type="submit", value="SIGN UP")
+          
+        // Loading indicator
+        #registerLoading(style="display: none; text-align: center; margin-top: 1rem;")
+          .spinner
+          p.loading-text Creating your account...
 
         .signup-links
           p Already have an account?
@@ -96,6 +101,14 @@ script.
       e.preventDefault();
 
       const formData = new FormData(registerForm);
+      const submitBtn = document.getElementById("registerSubmitBtn");
+      const loadingIndicator = document.getElementById("registerLoading");
+
+      // Show loading state
+      submitBtn.disabled = true;
+      submitBtn.value = "Creating Account...";
+      loadingIndicator.style.display = "block";
+      errorMessage.style.display = "none";
 
       try {
         const response = await fetch("/users/register", {
@@ -115,9 +128,34 @@ script.
         const result = await response.json();
 
         if (result.success) {
-          window.location.href = result.redirect;
+          // Update loading text for transition
+          document.querySelector(".loading-text").textContent = "Account created! Redirecting to verification...";
+          
+          // Small delay for better UX
+          setTimeout(() => {
+            // Close register modal and show OTP modal
+            registerModal.style.display = "none";
+            errorMessage.style.display = "none";
+            
+            // Reset form and loading state
+            registerForm.reset();
+            submitBtn.disabled = false;
+            submitBtn.value = "SIGN UP";
+            loadingIndicator.style.display = "none";
+            document.querySelector(".loading-text").textContent = "Creating your account...";
+            
+            // Show OTP modal
+            if (window.showOtpModal) {
+              window.showOtpModal(result.email || document.getElementById("registerEmail").value);
+            }
+          }, 1000);
         }
       } catch (err) {
+        // Reset loading state on error
+        submitBtn.disabled = false;
+        submitBtn.value = "SIGN UP";
+        loadingIndicator.style.display = "none";
+        
         errorMessage.textContent = err.message || "An error occurred. Please try again.";
         errorMessage.style.display = "block";
       }

@@ -1,22 +1,169 @@
-extends ../layout
+//- users/verify-otp.pug
+#verifyOtpModal.modal(style="display: none;")
+  .modal-content
+    span.close-btn(data-modal="verifyOtpModal") &times;
+    .otp-container
+      h1 VERIFY YOUR EMAIL
+      form#verifyOtpForm.otp-form(method="post")
+        input(type="hidden", name="email", id="otpEmail", value=email)
+        .otp-form-group
+          label(for="otp") Enter OTP
+          input#otp(type="text", class="otp-input", name="otp", placeholder="Enter the OTP", required) 
+        
+        // Error display block
+        #otpErrorMessage(style="color: red; display: none;")
+        
+        .otp-form-group
+          input#otpSubmitBtn.otp-btn.btn-block(type="submit", value="Verify")
+          
+        // Loading indicator
+        #otpLoading(style="display: none; text-align: center; margin-top: 1rem;")
+          .spinner
+          p.loading-text Verifying your OTP...
 
-block content
-  link(rel='stylesheet' href='/stylesheets/otp.css')
-  .otp-container
-    h1 Verify Your Email
-    form(action="/users/verify-otp", method="post", class="otp-form")
-      input(type="hidden", name="email", value=email)
-      .otp-form-group
-        label(for="otp") Enter OTP
-        input#otp(type="text", class="otp-input", name="otp", placeholder="Enter the OTP", required) 
-      if error
-        p.error-message= error
-      .otp-form-group
-        input(type="submit", class="otp-btn", value="Verify")
+      // Resend OTP Section
+      .resend-otp
+        p Didn't receive the OTP? 
+        button#resendOtpBtn.resend-otp-btn(type="button") Resend OTP
 
-    // Resend OTP Section
-    .resend-otp
-      p Didn't receive the OTP? 
-      form(action="/users/resend-otp", method="post", class="resend-otp-form")
-        input(type="hidden", name="email", value=email)
-        button(type="submit", class="resend-otp-btn") Resend OTP
+//- Scripts
+script.
+  document.addEventListener("DOMContentLoaded", function () {
+    const verifyOtpModal = document.getElementById("verifyOtpModal");
+    const verifyOtpForm = document.getElementById("verifyOtpForm");
+    const resendOtpBtn = document.getElementById("resendOtpBtn");
+    const otpErrorMessage = document.getElementById("otpErrorMessage");
+
+    // Close modal (x buttons)
+    document.querySelectorAll(".close-btn").forEach(btn => {
+      btn.addEventListener("click", function () {
+        if (btn.getAttribute("data-modal") === "verifyOtpModal") {
+          verifyOtpModal.style.display = "none";
+          otpErrorMessage.style.display = "none";
+        }
+      });
+    });
+
+    // Close on outside click
+    window.addEventListener("click", function (e) {
+      if (e.target === verifyOtpModal) {
+        verifyOtpModal.style.display = "none";
+      }
+    });
+
+    // Submit OTP verification form using fetch
+    verifyOtpForm?.addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const submitBtn = document.getElementById("otpSubmitBtn");
+      const loadingIndicator = document.getElementById("otpLoading");
+      
+      // Get form data
+      const email = document.getElementById("otpEmail").value;
+      const otp = document.getElementById("otp").value;
+
+      // Show loading state
+      submitBtn.disabled = true;
+      submitBtn.value = "Verifying...";
+      loadingIndicator.style.display = "block";
+      otpErrorMessage.style.display = "none";
+
+      try {
+        const response = await fetch("/users/verify-otp", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+            "Accept": "application/json",
+            "X-Requested-With": "XMLHttpRequest"
+          },
+          body: new URLSearchParams({
+            email: email,
+            otp: otp
+          })
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error || "Invalid OTP or OTP has expired");
+        }
+
+        const result = await response.json();
+
+        if (result.success) {
+          // Update loading text for success
+          document.querySelector("#otpLoading .loading-text").textContent = "Verification successful! Redirecting...";
+          
+          setTimeout(() => {
+            window.location.href = result.redirect || "/?showLogin=true";
+          }, 1000);
+        }
+      } catch (err) {
+        // Reset loading state on error
+        submitBtn.disabled = false;
+        submitBtn.value = "Verify";
+        loadingIndicator.style.display = "none";
+        
+        otpErrorMessage.textContent = err.message || "An error occurred. Please try again.";
+        otpErrorMessage.style.display = "block";
+      }
+    });
+
+    // Resend OTP functionality
+    resendOtpBtn?.addEventListener("click", async function (e) {
+      e.preventDefault();
+      
+      const email = document.getElementById("otpEmail").value;
+      
+      // Show loading state for resend button
+      const originalText = resendOtpBtn.textContent;
+      resendOtpBtn.disabled = true;
+      resendOtpBtn.textContent = "Sending...";
+      otpErrorMessage.style.display = "none";
+      
+      try {
+        const response = await fetch("/users/resend-otp", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "X-Requested-With": "XMLHttpRequest"
+          },
+          body: JSON.stringify({ email })
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error || "Failed to resend OTP");
+        }
+
+        const result = await response.json();
+        
+        if (result.success) {
+          otpErrorMessage.style.color = "green";
+          otpErrorMessage.textContent = "A new OTP has been sent to your email";
+          otpErrorMessage.style.display = "block";
+          
+          // Reset color back to red after 3 seconds
+          setTimeout(() => {
+            otpErrorMessage.style.color = "red";
+          }, 3000);
+        }
+      } catch (err) {
+        otpErrorMessage.style.color = "red";
+        otpErrorMessage.textContent = err.message || "Failed to resend OTP. Please try again.";
+        otpErrorMessage.style.display = "block";
+      } finally {
+        // Reset resend button state
+        setTimeout(() => {
+          resendOtpBtn.disabled = false;
+          resendOtpBtn.textContent = originalText;
+        }, 2000); // Keep disabled for 2 seconds to prevent spam
+      }
+    });
+
+    // Function to show OTP modal (can be called from other scripts)
+    window.showOtpModal = function(email) {
+      document.getElementById("otpEmail").value = email;
+      verifyOtpModal.style.display = "block";
+    };
+  });

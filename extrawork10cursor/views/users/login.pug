@@ -4,25 +4,31 @@
     .login-container
       h1 LOGIN
       form#loginForm(action="/users/login", method="post")
-        .form-group
+        .otp-form-group
           label(for="email") Email
-          input#loginEmail(type="email", name="email", required, placeholder="Enter your email")
+          input#loginEmail(type="email", class="otp-input", name="email", required, placeholder="Enter your email")
 
-        .form-group     
+        .otp-form-group     
           label(for="password") Password
-          input#loginPassword(type="password", name="password", required, placeholder="Enter your password")
+          input#loginPassword(type="password", class="otp-input", name="password", required, placeholder="Enter your password")
 
           #errorMessage(style="color:red;display:none;")
 
-        .form-group
-          input(type="submit", value="SIGN IN")
+        .otp-form-group
+          input#loginSubmitBtn.otp-btn(type="submit", value="SIGN IN")
+          
+        // Loading indicator
+        #loginLoading(style="display: none; text-align: center; margin-top: 1rem;")
+          .spinner
+          p.loading-text Signing you in...
 
-        p Don't have an account?
-          a(href="#" id="openRegisterModal") Sign Up
+        .resend-otp
+          p Don't have an account?
+            a.resend-otp-btn(href="#" id="openRegisterModal") Sign Up
 
-        p
-          | Forgot password?
-          a(href="#" id="forgotPasswordBtn") Reset
+        .resend-otp
+          p Forgot password?
+            a.resend-otp-btn(href="#" id="forgotPasswordBtn") Reset
 
 
 script.
@@ -102,8 +108,17 @@ script.
     // Login form submit
     loginForm?.addEventListener("submit", async function (e) {
       e.preventDefault();
+      
       const formData = new FormData(loginForm);
       const data = Object.fromEntries(formData.entries());
+      const submitBtn = document.getElementById("loginSubmitBtn");
+      const loadingIndicator = document.getElementById("loginLoading");
+
+      // Show loading state
+      submitBtn.disabled = true;
+      submitBtn.value = "Signing In...";
+      loadingIndicator.style.display = "block";
+      errorMessage.style.display = "none";
 
       try {
         const response = await fetch("/users/login", {
@@ -118,12 +133,27 @@ script.
         const result = await response.json();
 
         if (result.error) {
+          // Reset loading state on error
+          submitBtn.disabled = false;
+          submitBtn.value = "SIGN IN";
+          loadingIndicator.style.display = "none";
+          
           errorMessage.textContent = result.error;
           errorMessage.style.display = "block";
         } else if (result.success) {
-          window.location.href = result.redirect;
+          // Update loading text for success
+          document.querySelector("#loginLoading .loading-text").textContent = "Login successful! Redirecting...";
+          
+          setTimeout(() => {
+            window.location.href = result.redirect;
+          }, 1000);
         }
       } catch (err) {
+        // Reset loading state on error
+        submitBtn.disabled = false;
+        submitBtn.value = "SIGN IN";
+        loadingIndicator.style.display = "none";
+        
         errorMessage.textContent = "An error occurred. Please try again.";
         errorMessage.style.display = "block";
       }

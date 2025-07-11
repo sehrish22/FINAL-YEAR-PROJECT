@@ -146,12 +146,24 @@ input, textarea, select {
     border-radius: 5px;
     font-size: 0.9rem;
     transition: border 0.3s ease;
+    background: #fff !important;
+    color: #3d2b1f !important;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
 }
 
 input:focus, textarea:focus, select:focus {
     border-color: #007bff;
     outline: none;
 }
+
+/* Ensure textarea placeholder is visible */
+textarea::placeholder {
+    color: #8b5e3b !important;
+    opacity: 1;
+}
+
 
 /* Checkout Button */
 .btn-primary {

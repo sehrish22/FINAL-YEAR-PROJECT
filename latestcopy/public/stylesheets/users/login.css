@@ -13,6 +13,8 @@
 }
 
 #loginModal .modal-content {
+    border: 2px solid #c2a17c !important;
+    border: 2px solid #c2a17c !important;
     background: #fffaf3;
     border-radius: 14px;
     box-shadow: 0 8px 32px rgba(139,94,60,0.13);
@@ -22,6 +24,18 @@
     margin: auto;
     position: relative;
     animation: fadeIn 0.8s cubic-bezier(.39,.58,.57,1) both;
+    border: 2px solid #c2a17c;
+}
+
+/* Center action links (Sign Up and Reset) on login popup */
+#loginModal .login-form-group + p,
+#loginModal .login-form-group + p + p {
+    text-align: center;
+    margin-top: 10px;
+}
+#loginModal .login-form-group + p a,
+#loginModal .login-form-group + p + p a {
+    display: inline-block;
 }
 
 #loginModal h1 {

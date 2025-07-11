@@ -89,6 +89,7 @@ router.post("/register", upload, async function (req, res) {
     if (isJsonRequest) {
       return res.json({ 
         success: true, 
+        email: user.email,
         redirect: `/users/verify-otp?email=${user.email}` 
       });
     }
@@ -110,14 +111,22 @@ router.get("/verify-otp", function (req, res) {
 
 router.post("/verify-otp", async function (req, res) {
   const { email, otp } = req.body;
+  
+  // Check if this is a JSON request
+  const isJsonRequest = req.xhr || req.headers['x-requested-with'] === 'XMLHttpRequest' || (req.headers.accept && req.headers.accept.indexOf('json') > -1);
 
   let user = await User.findOne({ email });
-
   if (!user) {
+    if (isJsonRequest) {
+      return res.status(400).json({ error: "Invalid email" });
+    }
     return res.render("users/verify-otp", { error: "Invalid email", email });
   }
 
   if (user.otp !== otp || Date.now() > user.otpExpires) {
+    if (isJsonRequest) {
+      return res.status(400).json({ error: "Invalid or expired OTP" });
+    }
     return res.render("users/verify-otp", {
       error: "Invalid or expired OTP",
       email,
@@ -130,14 +139,27 @@ router.post("/verify-otp", async function (req, res) {
   user.isVerified = true;
   await user.save();
 
+  if (isJsonRequest) {
+    return res.json({ 
+      success: true, 
+      redirect: "/?showLogin=true" 
+    });
+  }
   res.redirect('/?showLogin=true');
 });
 
 router.post("/resend-otp", async function (req, res) {
   const { email } = req.body;
+  
+  // Check if this is a JSON request
+  const isJsonRequest = req.xhr || req.headers['x-requested-with'] === 'XMLHttpRequest' || (req.headers.accept && req.headers.accept.indexOf('json') > -1);
+  
   let user = await User.findOne({ email });
 
   if (!user) {
+    if (isJsonRequest) {
+      return res.status(400).json({ error: "Invalid email" });
+    }
     return res.render("users/verify-otp", { error: "Invalid email", email });
   }
 
@@ -166,12 +188,19 @@ router.post("/resend-otp", async function (req, res) {
 
   await transporter.sendMail(mailOptions);
 
+  if (isJsonRequest) {
+    return res.json({ 
+      success: true, 
+      message: "A new OTP has been sent to your email" 
+    });
+  }
+  
   res.render("users/verify-otp", {
     message: "A new OTP has been sent to your email",
     email,
   });
 });
-//forgot password get 
+
 router.get("/forgot-password", (req, res) => {
   res.render("users/forgot-password");
 });
@@ -233,7 +262,7 @@ router.post("/forgot-password", async (req, res) => {
     });
   }
 });
-//get reset password page 
+
 router.get("/reset-password/:token", async (req, res) => {
   try {
     const user = await User.findOne({
@@ -252,7 +281,7 @@ router.get("/reset-password/:token", async (req, res) => {
     res.redirect('/?error=server_error');
   }
 });
-//set new password 
+
 router.post("/reset-password", async (req, res) => {
   try {
     const { token, password, confirmPassword } = req.body;
@@ -488,7 +517,7 @@ router.post("/change-password", async function (req, res) {
     res.render("users/change-password", { errors });
   }
 });
-//change-password done 
+
 router.get("/password-updated", (req, res) => {
   res.render("users/password-updated");
 });

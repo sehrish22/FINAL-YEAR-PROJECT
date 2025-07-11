@@ -2,11 +2,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
 /* General Styles */
+* {
+    box-sizing: border-box;
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     background-color: #f8f4ee;
     margin: 0;
     padding: 0;
+    line-height: 1.6;
 }
 
 /* Page Title */
@@ -48,11 +53,10 @@ body {
 
 /* Store Container */
 .store-container {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
-    padding: 1rem 0;
-    justify-content: center;
+    padding: 1rem 2rem;
     max-width: 1200px;
     margin: 0 auto;
 }
@@ -63,23 +67,25 @@ body {
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    width: calc(33.333% - 1.33rem);
-    min-width: 300px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    width: 100%;
     max-width: 350px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
+    will-change: transform;
+    backface-visibility: hidden;
 }
 
 .store-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-3px);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
 /* Store Image */
 .store-image-container {
     position: relative;
-    height: 240px;
+    height: 200px;
     overflow: hidden;
     display: flex;
     justify-content: center;
@@ -88,12 +94,11 @@ body {
 }
 
 .store-image {
-    width: auto;
-    height: auto;
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     transition: transform 0.3s ease;
+    will-change: transform;
 }
 
 .store-image-placeholder {
@@ -111,7 +116,15 @@ body {
 }
 
 .store-card:hover .store-image {
-    transform: scale(1.05);
+    transform: scale(1.02);
+}
+
+/* Store Content */
+.store-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
 }
 
 /* Store Info */
@@ -119,8 +132,7 @@ body {
     font-size: 1.5rem;
     font-weight: 600;
     color: #2d3748;
-    margin: 1rem 0;
-    padding: 0 1rem;
+    margin: 0 0 1rem 0;
     text-align: center;
 }
 
@@ -128,7 +140,6 @@ body {
     font-size: 1rem;
     color: #4a5568;
     margin: 0.5rem 0;
-    padding: 0 1rem;
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -143,8 +154,8 @@ body {
 .store-actions {
     display: flex;
     gap: 1rem;
-    padding: 1rem;
     margin-top: auto;
+    padding-top: 1rem;
 }
 
 .btn {
@@ -190,21 +201,54 @@ body {
     transform: translateY(-2px);
 }
 
-/* Responsive Design */
-@media (max-width: 1200px) {
-    .store-card {
-        width: calc(50% - 1rem);
-    }
+/* No stores message styling */
+.no-stores-message {
+    text-align: center;
+    padding: 3rem 2rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin: 2rem auto;
+    max-width: 500px;
 }
 
+.no-stores-message h3 {
+    color: #4d3b3b;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.no-stores-message p {
+    color: #666;
+    font-size: 1rem;
+}
+
+/* Error message styling */
+.alert {
+    padding: 1rem 1.5rem;
+    margin: 1rem auto 2rem;
+    border-radius: 8px;
+    max-width: 800px;
+    text-align: center;
+}
+
+.alert-danger {
+    background-color: #fee;
+    border: 1px solid #fcc;
+    color: #c33;
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
-    .store-card {
-        width: 100%;
-        max-width: 350px;
+    .store-container {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+        gap: 1.5rem;
     }
 
     .page-title {
         font-size: 2rem;
+        margin: 1rem 0 2rem;
     }
 
     .store-name {
@@ -213,9 +257,25 @@ body {
 
     .store-actions {
         flex-direction: column;
+        gap: 0.8rem;
     }
 
     .btn {
         width: 100%;
+    }
+
+    .admin-panel {
+        flex-direction: column;
+        margin-bottom: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .store-container {
+        padding: 0.5rem;
+    }
+
+    .page-title {
+        font-size: 1.8rem;
     }
 }

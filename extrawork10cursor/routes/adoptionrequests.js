@@ -35,7 +35,7 @@ router.get("/", async function (req, res, next) {
 });
 // Store adoption request in the database (authentication enforced)
 router.post(
-  "/", // Ensures req.session.user is defined
+  "/",
   validateAdoptionRequest,checkSessionAuth,
   async function (req, res, next) {
     console.log("🧾 Received body:", req.body);

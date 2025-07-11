@@ -107,17 +107,19 @@
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
     position: relative;
 }
+
 .product-info {
-    font-size: 1.1rem;
-    color: #666;
-    margin-bottom: 1.5rem;
-    padding: 1.5rem;
+    font-size: 1.28rem;
+    color: #5a4a36;
+    margin-bottom: 2rem;
+    padding: 2.2rem 2.5rem;
     background: #f8f8f8;
-    border-radius: 12px;
+    border-radius: 16px;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 24px rgba(165, 139, 111, 0.11);
     position: relative;
     overflow: hidden;
+    width: 100%;
 }
 
 .product-info i {
@@ -336,7 +338,9 @@
 .reviews-container {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 2rem;
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
 }
 
 .review-card {
@@ -370,15 +374,12 @@
     color: #333;
 }
 
-
-
 .review-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+    transform: translateY(-7px) scale(1.015);
+    box-shadow: 0 18px 48px rgba(165, 139, 111, 0.18), 0 4px 12px rgba(0,0,0,0.10);
+    border-left: 7px solid #7a5a36;
+    background: linear-gradient(90deg, #fff9f3 85%, #e9d9c5 100%);
 }
-
-
-
 
 .review-rating i {
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -668,6 +669,163 @@ form button[type="submit"]:hover {
 }
 
 /* Responsive Design */
+
+/* --- Improved Review Section Styles (force override) --- */
+
+.section-card {
+    background: #fffaf6;
+    border-radius: 18px;
+    box-shadow: 0 6px 32px rgba(165, 139, 111, 0.10), 0 1.5px 6px rgba(0,0,0,0.04);
+    padding: 2.5rem 2rem 2rem 2rem;
+    margin: 2.5rem auto 2.5rem auto;
+    max-width: 670px;
+    width: 100%;
+    position: relative;
+}
+
+.reviews-section {
+    margin-bottom: 2.5rem;
+}
+
+.add-review-section {
+    margin-top: 0;
+}
+
+.reviews-title, .add-review-title {
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 2rem;
+    color: #7a5a36;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    margin-bottom: 2rem;
+}
+
+.add-review-section form {
+    background: #f8f5f1;
+    border-radius: 14px;
+    padding: 2rem 1.5rem 1.5rem 1.5rem;
+    box-shadow: 0 2px 10px rgba(165, 139, 111, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.add-review-section label {
+    font-weight: 600;
+    color: #4d3b3b;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.add-review-section select,
+.add-review-section textarea {
+    border-radius: 8px;
+    border: 1px solid #e0d6c8;
+    padding: 0.7rem 1rem;
+    font-size: 1.08rem;
+    background: #fff;
+    color: #4d3b3b;
+    font-family: inherit;
+    margin-bottom: 1rem;
+    resize: vertical;
+    transition: border-color 0.2s;
+}
+
+.add-review-section select:focus,
+.add-review-section textarea:focus {
+    border-color: #a58b6f;
+    outline: none;
+}
+
+.add-review-section button[type="submit"] {
+    background: linear-gradient(135deg, #a58b6f 0%, #8c6b4a 100%);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    box-shadow: 0 2px 12px rgba(165, 139, 111, 0.13);
+    letter-spacing: 0.03em;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.add-review-section button[type="submit"]:hover {
+    background: linear-gradient(135deg, #8c6b4a 0%, #7a5a3a 100%);
+    transform: translateY(-2px) scale(1.03);
+}
+
+
+.no-reviews {
+    max-width: 480px !important;
+    margin: 2rem auto !important;
+    padding: 2.5rem 2rem !important;
+    background: #fff !important;
+    border-radius: 18px !important;
+    box-shadow: 0 4px 24px rgba(165, 139, 111, 0.13) !important;
+    border: 1px solid #f0e6dc !important;
+    text-align: center !important;
+    color: #7a5a36 !important;
+    font-size: 1.22rem !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.03em !important;
+}
+
+.reviews-container {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2.5rem !important;
+    margin-top: 2rem !important;
+    margin-bottom: 2.5rem !important;
+}
+
+.review-card {
+    background: linear-gradient(90deg, #fff8f0 80%, #f5e8d7 100%) !important;
+    padding: 2rem 1.7rem 1.5rem 1.7rem !important;
+    border-radius: 16px !important;
+    box-shadow: 0 10px 32px rgba(165, 139, 111, 0.15), 0 2px 8px rgba(0,0,0,0.07) !important;
+    border-left: 8px solid #a58b6f !important;
+    transition: box-shadow 0.3s, transform 0.3s !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.review-card:hover {
+    transform: translateY(-9px) scale(1.025) !important;
+    box-shadow: 0 24px 60px rgba(165, 139, 111, 0.22), 0 6px 18px rgba(0,0,0,0.13) !important;
+    border-left: 8px solid #7a5a36 !important;
+    background: linear-gradient(90deg, #fff9f3 85%, #e9d9c5 100%) !important;
+}
+
+.review-rating {
+    font-size: 1.7rem !important;
+    color: #ffc107 !important;
+    text-shadow: 0 2px 8px rgba(255,193,7,0.18) !important;
+    letter-spacing: 2px !important;
+    margin-bottom: 0.2rem !important;
+}
+
+.review-user {
+    font-size: 1.06rem !important;
+    color: #6d4c2c !important;
+    font-style: italic !important;
+    margin-bottom: 0.3rem !important;
+    opacity: 0.85 !important;
+}
+
+.review-comment p {
+    margin: 0 !important;
+    margin-top: 0.6rem !important;
+    font-size: 1.16rem !important;
+    color: #3d2b1f !important;
+    line-height: 1.7 !important;
+    word-break: break-word !important;
+    letter-spacing: 0.02em !important;
+}
+
 @media (max-width: 768px) {
     .content-box {
         flex-direction: column;
