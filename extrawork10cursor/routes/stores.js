@@ -11,7 +11,7 @@ router.get("/stores", async function (req, res, next) {
 });
 // GET: Add new store form
 router.get("/admin/stores/new", (req, res) => {
-    res.render("admin/addStore");
+    res.render("admin/addstore");
   });
   
   // POST: Create new store

@@ -107,13 +107,31 @@ router.get("/profile/:id", adminAuth, async (req, res) => {
 // Delete user profile
 router.post("/profile/:id/delete", adminAuth, async (req, res) => {
   try {
-    const user = await User.findByIdAndDelete(req.params.id);
-    if (!user) {
-      return res.status(404).send("User not found");
-    }
+    const userId = req.params.id;
+
+    // Delete all products uploaded by this seller
+    await Product.deleteMany({ uploadedBy: userId });
+
+    // Find all pets uploaded by this seller
+    const sellerPets = await Pet.find({ uploadedBy: userId }).select("_id");
+    const petIds = sellerPets.map(pet => pet._id);
+
+    // Delete adoption requests for seller's pets
+    await AdoptionRequest.deleteMany({ pet: { $in: petIds } });
+
+    // Delete the pets themselves
+    await Pet.deleteMany({ uploadedBy: userId });
+
+    // Delete all orders made to this seller
+    await Order.deleteMany({ sellerId: userId });
+
+    // Finally, delete the seller's user profile
+    await User.findByIdAndDelete(userId);
+
+    req.flash("success", "Seller and all related data deleted successfully.");
     res.redirect("/admin/profiles");
   } catch (error) {
-    console.error("Error deleting user:", error);
+    console.error("Error deleting seller and related data:", error);
     res.status(500).send("Internal Server Error");
   }
 });
