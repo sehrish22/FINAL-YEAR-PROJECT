@@ -1,0 +1,32 @@
+extends layout
+
+block content
+  link(rel='stylesheet', href='/stylesheets/stores.css')
+
+  h1.page-title 🏪 Stores Across Pakistan
+
+  if user && user.role === "admin"
+    .admin-panel
+      h2 Stores Management
+      a.btn.btn-green(href="/admin/stores/new") ➕ Add New Store
+
+  .store-container
+    each store in stores
+      .store-card
+        .store-image-container
+          if store.image
+            img.store-image(src=store.image, alt=store.name)
+          else
+            .store-image-placeholder
+              i.bi.bi-shop
+        .store-content
+          h2.store-name= store.name
+          p.store-info 📍 Address: #{store.address}
+          p.store-info 📞 Phone: #{store.contact}
+          p.store-info ⏰ Opening Time: #{store.openingTime}
+          p.store-info ⏳ Closing Time: #{store.closingTime}
+
+          if user && user.role === "admin"
+            .store-actions
+              a.btn.btn-brown(href=`/admin/stores/edit/${store._id}`) ✏️ Edit
+              a.btn.btn-red(href=`/admin/stores/delete/${store._id}`) 🗑️ Delete

@@ -1,0 +1,123 @@
+/* User Dashboard Styles */
+.user-dashboard {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px 16px;
+    background-color: #f5eee6;
+    min-height: 100vh;
+    color: #000 !important;
+}
+
+/* Title */
+.user-title {
+    text-align: center;
+    font-size: 28px;
+    color: #6b4226;
+    margin-bottom: 20px;
+}
+
+/* Grid Layout */
+.user-grid.animated-dashboard {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+    margin-top: 32px;
+}
+
+@media (max-width: 900px) {
+  .user-grid.animated-dashboard {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+/* Cards */
+.user-card {
+    background: #fffaf3;
+    border-radius: 14px;
+    box-shadow: 0 2px 12px rgba(44, 62, 80, 0.10);
+    border: 1.5px solid #8b5e3c;
+    padding: 44px 36px 32px 36px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 290px;
+    opacity: 0;
+    transform: translateY(40px) scale(0.98);
+    animation: fadeInCard 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: calc(var(--card-index, 0) * 0.13s);
+    transition: box-shadow 0.28s, transform 0.28s;
+}
+
+.user-card:hover {
+    box-shadow: 0 12px 36px rgba(139, 94, 60, 0.22), 0 2px 12px rgba(44, 62, 80, 0.10);
+    transform: translateY(-10px) scale(1.03);
+    background: #f5eee6;
+    z-index: 2;
+}
+
+@keyframes fadeInCard {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Card Title & Text */
+.user-card-title {
+    font-size: 2.1rem;
+    font-weight: 700;
+    color: #6b4226;
+    margin-bottom: 20px;
+}
+
+.user-card-text {
+    font-size: 1.32rem;
+    color: #3d2c18;
+    margin-bottom: 28px;
+}
+
+/* Button */
+.btn.btn-brown {
+    margin-top: 0;
+    font-size: 1.22rem;
+    padding: 16px 36px;
+    border-radius: 10px;
+    display: inline-block;
+    color: #fff;
+    background-color: #6b4226;
+    border: none;
+    transition: background 0.3s ease-in-out;
+    text-decoration: none;
+}
+
+.btn.btn-brown:hover {
+    background-color: #55351d;
+}
+
+/* Optional: Responsive tweaks if needed */
+@media (max-width: 700px) {
+  .user-title {
+    font-size: 24px;
+  }
+
+  .user-card-title {
+    font-size: 1.7rem;
+  }
+
+  .user-card-text {
+    font-size: 1.1rem;
+  }
+
+  .btn.btn-brown {
+    font-size: 1rem;
+    padding: 12px 24px;
+  }
+}

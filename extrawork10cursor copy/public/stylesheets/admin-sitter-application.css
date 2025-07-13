@@ -1,0 +1,204 @@
+.admin-sitter-container {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 24px 18px 12px 18px;
+    background: linear-gradient(135deg, #f9e5c4 0%, #f5f0eb 100%);
+    border-radius: 18px;
+    border: 2px solid #b0855b;
+    box-shadow: 0 8px 32px rgba(176, 133, 91, 0.13);
+    text-align: center;
+    color: #4d3b3b;
+}
+
+
+.admin-sitter-container h1 {
+    font-size: 2.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #000 !important;
+    letter-spacing: 1.2px;
+    margin-bottom: 28px;
+    text-shadow: 0 2px 8px rgba(44, 40, 37, 0.08);
+}
+
+
+/* Table Styling */
+.sitter-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: #fffaf3;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(139, 94, 60, 0.10);
+    font-size: 1rem;
+    border: 1.5px solid #b0855b;
+    margin-bottom: 24px;
+}
+.sitter-table thead {
+    background: #3b2108;
+}
+.sitter-table th {
+    background: #3b2108 !important;
+    color: #000 !important;
+    padding: 18px 20px;
+    text-align: left;
+    font-size: 1.13rem;
+    font-weight: 700;
+    border-bottom: 2.5px solid #b0855b;
+    letter-spacing: 0.5px;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+
+.sitter-table th {
+    color: #e8d3b9 !important;
+    background: #7a5542 !important;
+    font-weight: 700;
+    border-bottom: 3px solid #b0855b;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+    text-align: left;
+}
+.sitter-table td {
+    border: none;
+    text-align: left;
+    font-size: 1rem;
+    color: #000 !important;
+    font-weight: 600;
+    background: #fffaf3;
+    padding: 14px 18px;
+    letter-spacing: 0.5px;
+}
+.sitter-table tbody tr:hover td {
+    background: #ffe8c7 !important;
+    color: #4d3b3b !important;
+}
+.sitter-table tbody tr:nth-child(even) td {
+    background: #f5f0eb !important;
+}
+.sitter-table tbody tr:nth-child(odd) td {
+    background: #f7ecd9 !important;
+}
+.sitter-table tbody tr:hover td {
+    background: #ffe8c7 !important;
+    color: #4d3b3b !important;
+}
+.sitter-table {
+    border: 1.5px solid #e8d3b9;
+    box-shadow: 0 4px 24px rgba(176, 133, 91, 0.13);
+}
+.sitter-table tbody tr:nth-child(even) td {
+    background: #f5f0eb;
+}
+.sitter-table tbody tr:nth-child(odd) td {
+    background: #f9e5c4;
+}
+.sitter-table tbody tr:hover td {
+    background: #ffe8c7 !important;
+    box-shadow: 0 2px 12px rgba(176, 133, 91, 0.08);
+}
+
+
+.sitter-table thead {
+    background: linear-gradient(90deg, #e8d3b9 0%, #f5e4cc 100%);
+    color: #222;
+    font-size: 1.07rem;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+.sitter-table th {
+    color: #222 !important;
+    background: transparent !important;
+    font-weight: 700;
+    border-bottom: 2px solid #b0855b;
+}
+.sitter-table td {
+    background: #f5f0eb !important;
+    color: #4d3b3b;
+    border: none;
+    text-align: left;
+    font-size: 1rem;
+}
+.sitter-table tbody tr {
+    background: #f5f0eb !important;
+    transition: background 0.2s;
+}
+.sitter-table tbody tr:hover {
+    background: #ffe8c7 !important;
+    box-shadow: 0 2px 12px rgba(176, 133, 91, 0.08);
+}
+
+
+.sitter-table th {
+    color: #222 !important;
+    background: transparent !important;
+    font-weight: 700;
+    border-bottom: 2px solid #b0855b;
+}
+
+
+.sitter-table td {
+    background: #f5f0eb;
+    color: #4d3b3b;
+    border: none;
+    text-align: left;
+    font-size: 1rem;
+    color: #e0e0e0;
+}
+
+
+.sitter-table tbody tr {
+    transition: background 0.2s;
+}
+
+/* Removed nth-child coloring for consistent light rows */
+
+.sitter-table tbody tr:hover {
+    background: #363b44;
+}
+
+
+/* Approve Button */
+.sitter-approve-btn {
+    background: #b0855b;
+    color: #23272f;
+    padding: 8px 18px;
+    font-size: 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    box-shadow: 0 1px 4px rgba(44, 40, 37, 0.07);
+    transition: background 0.2s, color 0.2s;
+}
+
+
+.sitter-approve-btn:hover {
+    background: #c7a16e;
+    color: #23272f;
+    box-shadow: 0 2px 8px rgba(44, 40, 37, 0.18);
+}
+
+/* Empty State Styling */
+.admin-no-sitter-applications {
+    text-align: center;
+    font-size: 1.22rem;
+    color: #b0855b;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    padding: 44px 0 60px 0;
+    background: #23272f;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(44, 40, 37, 0.10);
+    margin: 32px auto 0 auto;
+}
+
+/* No Applications Message */
+.no-applications {
+    font-size: 18px;
+    color: #7a5542;
+    font-weight: bold;
+    margin-top: 20px;
+}

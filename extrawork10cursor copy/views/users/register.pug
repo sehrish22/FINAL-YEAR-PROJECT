@@ -1,0 +1,163 @@
+//- users/register.pug
+#registerModal.modal(style="display: none;")
+  .modal-content
+    span.close-btn(data-modal="registerModal") &times;
+    .login-container
+      h1 SIGN UP
+      form#registerForm.login-form(method="post" enctype="multipart/form-data")
+        .login-form-group
+          label(for="name") Name
+          input#registerName(type="text", class="login-input", name="name", placeholder="Enter your name", required)
+
+        .login-form-group
+          label(for="email") Email
+          input#registerEmail(type="email", class="login-input", name="email", placeholder="Enter your email", required)
+
+        .login-form-group
+          label(for="contact") Contact
+          input#registerContact(type="text", class="login-input", name="contact", placeholder="Enter your phone number", required)
+
+        .login-form-group
+          label(for="role") Account Type
+          select#registerRole(name="role", class="login-input", required)
+            option(value="" selected disabled) Select a role
+            option(value="seller") Seller
+            option(value="buyer") Buyer
+
+        .login-form-group#storeNameGroup(style="display: none;")
+          label(for="storeName") Store Name
+          input#storeName(type="text", class="login-input", name="storeName", placeholder="Enter your store name")
+
+        .login-form-group
+          label(for="password") Password
+          input#registerPassword(type="password", class="login-input", name="password", placeholder="Create a password", required)
+          p.password-hint Password must be at least 8 characters with 1 digit and 1 special character.
+
+        .login-form-group
+          label(for="image") Upload Image
+          input(type="file", class="login-input", id="image", name="image")
+
+        // Error display block
+        #registerErrorMessage(style="color: red; display: none;")
+
+        .login-form-group
+          input#registerSubmitBtn.login-btn.btn-block(type="submit", value="SIGN UP")
+          
+        // Loading indicator
+        #registerLoading(style="display: none; text-align: center; margin-top: 1rem;")
+          .spinner
+          p.loading-text Creating your account...
+
+        .signup-links
+          p Already have an account?
+            a.signup-link(href="#" id="openLoginFromRegister") Log In
+
+//- Scripts
+script.
+  document.addEventListener("DOMContentLoaded", function () {
+    const registerModal = document.getElementById("registerModal");
+    const loginModal = document.getElementById("loginModal");
+    const registerForm = document.getElementById("registerForm");
+    const errorMessage = document.getElementById("registerErrorMessage");
+
+    // Role selector toggle
+    const roleSelect = document.getElementById("registerRole");
+    const storeNameGroup = document.getElementById("storeNameGroup");
+
+    roleSelect?.addEventListener("change", function () {
+      if (roleSelect.value === "seller") {
+        storeNameGroup.style.display = "block";
+      } else {
+        storeNameGroup.style.display = "none";
+        document.getElementById("storeName").value = "";
+      }
+    });
+
+    // Close modal (x buttons)
+    document.querySelectorAll(".close-btn").forEach(btn => {
+      btn.addEventListener("click", function () {
+        registerModal.style.display = "none";
+        loginModal.style.display = "none";
+        errorMessage.style.display = "none";
+      });
+    });
+
+    // Switch to login modal
+    document.getElementById("openLoginFromRegister")?.addEventListener("click", function (e) {
+      e.preventDefault();
+      registerModal.style.display = "none";
+      loginModal.style.display = "block";
+    });
+
+    // Close on outside click
+    window.addEventListener("click", function (e) {
+      if (e.target === registerModal) {
+        registerModal.style.display = "none";
+      }
+    });
+
+    // Submit register form using fetch
+    registerForm?.addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const formData = new FormData(registerForm);
+      const submitBtn = document.getElementById("registerSubmitBtn");
+      const loadingIndicator = document.getElementById("registerLoading");
+
+      // Show loading state
+      submitBtn.disabled = true;
+      submitBtn.value = "Creating Account...";
+      loadingIndicator.style.display = "block";
+      errorMessage.style.display = "none";
+
+      try {
+        const response = await fetch("/users/register", {
+          method: "POST",
+          body: formData,
+          headers: {
+            "Accept": "application/json",
+            "X-Requested-With": "XMLHttpRequest"
+          }
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error || "Unknown error occurred");
+        }
+
+        const result = await response.json();
+
+        if (result.success) {
+          // Update loading text for transition
+          document.querySelector(".loading-text").textContent = "Account created! Redirecting to verification...";
+          
+          // Small delay for better UX
+          setTimeout(() => {
+            // Close register modal and show OTP modal
+            registerModal.style.display = "none";
+            errorMessage.style.display = "none";
+            
+            // Reset form and loading state
+            registerForm.reset();
+            submitBtn.disabled = false;
+            submitBtn.value = "SIGN UP";
+            loadingIndicator.style.display = "none";
+            document.querySelector(".loading-text").textContent = "Creating your account...";
+            
+            // Show OTP modal
+            if (window.showOtpModal) {
+              window.showOtpModal(result.email || document.getElementById("registerEmail").value);
+            }
+          }, 1000);
+        }
+      } catch (err) {
+        // Reset loading state on error
+        submitBtn.disabled = false;
+        submitBtn.value = "SIGN UP";
+        loadingIndicator.style.display = "none";
+        
+        errorMessage.textContent = err.message || "An error occurred. Please try again.";
+        errorMessage.style.display = "block";
+      }
+    });
+  });

@@ -39,10 +39,6 @@ block content
                   .vet-info-item
                     i.bi.bi-clock
                     span #{vet.openingTime} - #{vet.closingTime}
-                if vet.description
-                  .vet-description
-                    i.bi.bi-info-circle
-                    p= vet.description
                 if user && user.role === "admin"
                   .vet-actions
                     a.btn.btn-brown(href=`/admin/vets/edit/${vet._id}`)

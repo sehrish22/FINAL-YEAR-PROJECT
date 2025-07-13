@@ -1,0 +1,22 @@
+extends ../layout
+
+block content
+  link(rel='stylesheet' href='/stylesheets/profiles.css')
+  .admin-profiles-container
+    h2.admin-profiles-title Seller Profiles
+    if users && users.length > 0
+      .admin-profiles-grid
+        each user in users
+          if user.role == 'seller'
+            .admin-profile-card
+              img.admin-profile-image(src=user.image, alt="Profile Photo") 
+              .admin-profile-details
+                p.admin-profile-text 
+                  strong Name:  
+                  | #{user.name}
+                p.admin-profile-text 
+                  strong Email:  
+                  | #{user.email}
+                a.btn.btn-brown(href=`/admin/profile/${user._id}`) View Details
+    else
+      p.admin-no-profiles No seller profiles to display.

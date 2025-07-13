@@ -1,7 +1,7 @@
 extends ../layout
 
 block content
-  link(rel='stylesheet', href='/stylesheets/addvet.css')
+  link(rel='stylesheet', href='/stylesheets/addVet.css')
 
   .form-container
     h1.page-title ➕ Add New Vet
@@ -20,19 +20,29 @@ block content
         input#contact(type="text" name="contact" placeholder="Enter contact number" required)
 
       .form-group
-        label(for="openingTime") Opening Time:
-        input#openingTime(type="text" name="openingTime" placeholder="e.g. 9:00 AM" required)
+        label Opening Time:
+        .time-group
+          select(name="openingHour" required)
+            option(value="" disabled selected) Hour
+            each hour in [1,2,3,4,5,6,7,8,9,10,11,12]
+              option(value=`${hour}.00`) #{hour}.00
+          select(name="openingPeriod" required)
+            option(value="AM") AM
+            option(value="PM") PM
 
       .form-group
-        label(for="closingTime") Closing Time:
-        input#closingTime(type="text" name="closingTime" placeholder="e.g. 9:00 PM" required)
+        label Closing Time:
+        .time-group
+          select(name="closingHour" required)
+            option(value="" disabled selected) Hour
+            each hour in [1,2,3,4,5,6,7,8,9,10,11,12]
+              option(value=`${hour}.00`) #{hour}.00
+          select(name="closingPeriod" required)
+            option(value="AM") AM
+            option(value="PM") PM
 
       .form-group
-        label(for="description") Description:
-        textarea#description(name="description" placeholder="Enter clinic description" rows="4")
-
-      .form-group
-        label(for="image") Clinic Image:
+        label(for="image") Vet Image:
         input#image(type="file" name="image" accept="image/*")
         .image-preview
           img#imagePreview(src="#" alt="Image preview" style="display: none; max-width: 200px;")

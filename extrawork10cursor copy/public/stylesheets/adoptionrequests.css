@@ -1,0 +1,123 @@
+/* Adoption Requests Container */
+.admin-adoption-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 16px;
+  background: none;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.admin-adoption-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #f3e4d6;
+  /* Richer beige */
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(139, 94, 60, 0.13);
+  font-size: 1rem;
+  border: 1.5px solid #8b5e3c;
+  /* Rich brown border */
+}
+
+
+/* Adoption Requests Title */
+.admin-adoption-title {
+  text-align: center;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #c7a16e;
+  margin-bottom: 32px;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 8px rgba(44, 40, 37, 0.08);
+}
+
+
+/* Adoption Requests Table */
+.admin-adoption-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  border: 1px solid #444;
+  /* Adds border around the entire table */
+}
+
+/* Table Header - deeper brown, bolder text */
+.admin-adoption-table th {
+  /* Intensified deep brown */
+  color: #fffaf3;
+  padding: 18px 20px;
+  text-align: left;
+  font-size: 1.13rem;
+  font-weight: 700;
+  border-bottom: 2.5px solid #b0855b;
+  letter-spacing: 0.5px;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.admin-adoption-table thead tr {
+  background: #3b2108;
+}
+
+
+/* Table Rows - zebra striping, soft hover, modern look */
+.admin-adoption-table tbody tr {
+  background: #f3e4d6;
+  border-bottom: 1px solid #c7a16e;
+  transition: background 0.2s;
+}
+
+.admin-adoption-table tbody tr:nth-child(even) {
+  background: #e5d4c2;
+}
+
+.admin-adoption-table tbody tr:hover {
+  background: #e1c9ad;
+}
+
+.admin-adoption-table td {
+  color: #4e2e0e;
+  padding: 14px 18px;
+  font-size: 1.05rem;
+  border-bottom: 1px solid #c7a16e;
+  background: transparent;
+  vertical-align: middle;
+}
+
+
+/* Adoption Image Styling */
+.admin-adoption-img {
+  width: 62px;
+  height: 62px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 2px solid #c7a16e;
+  box-shadow: 0 2px 8px rgba(199, 161, 110, 0.09);
+  background: #fff;
+}
+
+.no-img {
+  color: #888;
+  font-style: italic;
+  font-size: 0.98rem;
+}
+
+
+/* No Adoption Requests Message */
+.admin-no-adoption-requests {
+  text-align: center;
+  font-size: 1.22rem;
+  color: #b0855b;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  padding: 44px 0 60px 0;
+  background: #23272f;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(44, 40, 37, 0.10);
+  margin: 32px auto 0 auto;
+}

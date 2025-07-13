@@ -1,0 +1,64 @@
+extends layout
+
+block content
+  link(rel="stylesheet", href="/stylesheets/order-placed.css")
+  .form-container
+    h1.form-title Order Details
+    form.order-form(method="GET")
+      .form-group
+        label(for="orderId") Order Number
+        input#orderId(type="text" value=orderId readonly)
+      
+      .form-group
+        label(for="orderDate") Order Date
+        input#orderDate(type="text" value=orderDate readonly)
+
+      .form-group
+        label(for="customerName") Customer Name
+        input#customerName(type="text" value=order.name readonly)
+
+      .form-group
+        label(for="email") Email
+        input#email(type="email" value=order.email readonly)
+
+      .form-group
+        label(for="contact") Contact Number
+        input#contact(type="tel" value=order.contact readonly)
+
+      .form-group
+        label(for="address") Delivery Address
+        textarea#address(readonly)= order.address
+
+      .form-group
+        label(for="items") Order Items
+        .items-list
+          each item in order.items
+            .item-row
+              input.item-name(type="text" value=item.product.name readonly)
+              input.item-quantity(type="number" value=item.quantity readonly)
+              input.item-price(type="text" value=`$${item.price}` readonly)
+              input.item-total(type="text" value=`$${item.subtotal}` readonly)
+
+      .form-group
+        label(for="subtotal") Subtotal
+        input#subtotal(type="text" value=`$${order.subtotal}` readonly)
+
+      .form-group
+        label(for="shipping") Shipping Fee
+        input#shipping(type="text" value="$5.00" readonly)
+
+      .form-group
+        label(for="total") Total Amount
+        input#total(type="text" value=`$${order.total}` readonly)
+
+      .form-group
+        label(for="paymentMethod") Payment Method
+        input#paymentMethod(type="text" value="Cash on Delivery" readonly)
+
+      .form-group
+        label(for="status") Order Status
+        input#status(type="text" value="Processing" readonly)
+
+      .form-actions
+        a.btn.primary(href="buyerprofile/buyerprofile") View All Orders
+        a.btn.secondary(href="/products") Continue Shopping

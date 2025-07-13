@@ -9,7 +9,6 @@ block content
       table.admin-orders-table
         thead
           tr
-            th Order ID
             th Name
             th Email
             th Address
@@ -20,7 +19,6 @@ block content
         tbody
           each order in orders
             tr
-              td #{order._id}
               td #{order.name}
               td #{order.email}
               td #{order.address}

@@ -18,14 +18,15 @@ block content
             th Pet Type
             th Pet Image
             th Status
+            th 
         tbody
           each request in adoptionrequests
             tr
               td #{request.adoptionRequestId || request._id}
               td #{new Date(request.createdAt).toLocaleDateString()}
-              td #{request.name}
-              td #{request.email}
-              td #{request.contact}
+              td #{request.userId ? request.userId.name : 'N/A'}
+              td #{request.userId ? request.userId.email : 'N/A'}
+              td #{request.userId ? request.userId.contact : 'N/A'}
               td #{request.petId ? request.petId.name : 'N/A'}
               td #{request.petId ? request.petId.type : 'N/A'}
               td
@@ -43,7 +44,7 @@ block content
   script.
     async function updateStatus(requestId, status) {
       try {
-        const response = await fetch(`/admin/adoptionrequests/${requestId}/status`, {
+        const response = await fetch(/admin/adoptionrequests/${requestId}/status, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',

@@ -13,14 +13,19 @@ router.get("/new", adminAuth, (req, res) => {
 // POST: Create new vet
 router.post("/", upload, adminAuth, async (req, res) => {
   try {
-    const { name, address, contact, openingTime, closingTime, description } = req.body;
+    const { name, address, contact,openingHour,
+      openingPeriod,
+      closingHour,
+      closingPeriod, } = req.body;
+
+      const openingTime = `${openingHour} ${openingPeriod}`;
+      const closingTime = `${closingHour} ${closingPeriod}`;
     const vetData = {
       name,
       address,
       contact,
       openingTime,
       closingTime,
-      description
     };
 
     // Add image path if an image was uploaded
@@ -29,7 +34,7 @@ router.post("/", upload, adminAuth, async (req, res) => {
     }
 
     await Vet.create(vetData);
-    res.redirect("/vets");
+    res.redirect("/clinics");
   } catch (error) {
     console.error("Error adding vet:", error);
     res.status(500).send("Internal Server Error");
@@ -50,15 +55,20 @@ router.get("/edit/:id", adminAuth, async (req, res) => {
 // POST: Update vet
 router.post("/edit/:id", upload, adminAuth, async (req, res) => {
   try {
-    const { name, address, contact, openingTime, closingTime, description } = req.body;
+    const { name, address, contact, openingHour,
+      openingPeriod,
+      closingHour,
+      closingPeriod } = req.body;
+      const openingTime = `${openingHour} ${openingPeriod}`;
+const closingTime = `${closingHour} ${closingPeriod}`;
     const updateData = {
       name,
       address,
       contact,
       openingTime,
-      closingTime,
-      description
+      closingTime
     };
+
 
     // Add image path if a new image was uploaded
     if (req.file) {
@@ -66,7 +76,7 @@ router.post("/edit/:id", upload, adminAuth, async (req, res) => {
     }
 
     await Vet.findByIdAndUpdate(req.params.id, updateData);
-    res.redirect("/vets");
+    res.redirect("/clinics");
   } catch (error) {
     console.error("Error updating vet:", error);
     res.status(500).send("Internal Server Error");
@@ -77,7 +87,7 @@ router.post("/edit/:id", upload, adminAuth, async (req, res) => {
 router.get("/delete/:id", adminAuth, async (req, res) => {
   try {
     await Vet.findByIdAndDelete(req.params.id);
-    res.redirect("/vets");
+    res.redirect("/clinics");
   } catch (error) {
     console.error("Error deleting vet:", error);
     res.status(500).send("Internal Server Error");

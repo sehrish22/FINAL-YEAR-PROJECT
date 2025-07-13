@@ -48,9 +48,6 @@ body {
     animation: fadeInHeroContent 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-
-
-
 @keyframes fadeInHeroContent {
     from {
         opacity: 0;
@@ -85,53 +82,6 @@ body {
 }
 
 .vet-card {
-    width: 100%;
-    margin-bottom: 30px;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    background: #fff;
-    border-radius: 16px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    overflow: visible;
-}
-
-.vet-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 25px;
-    min-height: 180px;
-}
-
-.vet-description {
-    margin-top: 1rem;
-    color: #6c757d;
-    font-size: 0.98rem;
-}
-
-.vet-actions {
-    margin-top: 1.2rem;
-    display: flex;
-    gap: 0.7rem;
-    justify-content: center;
-}
-
-/* When there are fewer than 3 cards, center them */
-.vet-container:has(.vet-card:nth-child(3n + 1):last-child) {
-    grid-template-columns: 1fr;
-}
-
-.vet-container:has(.vet-card:nth-child(3n + 2):last-child) {
-    grid-template-columns: 1fr 1fr;
-    max-width: 730px;
-    /* 2 cards + gap */
-    margin: 0 auto;
-}
-
-/* Vet Card */
-.vet-card {
     background: white;
     border-radius: 15px;
     overflow: hidden;
@@ -139,6 +89,10 @@ body {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     width: 100%;
     max-width: 350px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin-bottom: 30px;
 }
 
 .vet-card:hover {
@@ -180,12 +134,11 @@ body {
 
 /* Vet Content */
 .vet-content {
-    display: grid;
-    grid-template-rows: auto auto 1fr;
-    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     padding: 25px;
-    height: 270px;
-    overflow: hidden;
+    flex-grow: 1;
 }
 
 .vet-name {
@@ -196,16 +149,13 @@ body {
     padding: 0 1rem;
     text-align: center;
     width: 100%;
-    min-height: 56px; /* Match product card name height */
+    min-height: 56px;
     line-height: 1.3;
     word-break: break-word;
-    grid-row: 1;
-    align-self: stretch;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-
 
 .vet-location {
     font-size: 1rem;
@@ -217,13 +167,10 @@ body {
     min-height: 64px;
     line-height: 1.4;
     word-break: break-word;
-    grid-row: 2;
-    align-self: stretch;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-
 
 .vet-info-group {
     margin-bottom: 20px;
@@ -260,11 +207,11 @@ body {
     line-height: 1.5;
 }
 
-/* Vet Actions */
 .vet-actions {
     display: flex;
     gap: 10px;
     margin-top: 20px;
+    justify-content: center;
 }
 
 /* Buttons */
@@ -285,7 +232,6 @@ body {
     margin-right: 5px;
 }
 
-/* Green Button */
 .btn-green {
     background: #4a2c1f;
     color: white;
@@ -296,7 +242,6 @@ body {
     transform: translateY(-2px);
 }
 
-/* Brown Button */
 .btn-brown {
     background: #8b5e3b;
     color: white;
@@ -307,7 +252,6 @@ body {
     transform: translateY(-2px);
 }
 
-/* Red Button */
 .btn-red {
     background: #d32f2f;
     color: white;
@@ -318,7 +262,6 @@ body {
     transform: translateY(-2px);
 }
 
-/* Admin Panel */
 .admin-panel {
     margin-top: 20px;
 }
@@ -328,7 +271,24 @@ body {
     .hero-title {
         font-size: 2.2rem;
     }
+
     .vet-card {
         max-width: 100%;
     }
+}
+
+/* 👇 Added Fix for Equal Height Cards 👇 */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -12px;
+    margin-right: -12px;
+}
+
+.col-md-4 {
+    width: 33.3333%;
+    padding-left: 12px;
+    padding-right: 12px;
+    display: flex;
+    flex-direction: column;
 }

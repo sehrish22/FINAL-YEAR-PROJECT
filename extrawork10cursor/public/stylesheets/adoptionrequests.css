@@ -19,7 +19,7 @@
   overflow: hidden;
   box-shadow: 0 8px 32px rgba(139, 94, 60, 0.13);
   font-size: 1rem;
-  border: 1.5px solid #8b5e3c;
+  border: 1.5px solid #3c658b;
   /* Rich brown border */
 }
 
@@ -35,6 +35,13 @@
   text-shadow: 0 2px 8px rgba(44, 40, 37, 0.08);
 }
 
+.admin-adoption-table th:nth-child(9),
+.admin-adoption-table td:nth-child(9) {
+  width: 950px;
+  max-width: 970px;
+  white-space: normal;
+  overflow-wrap: break-word;
+}
 
 /* Adoption Requests Table */
 .admin-adoption-table {
@@ -47,7 +54,6 @@
 
 /* Table Header - deeper brown, bolder text */
 .admin-adoption-table th {
-  background: #3b2108;
   /* Intensified deep brown */
   color: #fffaf3;
   padding: 18px 20px;
@@ -61,6 +67,9 @@
   z-index: 2;
 }
 
+.admin-adoption-table thead tr {
+  background: #3b2108;
+}
 
 /* Table Rows - zebra striping, soft hover, modern look */
 .admin-adoption-table tbody tr {

@@ -17,7 +17,11 @@ router.get("/admin/stores/new", (req, res) => {
   // POST: Create new store
   router.post("/stores", upload, async (req, res) => {
     try {
-      const { name, address, contact, openingTime, closingTime } = req.body;
+      const { name, address, contact, openingHour,openingPeriod,
+        closingHour,
+        closingPeriod } = req.body;
+        const openingTime = `${openingHour} ${openingPeriod}`;
+    const closingTime = `${closingHour} ${closingPeriod}`;
       const storeData = { 
         name, 
         address, 
@@ -53,7 +57,11 @@ router.get("/admin/stores/new", (req, res) => {
   // POST: Update store
   router.post("/admin/stores/edit/:id", upload, async (req, res) => {
     try {
-      const { name, address, contact, openingTime, closingTime } = req.body;
+      const { name, address, contact, openingHour,openingPeriod,
+        closingHour,
+        closingPeriod } = req.body;
+      const openingTime = `${openingHour} ${openingPeriod}`;
+    const closingTime = `${closingHour} ${closingPeriod}`;
       const updateData = {
         name,
         address,

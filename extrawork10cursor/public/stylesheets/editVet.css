@@ -4,9 +4,38 @@
 /* General Styles */
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #f4ede4; /* Light beige background */
+    background-color: #f4ede4;
+    /* Light beige background */
     margin: 0;
     padding: 0;
+}
+
+/* Dropdown Wrapper */
+.time-group {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+/* Individual select dropdown */
+.time-group select {
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    background-color: white;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+    flex: 1;
+    min-width: 100px;
+}
+
+.time-group select:focus {
+    outline: none;
+    border-color: #8b5e3b;
+    box-shadow: 0 0 5px rgba(139, 94, 59, 0.3);
 }
 
 /* Form Container */

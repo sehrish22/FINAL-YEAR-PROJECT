@@ -173,12 +173,6 @@ html
             input.form-control(type="email" name="email" placeholder="Enter your email" required)
           .form-group
             button.btn.btn-primary(type="submit") Subscribe
-        if user && user.role === 'admin'
-          br
-          h3 Admin Profile
-          a(href='/users/logout' style='color: #d2b48c; text-decoration: none;')
-            i.bi.bi-box-arrow-right.me-2
-            | Logout
     div
       a#bot(href="/chatbot/consultation")
         i.bi.bi-robot

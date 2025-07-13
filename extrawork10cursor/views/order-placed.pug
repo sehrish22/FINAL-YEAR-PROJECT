@@ -35,21 +35,23 @@ block content
           each item in order.items
             .item-row
               input.item-name(type="text" value=item.product.name readonly)
-              input.item-quantity(type="number" value=item.quantity readonly)
-              input.item-price(type="text" value=`$${item.price}` readonly)
-              input.item-total(type="text" value=`$${item.subtotal}` readonly)
+              input.item-quantity(value=item.quantity readonly)
+              input.item-price(type="text" value=`Rs.${item.price}` readonly)
+              input.item-total(type="text" value=`Rs.${item.subtotal}` readonly)
 
+      - const shippingFee = 250
+      - const subtotal = Number(order.total) || 0
       .form-group
         label(for="subtotal") Subtotal
-        input#subtotal(type="text" value=`$${order.subtotal}` readonly)
+        input#subtotal(type="text" value=`Rs.${subtotal}` readonly)
 
       .form-group
         label(for="shipping") Shipping Fee
-        input#shipping(type="text" value="$5.00" readonly)
+        input#shipping(type="text" value=`Rs.${shippingFee}` readonly)
 
       .form-group
         label(for="total") Total Amount
-        input#total(type="text" value=`$${order.total}` readonly)
+        input#total(type="text" value=`Rs.${subtotal + shippingFee}` readonly)
 
       .form-group
         label(for="paymentMethod") Payment Method

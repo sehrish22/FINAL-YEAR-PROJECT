@@ -1,0 +1,87 @@
+extends ../layout
+
+block content
+  link(rel='stylesheet', href='/stylesheets/details.css')
+
+  .container.product-details
+    .content-box
+      // Left Side - Image
+      .image-container
+        if product.image
+          img(src=product.image, alt=product.name, class="product-img")
+        else
+          img(src="/imgs/default-product.jpg", alt="Default Product Image", class="product-img")
+
+      // Right Side - Product Details
+      .details-container
+        h1.product-title= product.name
+        .product-info
+          i.bi.bi-tag-fill
+          span Type: #{product.type}
+        .product-info
+          i.bi.bi-currency-dollar
+          span Price: Rs.#{product.price}
+        .product-info
+          i.bi.bi-box-seam
+          span In Stock: 
+          if product.instock > 0
+            span.in-stock #{product.instock} available
+          else
+            span.out-stock Out of Stock
+
+        .btn-group.action-buttons
+          a.btn.btn-cart(href="/products/cart/" + product._id) 🛒 Add to Cart
+          if user && user.role == "seller"
+            a.btn.btn-edit(href="/products/edit/" + product._id) ✏️ Edit
+            a.btn.btn-delete(href="/products/delete/" + product._id) 🗑 Delete
+  
+  hr
+  .product-info
+    i.bi.bi-info-circle-fill
+    span Description: #{product.description}
+
+  //- Reviews Section
+  .section-card.reviews-section
+    h2.reviews-title Reviews
+    if reviews && reviews.length
+      .reviews-container
+        each review in reviews
+          .review-card
+            .review-header
+              .review-rating
+                span.rating-stars= '⭐'.repeat(review.rating)
+              .review-user
+                if review.user
+                  p Posted by #{review.user.name} on #{review.createdAt.toDateString()}
+                else
+                  p Posted by Anonymous on #{review.createdAt.toDateString()}
+            .review-comment
+              p= review.comment
+    else
+      p.no-reviews No reviews yet. Be the first to review this product!
+
+  hr
+
+  //- Add Review Section
+  if user
+    .section-card.add-review-section
+      h2.add-review-title Add a Review
+      if hasReviewed
+        p(style="color: green; margin-top: 10px;") Thank you for your review!
+      else if hasPurchased
+        form(action=`/products/${product._id}/review`, method="POST")
+          label(for="rating") Rating:
+          select(name="rating", id="rating", required)
+            option(value="") Select rating
+            option(value="1") 1 ⭐
+            option(value="2") 2 ⭐
+            option(value="3") 3 ⭐
+            option(value="4") 4 ⭐
+            option(value="5") 5 ⭐
+          label(for="comment") Comment:
+          textarea(name="comment", id="comment", required)
+          button(type="submit") Submit Review
+      else if user.role !== 'buyer'
+        p(style="color: red; margin-top: 10px;") Only buyers can leave a review for this product.
+      else
+        .alert.alert-warning(style="padding: 10px; margin-top: 10px; background: #fff3cd; border: 1px solid #ffeeba; border-radius: 5px; color: #856404;") ⚠️ You must purchase this product before leaving a review.

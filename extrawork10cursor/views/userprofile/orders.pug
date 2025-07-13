@@ -10,7 +10,6 @@ block content
       table.user-orders-table
         thead
           tr
-            th Order ID
             th Buyer Name
             th Buyer Email
             th Address
@@ -21,8 +20,6 @@ block content
             th Action
         tbody
           each order in orders
-            tr
-              td #{order.orderId}
               td #{order.name}
               td #{order.email}
               td #{order.address}
@@ -31,10 +28,12 @@ block content
                 ul.items-list
                   each item in order.items
                     li.item
-                      if item.image
+                      if item.image && item.product
+                        a(href=`/products/${item.product._id}`,target="_blank")
+                          img.item-image(src=item.image, alt=item.name)
+                      else if item.image
                         img.item-image(src=item.image, alt=item.name)
                       .item-details
-                        .item-name= item.name
                         .item-price Rs.#{item.price.toLocaleString()} x #{item.quantity}
                         .item-subtotal= `Rs.${item.subtotal.toLocaleString()}`
               td Rs.#{order.total.toLocaleString()}

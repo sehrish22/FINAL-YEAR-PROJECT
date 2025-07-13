@@ -20,12 +20,26 @@ block content
         input#contact(type="text" name="contact" value=store.contact required)
 
       .form-group
-        label(for="openingTime") Opening Time:
-        input#openingTime(type="text" name="openingTime" value=store.openingTime required)
+        label Opening Time:
+        .time-dropdown-group
+          select.time-select(name="openingHour" required)
+            option(value="" disabled selected) Hour
+            each hour in [1,2,3,4,5,6,7,8,9,10,11,12]
+              option(value=`${hour}.00`) #{hour}.00
+          select.time-select(name="openingPeriod" required)
+            option(value="AM") AM
+            option(value="PM") PM
 
       .form-group
-        label(for="closingTime") Closing Time:
-        input#closingTime(type="text" name="closingTime" value=store.closingTime required)
+        label Closing Time:
+        .time-dropdown-group
+          select.time-select(name="closingHour" required)
+            option(value="" disabled selected) Hour
+            each hour in [1,2,3,4,5,6,7,8,9,10,11,12]
+              option(value=`${hour}.00`) #{hour}.00
+          select.time-select(name="closingPeriod" required)
+            option(value="AM") AM
+            option(value="PM") PM
 
       .form-group
         label(for="image") Store Image:
@@ -49,7 +63,7 @@ block content
       reader.onload = function(e) {
         preview.src = e.target.result;
         preview.style.display = 'block';
-      }
+      };
 
       if (file) {
         reader.readAsDataURL(file);

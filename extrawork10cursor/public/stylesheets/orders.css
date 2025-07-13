@@ -9,6 +9,22 @@
   border-radius: 0;
 }
 
+.admin-orders-table th:nth-child(3),
+.admin-orders-table td:nth-child(3) {
+  width: 260px;
+  max-width: 280px;
+  white-space: pre-line;
+}
+
+/* Widen Items Ordered column */
+.admin-orders-table th:nth-child(5),
+.admin-orders-table td:nth-child(5) {
+  width: 950px;
+  max-width: 970px;
+  white-space: normal;
+  overflow-wrap: break-word;
+}
+
 .admin-orders-table {
   width: 100%;
   border-collapse: separate;

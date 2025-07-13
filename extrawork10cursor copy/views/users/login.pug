@@ -1,0 +1,161 @@
+#loginModal.modal(style="display: none;")
+  .modal-content
+    span.close-btn(data-modal="loginModal") &times;
+    .login-container
+      h1 LOGIN
+      form#loginForm(action="/users/login", method="post")
+        .otp-form-group
+          label(for="email") Email
+          input#loginEmail(type="email", class="otp-input", name="email", required, placeholder="Enter your email")
+
+        .otp-form-group     
+          label(for="password") Password
+          input#loginPassword(type="password", class="otp-input", name="password", required, placeholder="Enter your password")
+
+          #errorMessage(style="color:red;display:none;")
+
+        .otp-form-group
+          input#loginSubmitBtn.otp-btn(type="submit", value="SIGN IN")
+          
+        // Loading indicator
+        #loginLoading(style="display: none; text-align: center; margin-top: 1rem;")
+          .spinner
+          p.loading-text Signing you in...
+
+        .resend-otp
+          p Don't have an account?
+            a.resend-otp-btn(href="#" id="openRegisterModal") Sign Up
+
+        .resend-otp
+          p Forgot password?
+            a.resend-otp-btn(href="#" id="forgotPasswordBtn") Reset
+
+
+script.
+  document.addEventListener("DOMContentLoaded", function () {
+    const loginModal = document.getElementById("loginModal");
+    const registerModal = document.getElementById("registerModal");
+    const forgotPasswordModal = document.getElementById("forgotPasswordModal");
+
+    const loginForm = document.getElementById("loginForm");
+    const registerForm = document.getElementById("registerForm");
+
+    const loginBtn = document.getElementById("loginBtn");
+    const openRegisterModal = document.getElementById("openRegisterModal");
+    const openLoginFromRegister = document.getElementById("openLoginFromRegister");
+    const forgotPasswordBtn = document.getElementById("forgotPasswordBtn");
+
+    const errorMessage = document.getElementById("errorMessage");
+
+    // Close buttons
+    const closeBtns = document.querySelectorAll(".close-btn");
+    closeBtns.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        loginModal.style.display = "none";
+        registerModal.style.display = "none";
+        if (forgotPasswordModal) forgotPasswordModal.style.display = "none";
+      });
+    });
+
+    // Open login modal from navbar
+    loginBtn?.addEventListener("click", function (e) {
+      e.preventDefault();
+      loginModal.style.display = "block";
+      registerModal.style.display = "none";
+      if (forgotPasswordModal) forgotPasswordModal.style.display = "none";
+    });
+
+    // Open register modal from login
+    openRegisterModal?.addEventListener("click", function (e) {
+      e.preventDefault();
+      loginModal.style.display = "none";
+      registerModal.style.display = "block";
+    });
+
+    // Open login modal from register
+    openLoginFromRegister?.addEventListener("click", function (e) {
+      e.preventDefault();
+      registerModal.style.display = "none";
+      loginModal.style.display = "block";
+    });
+
+    // Forgot password flow
+    forgotPasswordBtn?.addEventListener("click", function (e) {
+      e.preventDefault();
+      loginModal.style.display = "none";
+      if (forgotPasswordModal) forgotPasswordModal.style.display = "block";
+    });
+
+    // Hide modals when clicking outside
+    window.addEventListener("click", function (event) {
+      if (event.target == loginModal) loginModal.style.display = "none";
+      if (event.target == registerModal) registerModal.style.display = "none";
+      if (event.target == forgotPasswordModal) forgotPasswordModal.style.display = "none";
+    });
+
+    // Role toggle
+    const roleSelect = document.getElementById("role");
+    const storeNameGroup = document.getElementById("storeNameGroup");
+    roleSelect?.addEventListener("change", function () {
+      if (roleSelect.value === 'seller') {
+        storeNameGroup.style.display = 'block';
+      } else {
+        storeNameGroup.style.display = 'none';
+        document.getElementById('storeName').value = '';
+      }
+    });
+
+    // Login form submit
+    loginForm?.addEventListener("submit", async function (e) {
+      e.preventDefault();
+      
+      const formData = new FormData(loginForm);
+      const data = Object.fromEntries(formData.entries());
+      const submitBtn = document.getElementById("loginSubmitBtn");
+      const loadingIndicator = document.getElementById("loginLoading");
+
+      // Show loading state
+      submitBtn.disabled = true;
+      submitBtn.value = "Signing In...";
+      loadingIndicator.style.display = "block";
+      errorMessage.style.display = "none";
+
+      try {
+        const response = await fetch("/users/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+
+        if (result.error) {
+          // Reset loading state on error
+          submitBtn.disabled = false;
+          submitBtn.value = "SIGN IN";
+          loadingIndicator.style.display = "none";
+          
+          errorMessage.textContent = result.error;
+          errorMessage.style.display = "block";
+        } else if (result.success) {
+          // Update loading text for success
+          document.querySelector("#loginLoading .loading-text").textContent = "Login successful! Redirecting...";
+          
+          setTimeout(() => {
+            window.location.href = result.redirect;
+          }, 1000);
+        }
+      } catch (err) {
+        // Reset loading state on error
+        submitBtn.disabled = false;
+        submitBtn.value = "SIGN IN";
+        loadingIndicator.style.display = "none";
+        
+        errorMessage.textContent = "An error occurred. Please try again.";
+        errorMessage.style.display = "block";
+      }
+    });
+  });

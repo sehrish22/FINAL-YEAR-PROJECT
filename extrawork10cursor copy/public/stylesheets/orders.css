@@ -1,0 +1,168 @@
+/* Orders Page Container */
+.admin-orders-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 16px;
+  background: none;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.admin-orders-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #fffaf3;
+  /* Soft beige */
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(139, 94, 60, 0.10);
+  font-size: 1rem;
+  border: 1.5px solid #b0855b;
+  /* Brown border */
+}
+
+
+/* Orders Title */
+.admin-orders-title {
+  text-align: center;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #c7a16e;
+  margin-bottom: 32px;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 8px rgba(44, 40, 37, 0.08);
+}
+
+/* Table Header - deeper brown, bolder text */
+.admin-orders-table th {
+  background: #3b2108;
+  /* Intensified deep brown */
+  color: #fffaf3;
+  padding: 18px 20px;
+  text-align: left;
+  font-size: 1.13rem;
+  font-weight: 700;
+  border-bottom: 2.5px solid #b0855b;
+  letter-spacing: 0.5px;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+/* Widen the Items Ordered column */
+.admin-orders-table th:nth-child(7),
+.admin-orders-table td:nth-child(7) {
+  width: 320px;
+  max-width: 340px;
+  white-space: nowrap;
+  overflow-x: auto;
+}
+
+/* Make Total column compact */
+.admin-orders-table th:nth-child(8),
+.admin-orders-table td:nth-child(8) {
+  min-width: 80px;
+  width: 100px;
+  text-align: center;
+}
+
+/* Table Rows - zebra striping, soft hover, modern look */
+.admin-orders-table tbody tr {
+  background: #fffaf3;
+  border-bottom: 1px solid #c7a16e;
+  transition: background 0.2s;
+}
+
+.admin-orders-table tbody tr:nth-child(even) {
+  background: #e5d4c2;
+}
+
+.admin-orders-table tbody tr:hover {
+  background: #e1c9ad;
+}
+
+.admin-orders-table td {
+  color: #4e2e0e;
+  padding: 14px 18px;
+  font-size: 1.05rem;
+  border-bottom: 1px solid #c7a16e;
+  background: transparent;
+  vertical-align: middle;
+}
+
+/* Table Rows */
+.admin-orders-table tbody tr {
+  background: #f3e4d6;
+  border-bottom: 1px solid #c7a16e;
+  transition: background 0.2s;
+}
+
+.admin-orders-table tbody tr:nth-child(even) {
+  background: #e5d4c2;
+}
+
+.admin-orders-table tbody tr:hover {
+  background: #e1c9ad;
+}
+
+.admin-orders-table td {
+  color: #4e2e0e;
+  padding: 14px 18px;
+  font-size: 1.05rem;
+  border-bottom: 1px solid #c7a16e;
+  background: transparent;
+  vertical-align: middle;
+}
+
+
+
+
+
+
+
+/* Dropdown Styling */
+.admin-orders-table select {
+  padding: 8px;
+  background-color: #555;
+  /* Dark background */
+  color: #fff;
+  border: 1px solid #8b5e3b;
+  /* Matching theme */
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+.admin-orders-table select:hover {
+  background-color: #666;
+  /* Slightly lighter background on hover */
+}
+
+/* Update Button Styling */
+.admin-orders-table button {
+  padding: 8px 14px;
+  /* Increased padding */
+  background-color: #8b5e3b;
+  /* Warm Brown */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+.admin-orders-table button:hover {
+  background-color: #a06b46;
+  /* Lighter brown for hover effect */
+}
+
+/* No Orders Message */
+.admin-no-orders {
+  text-align: center;
+  font-size: 18px;
+  color: #aaa;
+}

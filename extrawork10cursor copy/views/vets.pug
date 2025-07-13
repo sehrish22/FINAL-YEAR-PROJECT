@@ -1,0 +1,53 @@
+extends layout
+
+block content
+  link(rel='stylesheet', href='/stylesheets/vets.css')
+  link(rel='stylesheet', href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css')
+  link(rel='stylesheet', href='https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap')
+
+  .vet-page-container
+    .vet-hero-section
+      .hero-content
+        h1.hero-title 🏥 Professional Veterinary Care
+        p.hero-subtitle Find trusted veterinary clinics across Pakistan for your beloved pets
+        if user && user.role === "admin"
+          .admin-panel
+            a.btn.btn-green(href="/admin/vets/new") 
+              i.bi.bi-plus-circle.me-2
+              | Add New Vet Clinic
+
+    .vet-container
+      .row
+        each vet in vets
+          .col-md-4.col-12
+            .vet-card
+              if vet.image
+                .vet-image-container
+                  img.vet-image(src=vet.image, alt=vet.name)
+              else
+                .vet-image-placeholder
+                  i.bi.bi-hospital
+              .vet-content
+                h2.vet-name= vet.name
+                .vet-info-group
+                  .vet-info-item
+                    i.bi.bi-geo-alt
+                    span= vet.address
+                  .vet-info-item
+                    i.bi.bi-telephone
+                    span= vet.contact
+                  .vet-info-item
+                    i.bi.bi-clock
+                    span #{vet.openingTime} - #{vet.closingTime}
+                if vet.description
+                  .vet-description
+                    i.bi.bi-info-circle
+                    p= vet.description
+                if user && user.role === "admin"
+                  .vet-actions
+                    a.btn.btn-brown(href=`/admin/vets/edit/${vet._id}`)
+                      i.bi.bi-pencil-square.me-2
+                      | Edit
+                    a.btn.btn-red(href=`/admin/vets/delete/${vet._id}`)
+                      i.bi.bi-trash.me-2
+                      | Delete

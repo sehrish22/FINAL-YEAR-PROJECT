@@ -19,8 +19,10 @@ block content
                 p.cart-item-info Quantity: #{item.quantity}
                 p.cart-item-info Price Rs.#{item.product.price}
                 p.cart-item-subtotal Subtotal Rs.#{item.product.price * item.quantity}
+        - const shippingFee = 250
         .cart-total
-          h3 Total Amount: Rs.#{total}
+          h3 Total Amount: Rs.#{total + shippingFee}
+          p(style="font-size:0.95rem;color:#795548;margin-top:2px;") (Includes Rs.#{shippingFee} shipping fee)
 
         .checkout-form
           form(action="/products/checkout", method="post")
